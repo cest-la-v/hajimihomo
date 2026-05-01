@@ -1,0 +1,6 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/OneDrive/README.md
+name: OneDrive
+sources:
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OneDrive.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/OneDrive.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/OneDrive.yaml

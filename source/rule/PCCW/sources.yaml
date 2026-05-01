@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/PCCW/README.md
+name: PCCW
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/PCCW.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/PCCW.yaml

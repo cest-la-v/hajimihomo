@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Wikimedia/README.md
+name: Wikimedia
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Wikimedia.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Wikimedia.yaml

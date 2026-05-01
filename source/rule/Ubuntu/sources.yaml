@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Ubuntu/README.md
+name: Ubuntu
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Ubuntu.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Ubuntu.yaml

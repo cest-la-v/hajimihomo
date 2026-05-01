@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Crypto/README.md
+name: Crypto
+sources:
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Crypto.yaml
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Crypto.list

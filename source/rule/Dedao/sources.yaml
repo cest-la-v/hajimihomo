@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Dedao/README.md
+name: Dedao
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/Dedao.list

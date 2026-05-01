@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Nikkei/README.md
+name: Nikkei
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/Nikkei.list

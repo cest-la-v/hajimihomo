@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Espn/README.md
+name: Espn
+sources:
+  - https://rules.kr328.app/espn.yaml

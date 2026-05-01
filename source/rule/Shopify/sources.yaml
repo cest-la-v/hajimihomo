@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Shopify/README.md
+name: Shopify
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Shopify.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Shopify.yaml

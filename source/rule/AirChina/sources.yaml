@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/AirChina/README.md
+name: AirChina
+sources:
+  - https://rules.kr328.app/airchina.yaml

@@ -1,0 +1,6 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Deezer/README.md
+name: Deezer
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/Deezer.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Deezer.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Deezer.yaml

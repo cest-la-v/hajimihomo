@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/ThomsonReuters/README.md
+name: ThomsonReuters
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/ThomsonReuters.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/ThomsonReuters.yaml

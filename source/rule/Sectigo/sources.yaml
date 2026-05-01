@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Sectigo/README.md
+name: Sectigo
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Sectigo.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Sectigo.yaml

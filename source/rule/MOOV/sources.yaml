@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/MOOV/README.md
+name: MOOV
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/MOOV.list

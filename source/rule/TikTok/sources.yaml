@@ -1,0 +1,7 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/TikTok/README.md
+name: TikTok
+sources:
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/TikTok.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/TikTok.list
+  - https://raw.githubusercontent.com/Semporia/Quantumult-X/master/Filter/TikTok.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/TikTok.yaml

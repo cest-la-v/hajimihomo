@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/MEGA/README.md
+name: MEGA
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/MEGA.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/MEGA.yaml

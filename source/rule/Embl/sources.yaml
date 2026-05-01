@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Embl/README.md
+name: Embl
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Embl.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Embl.yaml

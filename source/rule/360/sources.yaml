@@ -1,0 +1,6 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/360/README.md
+name: 360
+sources:
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/360.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/360.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/Qihoo360.list

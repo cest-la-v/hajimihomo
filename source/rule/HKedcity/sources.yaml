@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/HKedcity/README.md
+name: HKedcity
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/HKedcity.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/HKedcity.yaml

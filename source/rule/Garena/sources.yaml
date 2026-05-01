@@ -1,0 +1,6 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Garena/README.md
+name: Garena
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/Garena.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Garena.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Garena.yaml

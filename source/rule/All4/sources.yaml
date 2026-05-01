@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/All4/README.md
+name: All4
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/All4.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/All4.list

@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Electron/README.md
+name: Electron
+sources:
+  - https://rules.kr328.app/electron.yaml

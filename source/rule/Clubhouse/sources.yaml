@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Clubhouse/README.md
+name: Clubhouse
+sources:
+  - https://raw.githubusercontent.com/tengyuankoo/qx/main/Clubhouse.list

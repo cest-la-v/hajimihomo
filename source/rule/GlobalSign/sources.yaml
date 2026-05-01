@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/GlobalSign/README.md
+name: GlobalSign
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Globalsign.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Globalsign.yaml

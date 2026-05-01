@@ -1,0 +1,7 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Spotify/README.md
+name: Spotify
+sources:
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Spotify.list
+  - https://raw.githubusercontent.com/GeQ1an/Rules/master/QuantumultX/Filter/Optional/Spotify.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/Spotify.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Spotify.yaml

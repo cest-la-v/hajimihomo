@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Gucci/README.md
+name: Gucci
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Gucci.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Gucci.yaml

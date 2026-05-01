@@ -1,0 +1,10 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Facebook/README.md
+name: Facebook
+sources:
+  - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/source/rule/Facebook/Facebook.list
+  - https://raw.githubusercontent.com/sve1r/Rules-For-Quantumult-X/develop/Rules/Services/SNS/Facebook.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Facebook.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Facebook.yaml
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Facebook.list
+  - https://raw.githubusercontent.com/tkzc11/QX-Rules/main/Meta.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Facebook.yaml

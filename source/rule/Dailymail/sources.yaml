@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Dailymail/README.md
+name: Dailymail
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Dailymail.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Dailymail.yaml

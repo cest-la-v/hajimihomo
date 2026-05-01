@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Buypass/README.md
+name: Buypass
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Buypass.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Buypass.yaml

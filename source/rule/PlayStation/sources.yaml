@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/PlayStation/README.md
+name: PlayStation
+sources:
+  - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/source/rule/PlayStation/PlayStation.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/PlayStation.list

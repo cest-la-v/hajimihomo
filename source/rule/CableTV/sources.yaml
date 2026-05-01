@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/CableTV/README.md
+name: CableTV
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/CableTV.list

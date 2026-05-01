@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/9to5/README.md
+name: 9to5
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/9to5.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/9to5.yaml

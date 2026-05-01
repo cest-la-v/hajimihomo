@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/ITV/README.md
+name: ITV
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/ITV.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/ITV.list

@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/My5/README.md
+name: My5
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/My5.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/My5.list

@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/CSDN/README.md
+name: CSDN
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/CSDN.list

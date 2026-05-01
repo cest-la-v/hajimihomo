@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/U17/README.md
+name: U17
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/U17.list

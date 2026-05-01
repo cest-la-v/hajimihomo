@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Aerogard/README.md
+name: Aerogard
+sources:
+  - https://rules.kr328.app/aerogard@cn.yaml
+  - https://rules.kr328.app/aerogard.yaml

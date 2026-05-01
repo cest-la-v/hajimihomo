@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/BOC/README.md
+name: BOC
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/BOC.list

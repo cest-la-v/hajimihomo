@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/SmarTone/README.md
+name: SmarTone
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/SmarTone.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/SmarTone.yaml

@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/ChinaTelecom/README.md
+name: ChinaTelecom
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/ChinaTelecom.list

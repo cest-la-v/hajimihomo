@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Intercom/README.md
+name: Intercom
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Intercom.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Intercom.yaml

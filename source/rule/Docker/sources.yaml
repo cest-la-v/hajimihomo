@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Docker/README.md
+name: Docker
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Docker.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Docker.yaml

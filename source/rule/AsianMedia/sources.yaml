@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/AsianMedia/README.md
+name: AsianMedia
+sources:
+  - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/source/rule/AsianMedia/AsianMedia.list

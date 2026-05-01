@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Jquery/README.md
+name: Jquery
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Jquery.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Jquery.yaml

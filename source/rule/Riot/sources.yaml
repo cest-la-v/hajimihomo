@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Riot/README.md
+name: Riot
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/Riot.list

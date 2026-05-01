@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/GitLab/README.md
+name: GitLab
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Gitlab.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Gitlab.yaml

@@ -1,0 +1,6 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/KKBOX/README.md
+name: KKBOX
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/KKBOX.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/KKBOX.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/KKBOX.yaml

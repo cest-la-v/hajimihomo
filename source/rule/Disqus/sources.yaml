@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Disqus/README.md
+name: Disqus
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Disqus.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Disqus.yaml

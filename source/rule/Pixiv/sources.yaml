@@ -1,0 +1,7 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Pixiv/README.md
+name: Pixiv
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Pixiv.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Pixiv.yaml
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Pixiv.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Pixiv.yaml

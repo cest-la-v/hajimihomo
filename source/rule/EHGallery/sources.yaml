@@ -1,0 +1,6 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/EHGallery/README.md
+name: EHGallery
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/EHGallery.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/EHGallery.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/EHGallery.yaml

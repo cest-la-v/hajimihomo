@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/1337x/README.md
+name: 1337x
+sources:
+  - https://rules.kr328.app/1337x.yaml

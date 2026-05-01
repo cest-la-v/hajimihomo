@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Collabora/README.md
+name: Collabora
+sources:
+  - https://rules.kr328.app/collabora.yaml

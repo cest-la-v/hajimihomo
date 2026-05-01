@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/LastFM/README.md
+name: LastFM
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/LastFM.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/LastFM.yaml

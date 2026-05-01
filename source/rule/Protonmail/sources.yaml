@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Protonmail/README.md
+name: Protonmail
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Protonmail.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Protonmail.yaml

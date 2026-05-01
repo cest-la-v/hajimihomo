@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Scaleflex/README.md
+name: Scaleflex
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Scaleflex.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Scaleflex.yaml

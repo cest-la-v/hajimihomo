@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/CHT/README.md
+name: CHT
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/CHT.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/CHT.yaml

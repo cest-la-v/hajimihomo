@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/FengXiaWangLuo/README.md
+name: FengXiaWangLuo
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/FengXiaWangLuo.list

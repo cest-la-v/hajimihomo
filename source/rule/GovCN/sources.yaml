@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/GovCN/README.md
+name: GovCN
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Special/Government-CN.list

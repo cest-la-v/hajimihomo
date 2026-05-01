@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Tumblr/README.md
+name: Tumblr
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Tumblr.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Tumblr.yaml

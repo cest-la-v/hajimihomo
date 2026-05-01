@@ -1,0 +1,6 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Blizzard/README.md
+name: Blizzard
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/Blizzard.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Blizzard.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Blizzard.yaml

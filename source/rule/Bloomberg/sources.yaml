@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Bloomberg/README.md
+name: Bloomberg
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Bloomberg.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Bloomberg.yaml

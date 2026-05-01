@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Yandex/README.md
+name: Yandex
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Yandex.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Yandex.yaml

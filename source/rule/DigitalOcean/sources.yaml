@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/DigitalOcean/README.md
+name: DigitalOcean
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/DigitalOcean.yaml
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/DigitalOcean.list

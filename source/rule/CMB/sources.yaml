@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/CMB/README.md
+name: CMB
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/CNKI.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/CMB.list

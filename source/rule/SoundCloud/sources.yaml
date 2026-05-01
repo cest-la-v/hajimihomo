@@ -1,0 +1,6 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/SoundCloud/README.md
+name: SoundCloud
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/SoundCloud.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/SoundCloud.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/SoundCloud.yaml

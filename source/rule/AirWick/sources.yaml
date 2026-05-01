@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/AirWick/README.md
+name: AirWick
+sources:
+  - https://rules.kr328.app/airwick@cn.yaml
+  - https://rules.kr328.app/airwick.yaml

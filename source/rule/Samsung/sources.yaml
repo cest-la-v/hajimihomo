@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Samsung/README.md
+name: Samsung
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Samsung.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Samsung.yaml

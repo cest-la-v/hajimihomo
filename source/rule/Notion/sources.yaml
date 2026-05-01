@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Notion/README.md
+name: Notion
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Notion.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Notion.yaml

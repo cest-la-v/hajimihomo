@@ -1,0 +1,7 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Twitch/README.md
+name: Twitch
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Twitch.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Twitch.yaml
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Twitch.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Twitch.yaml

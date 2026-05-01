@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Qualcomm/README.md
+name: Qualcomm
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Qualcomm.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Qualcomm.yaml

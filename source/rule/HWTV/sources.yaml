@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/HWTV/README.md
+name: HWTV
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/HWTV.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/HWTV.list

@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Identrust/README.md
+name: Identrust
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Identrust.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Identrust.yaml

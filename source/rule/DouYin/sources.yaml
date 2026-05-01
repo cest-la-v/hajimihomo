@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/DouYin/README.md
+name: DouYin
+sources:
+  - https://raw.githubusercontent.com/dler-io/Rules/main/Clash/Provider/Douyin.yaml

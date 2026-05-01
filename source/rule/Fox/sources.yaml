@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Fox/README.md
+name: Fox
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/Fox.list

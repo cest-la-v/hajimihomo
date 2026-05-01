@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/ClubhouseIP/README.md
+name: ClubhouseIP
+sources:
+  - https://raw.githubusercontent.com/tengyuankoo/qx/main/Clubhouse_IP.list

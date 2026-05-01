@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Duckduckgo/README.md
+name: Duckduckgo
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Duckduckgo.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Duckduckgo.yaml

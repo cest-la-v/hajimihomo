@@ -1,0 +1,8 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Scholar/README.md
+name: Scholar
+sources:
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Scholar.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Scholar.list
+  - https://raw.githubusercontent.com/dler-io/Rules/main/Clash/Provider/Scholar.yaml
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Scholar.yaml
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Scholar.yaml

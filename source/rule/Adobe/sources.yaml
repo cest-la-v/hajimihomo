@@ -1,0 +1,7 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Adobe/README.md
+name: Adobe
+sources:
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Adobe.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Adobe.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Adobe.yaml
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Adobe.yaml

@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/VISA/README.md
+name: VISA
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/VISA.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/VISA.yaml

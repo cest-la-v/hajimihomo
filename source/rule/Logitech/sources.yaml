@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Logitech/README.md
+name: Logitech
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Logitech.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Logitech.yaml

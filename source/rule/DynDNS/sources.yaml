@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/DynDNS/README.md
+name: DynDNS
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/DynDNS.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/DynDNS.yaml

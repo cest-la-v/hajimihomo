@@ -1,0 +1,6 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/TaiWanGood/README.md
+name: TaiWanGood
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/TaiWanGood.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/TaiWanGood.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/TaiWanGood.yaml

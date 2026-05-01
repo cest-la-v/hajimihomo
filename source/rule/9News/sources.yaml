@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/9News/README.md
+name: 9News
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/9News.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/9News.yaml

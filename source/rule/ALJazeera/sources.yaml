@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/ALJazeera/README.md
+name: ALJazeera
+sources:
+  - https://rules.kr328.app/aljazeera.yaml

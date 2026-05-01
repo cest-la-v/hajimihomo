@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/AdGuardSDNSFilter/README.md
+name: AdGuardSDNSFilter
+sources:
+  - https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt

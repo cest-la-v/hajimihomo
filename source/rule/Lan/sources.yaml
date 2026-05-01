@@ -1,0 +1,8 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Lan/README.md
+name: Lan
+sources:
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list
+  - https://raw.githubusercontent.com/GeQ1an/Rules/master/QuantumultX/Filter/LAN.list
+  - https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/lancidr.txt
+  - https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/private.txt
+  - https://raw.githubusercontent.com/dler-io/Rules/main/Clash/Provider/LAN.yaml

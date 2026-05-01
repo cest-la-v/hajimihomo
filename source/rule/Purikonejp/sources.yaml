@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Purikonejp/README.md
+name: Purikonejp
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/Purikonejp.list

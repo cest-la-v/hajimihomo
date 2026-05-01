@@ -1,0 +1,8 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Download/README.md
+name: Download
+sources:
+  - https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Download.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Special/Download.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Download.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Download.yaml

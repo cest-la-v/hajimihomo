@@ -1,0 +1,6 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/iQIYIIntl/README.md
+name: iQIYIIntl
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/iQIYI-Intl.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/IqiyiHMT.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/IqiyiHMT.yaml

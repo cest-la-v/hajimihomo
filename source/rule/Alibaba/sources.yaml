@@ -1,0 +1,7 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Alibaba/README.md
+name: Alibaba
+sources:
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Alibaba.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/Alibaba.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Alibaba.yaml
+  - https://ruleset.isagood.day/alibaba.conf

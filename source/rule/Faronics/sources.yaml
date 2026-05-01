@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Faronics/README.md
+name: Faronics
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Faronics.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Faronics.yaml

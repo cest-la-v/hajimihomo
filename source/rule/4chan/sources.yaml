@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/4chan/README.md
+name: 4chan
+sources:
+  - https://rules.kr328.app/4chan.yaml

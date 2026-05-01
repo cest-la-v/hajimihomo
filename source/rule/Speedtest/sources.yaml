@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Speedtest/README.md
+name: Speedtest
+sources:
+  - https://raw.githubusercontent.com/GeQ1an/Rules/master/QuantumultX/Filter/Speedtest.list
+  - https://raw.githubusercontent.com/dler-io/Rules/main/Clash/Provider/Speedtest.yaml

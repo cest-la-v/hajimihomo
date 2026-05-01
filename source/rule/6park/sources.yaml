@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/6park/README.md
+name: 6park
+sources:
+  - https://rules.kr328.app/6park.yaml

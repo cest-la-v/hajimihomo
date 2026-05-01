@@ -1,0 +1,6 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/LineTV/README.md
+name: LineTV
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/LineTV.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/LineTV.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/LineTV.yaml

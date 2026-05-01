@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/YouMengChuangXiang/README.md
+name: YouMengChuangXiang
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/YouMengChuangXiang.list

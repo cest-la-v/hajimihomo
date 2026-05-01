@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Salesforce/README.md
+name: Salesforce
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Salesforce.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Salesforce.yaml

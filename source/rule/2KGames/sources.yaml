@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/2KGames/README.md
+name: 2KGames
+sources:
+  - https://rules.kr328.app/2kgames.yaml

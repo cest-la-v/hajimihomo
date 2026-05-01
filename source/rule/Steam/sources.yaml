@@ -1,0 +1,7 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Steam/README.md
+name: Steam
+sources:
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Steam.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/Steam.list
+  - https://raw.githubusercontent.com/dler-io/Rules/main/Clash/Provider/Steam.yaml
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Steam.yaml

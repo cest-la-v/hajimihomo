@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/AppleID/README.md
+name: AppleID
+sources:
+  - https://gitlab.com/lodepuly/vpn_tool/raw/main/Tool/Loon/Rule/AppleID.list

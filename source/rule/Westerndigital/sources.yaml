@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Westerndigital/README.md
+name: Westerndigital
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Westerndigital.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Westerndigital.yaml

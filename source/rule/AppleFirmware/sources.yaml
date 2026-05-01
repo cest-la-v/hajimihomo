@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/AppleFirmware/README.md
+name: AppleFirmware
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Apple/AppleFirmware.list

@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/eBay/README.md
+name: eBay
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/eBay.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/eBay.yaml

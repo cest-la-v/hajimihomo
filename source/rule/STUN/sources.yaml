@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/STUN/README.md
+name: STUN
+sources:
+  - https://ruleset.isagood.day/stun.conf

@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/AdColony/README.md
+name: AdColony
+sources:
+  - https://rules.kr328.app/adcolony-ads@ads.yaml
+  - https://rules.kr328.app/adcolony-ads.yaml

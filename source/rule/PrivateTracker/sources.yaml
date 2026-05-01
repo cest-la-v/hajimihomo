@@ -1,0 +1,7 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/PrivateTracker/README.md
+name: PrivateTracker
+sources:
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/PrivateTracker.list
+  - https://trackerslist.com/all.txt
+  - https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/PrivateTracker.yaml

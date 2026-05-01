@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Mailru/README.md
+name: Mailru
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Mailru.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Mailru.yaml

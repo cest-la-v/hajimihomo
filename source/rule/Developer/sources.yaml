@@ -1,0 +1,7 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Developer/README.md
+name: Developer
+sources:
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Developer.list
+  - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/source/rule/Developer/Developer.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Apple/AppleDev.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Developer.yaml

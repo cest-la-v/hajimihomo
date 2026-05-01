@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Unity/README.md
+name: Unity
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Unity.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Unity.yaml

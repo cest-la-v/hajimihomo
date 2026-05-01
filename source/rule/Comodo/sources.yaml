@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Comodo/README.md
+name: Comodo
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Comodo.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Comodo.yaml

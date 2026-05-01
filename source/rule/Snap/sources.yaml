@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Snap/README.md
+name: Snap
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Snap.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Snap.yaml

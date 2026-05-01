@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Limelight/README.md
+name: Limelight
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Limelight.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Limelight.yaml

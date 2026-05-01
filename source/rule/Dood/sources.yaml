@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Dood/README.md
+name: Dood
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Dood.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Dood.yaml

@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/AppLovin/README.md
+name: AppLovin
+sources:
+  - https://rules.kr328.app/applovin-ads.yaml
+  - https://rules.kr328.app/applovin-ads@ads.yaml

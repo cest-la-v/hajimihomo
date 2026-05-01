@@ -1,0 +1,37 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Game/README.md
+name: Game
+sources:
+  - https://raw.githubusercontent.com/sve1r/Rules-For-Quantumult-X/develop/Rules/Games/GamesAll.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/Blizzard.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Steam.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/Steam.list
+  - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/source/rule/Rockstar/Rockstar.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/Rockstar.list
+  - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/source/rule/PlayStation/PlayStation.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/PlayStation.list
+  - https://raw.githubusercontent.com/sve1r/Rules-For-Quantumult-X/develop/Rules/Games/Epic.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/Epicgames.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/SteamCN.list
+  - https://raw.githubusercontent.com/sve1r/Rules-For-Quantumult-X/develop/Rules/Games/WildRift.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/EA.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/Garena.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/Gog.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/Nintendo.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/OP.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/Purikonejp.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/Riot.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/UBI.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/Xbox.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Garena.list
+  - https://raw.githubusercontent.com/dler-io/Rules/main/Clash/Provider/Steam.yaml
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Garena.yaml
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Blizzard.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Epic.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Xbox.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Blizzard.yaml
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Epic.yaml
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Steam.yaml
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/SteamCN.yaml
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Xbox.yaml
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Nintendo.yaml
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Nintendo.list

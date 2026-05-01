@@ -1,0 +1,8 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Sony/README.md
+name: Sony
+sources:
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Sony.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/Sony.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Sony.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Sony.yaml
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Sony.yaml

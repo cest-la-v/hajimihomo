@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Antutu/README.md
+name: Antutu
+sources:
+  - https://rules.kr328.app/antutu.yaml

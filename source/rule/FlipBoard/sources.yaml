@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/FlipBoard/README.md
+name: FlipBoard
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/FlipBoard.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/FlipBoard.yaml

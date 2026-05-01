@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Rockstar/README.md
+name: Rockstar
+sources:
+  - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/source/rule/Rockstar/Rockstar.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/Rockstar.list

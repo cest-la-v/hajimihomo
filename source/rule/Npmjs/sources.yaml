@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Npmjs/README.md
+name: Npmjs
+sources:
+  - https://rules.kr328.app/npmjs.yaml

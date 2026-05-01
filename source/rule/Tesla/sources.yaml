@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Tesla/README.md
+name: Tesla
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Tesla.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Tesla.yaml

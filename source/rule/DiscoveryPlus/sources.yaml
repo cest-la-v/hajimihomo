@@ -1,0 +1,6 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/DiscoveryPlus/README.md
+name: DiscoveryPlus
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/DiscoveryPlus.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/DiscoveryPlus.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/DiscoveryPlus.yaml

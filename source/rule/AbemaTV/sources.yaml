@@ -1,0 +1,6 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/AbemaTV/README.md
+name: AbemaTV
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/AbemaTV.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/AbemaTV.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/AbemaTV.yaml

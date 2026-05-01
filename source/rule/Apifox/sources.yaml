@@ -1,0 +1,4 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Apifox/README.md
+name: Apifox
+sources:
+  - https://rules.kr328.app/apifox.yaml

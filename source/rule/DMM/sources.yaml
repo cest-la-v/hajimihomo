@@ -1,0 +1,6 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/DMM/README.md
+name: DMM
+sources:
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/DMM.list
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Dmm.list
+  - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/DMM.yaml

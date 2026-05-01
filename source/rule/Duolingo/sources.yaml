@@ -1,0 +1,5 @@
+# Auto-extracted from blackmatrix7/ios_rule_script rule/Clash/Duolingo/README.md
+name: Duolingo
+sources:
+  - https://rules.kr328.app/duolingo.yaml
+  - https://rules.kr328.app/duolingo@cn.yaml
