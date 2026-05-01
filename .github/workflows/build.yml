@@ -1,0 +1,62 @@
+name: Build rule-sets
+
+on:
+  workflow_call:  # called from main branch trigger.yml
+  push:
+    branches: [dev]
+    paths:
+      - 'source/**'
+      - 'scripts/**'
+
+concurrency:
+  group: build
+  cancel-in-progress: false  # never cancel a running build; queue instead
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0  # need full history for worktree branch operations
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Validate source rules
+        run: python3 scripts/validate.py
+
+      - name: Build rule-sets
+        run: python3 scripts/build.py --jobs 16
+
+      - name: Push text rule-sets to branches
+        run: bash scripts/publish/push_text.sh
+
+      - name: Purge jsDelivr CDN cache
+        run: python3 scripts/publish/purge_cdn.py
+
+      # Binary compilation requires sing-box CLI for .srs and mihomo CLI for .mrs
+      # Skip if binaries directory doesn't exist yet
+      - name: Validate binaries
+        run: |
+          if [ -d dist/binaries ]; then
+            python3 scripts/validate_binaries.py dist/binaries/
+          else
+            echo "No binaries directory — skipping binary validation"
+          fi
+
+      - name: Publish binaries to GitHub Releases
+        if: ${{ hashFiles('dist/binaries/*') != '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash scripts/publish/push_binaries.sh
