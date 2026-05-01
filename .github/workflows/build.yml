@@ -60,3 +60,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: bash scripts/publish/push_binaries.sh
+
+      - name: Build stats + diff
+        run: python3 scripts/stats.py
+
+      - name: Upload build-meta.json
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-meta
+          path: dist/build-meta.json
