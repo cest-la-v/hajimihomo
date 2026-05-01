@@ -255,6 +255,8 @@ def main() -> None:
     parser.add_argument("--categories", help="comma-separated bm7 categories; default: all non-skipped")
     parser.add_argument("--groups", help="comma-separated catalog group IDs (e.g. proxy/google,meta/cn)")
     parser.add_argument("--all-groups", action="store_true", help="build catalog groups only (skip atomics)")
+    parser.add_argument("--with-groups", action="store_true",
+                        help="build all atomics AND all catalog groups (default CI mode)")
     parser.add_argument("--jobs", type=int, default=8, help="parallel workers (default: 8)")
     parser.add_argument("--dry-run", action="store_true", help="parse only, no file output")
     parser.add_argument("--source-dir", default="source/rule", help="path to source rules")
@@ -291,14 +293,13 @@ def main() -> None:
         for cat in emit_cats:
             work[cat] = lambda c=cat: resolver.effective_rules(c)
 
-    # Catalog groups — built if --groups or --all-groups
-    if args.all_groups or args.groups:
+    # Catalog groups — built if --groups, --all-groups, or --with-groups
+    if args.all_groups or args.with_groups or args.groups:
         catalog_groups = catalog.get("groups", {})
         if args.groups:
             wanted_groups = args.groups.split(",")
         else:
             wanted_groups = list(catalog_groups.keys())
-
         for gid in wanted_groups:
             if gid not in catalog_groups:
                 log.warning("Unknown catalog group: %s", gid)

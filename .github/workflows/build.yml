@@ -37,7 +37,7 @@ jobs:
         run: python3 scripts/validate.py
 
       - name: Build rule-sets
-        run: python3 scripts/build.py --jobs 16
+        run: python3 scripts/build.py --jobs 16 --with-groups
 
       - name: Push text rule-sets to branches
         run: bash scripts/publish/push_text.sh
