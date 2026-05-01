@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hajimihomo · 代理配置生成</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0d1117; color: #c9d1d9;
+      min-height: 100vh; padding: 2rem 1rem;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .subtitle { color: #8b949e; font-size: 0.9rem; margin-bottom: 2rem; }
+    .section { margin-bottom: 1.5rem; }
+    label { display: block; font-size: 0.85rem; color: #8b949e; margin-bottom: 0.4rem; }
+    select, input, textarea {
+      width: 100%; padding: 0.5rem 0.75rem;
+      background: #161b22; border: 1px solid #30363d; border-radius: 6px;
+      color: #c9d1d9; font-size: 0.9rem;
+    }
+    select:focus, input:focus, textarea:focus {
+      outline: none; border-color: #388bfd;
+    }
+    textarea { resize: vertical; min-height: 80px; font-family: monospace; font-size: 0.8rem; }
+    .categories-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.4rem; margin-top: 0.5rem;
+    }
+    .cat-item {
+      display: flex; align-items: center; gap: 0.4rem;
+      padding: 0.3rem 0.5rem; background: #161b22;
+      border: 1px solid #30363d; border-radius: 4px; cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .cat-item:hover { border-color: #388bfd; }
+    .cat-item input[type="checkbox"] { accent-color: #388bfd; }
+    .btn {
+      padding: 0.6rem 1.5rem; background: #238636; color: #fff;
+      border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;
+    }
+    .btn:hover { background: #2ea043; }
+    .btn-secondary {
+      background: #21262d; border: 1px solid #30363d; margin-left: 0.5rem;
+    }
+    .btn-secondary:hover { background: #30363d; }
+    .output-block {
+      background: #161b22; border: 1px solid #30363d; border-radius: 6px;
+      padding: 1rem; margin-top: 1rem; font-family: monospace; font-size: 0.78rem;
+      white-space: pre-wrap; overflow-x: auto; max-height: 500px;
+    }
+    .tag {
+      display: inline-block; padding: 0.1rem 0.4rem;
+      border-radius: 3px; font-size: 0.7rem; font-weight: 600;
+      background: #1f3a5f; color: #79c0ff; margin-left: 0.3rem;
+    }
+    .tag.ip { background: #3d2b00; color: #e3b341; }
+    .tag.mixed { background: #3d1f00; color: #f0883e; }
+    .notice {
+      background: #161b22; border: 1px solid #30363d; border-left: 3px solid #8b949e;
+      border-radius: 4px; padding: 0.75rem 1rem; font-size: 0.8rem; color: #8b949e;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>hajimihomo</h1>
+    <p class="subtitle">代理规则配置生成工具 · mihomo / sing-box</p>
+    <div class="notice">
+      个人使用，不保证稳定性。规则集来源于公开上游，按需自取。
+    </div>
+    <div id="app"></div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
