@@ -2,15 +2,23 @@
 """
 hajimihomo build orchestrator.
 
-Reads source/rule/*/sources.yaml, resolves sub-rule includes/excludes from
-source/rule/relationships.yaml, downloads upstream rule files, applies semantic
-compression, and emits:
-  dist/mihomo/<Category>.yaml         — mihomo rule-provider YAML (behavior auto-detected)
-  dist/mihomo/<Category>_Domain.yaml  — domain-only subset for classical categories
-  dist/singbox/<Category>.json        — sing-box rule-set JSON (version 3)
+Two build targets:
+
+1. Atomic categories — source/rule/*/sources.yaml (one file per bm7 category)
+   Resolved with sub-rule includes/excludes from source/rule/relationships.yaml.
+
+2. Catalog groups    — source/catalog.yaml (semantic bundles for policy groups)
+   Each group unions effective_rules of its bm7 members: or other groups
+   in members_ref:. IDs use slashes (proxy/google) → flat filenames (proxy-google).
+
+Output per name:
+  dist/mihomo/<name>.yaml         — mihomo rule-provider YAML
+  dist/mihomo/<name>_Domain.yaml  — domain-only subset (for classical categories)
+  dist/singbox/<name>.json        — sing-box rule-set JSON v3
 
 Usage:
-  python3 scripts/build.py [--categories cat1,cat2,...] [--jobs N] [--dry-run]
+  python3 scripts/build.py [--categories cat1,...] [--groups grp1,...] [--jobs N]
+  python3 scripts/build.py --all-groups   # catalog groups only, skip atomics
 """
 
 import argparse
@@ -142,9 +150,90 @@ def load_relationships(source_dir: Path) -> tuple[dict, dict]:
     return data.get("includes", {}), data.get("excludes", {})
 
 
+def load_catalog(catalog_path: Path) -> dict:
+    """Return the raw catalog data from source/catalog.yaml."""
+    if not catalog_path.exists():
+        return {}
+    return yaml.safe_load(catalog_path.read_text()) or {}
+
+
+def resolve_catalog_group(
+    group_id: str,
+    catalog: dict,
+    resolver: RuleResolver,
+    _group_stack: frozenset[str] = frozenset(),
+) -> frozenset[tuple[str, str]]:
+    """
+    Resolve a catalog group to its effective rule set.
+
+    members:     → union of bm7 category effective_rules (via RuleResolver)
+    members_ref: → union of other catalog groups (recursive)
+    """
+    if group_id in _group_stack:
+        log.warning("Cycle in catalog groups: %s in %s — skipping", group_id, _group_stack)
+        return frozenset()
+
+    groups = catalog.get("groups", {})
+    spec = groups.get(group_id)
+    if spec is None:
+        log.warning("Catalog group not found: %s", group_id)
+        return frozenset()
+
+    rules: set[tuple[str, str]] = set()
+    new_stack = _group_stack | {group_id}
+
+    # Direct bm7 category members
+    for cat in spec.get("members", []):
+        rules.update(resolver.effective_rules(cat))
+
+    # References to other catalog groups
+    for ref in spec.get("members_ref", []):
+        rules.update(resolve_catalog_group(ref, catalog, resolver, new_stack))
+
+    return frozenset(rules)
+
+
 # ---------------------------------------------------------------------------
 # Per-category build
 # ---------------------------------------------------------------------------
+
+def build_item(
+    name: str,
+    raw_rules: frozenset[tuple[str, str]],
+    dist: Path,
+    dry_run: bool = False,
+) -> dict:
+    """Compress and emit outputs for one named rule set."""
+    t0 = time.monotonic()
+    rules = compress(list(raw_rules))
+    behavior = detect_behavior(rules)
+    elapsed = time.monotonic() - t0
+
+    meta = {
+        "name": name,
+        "rule_count": len(rules),
+        "behavior": behavior,
+        "elapsed_s": round(elapsed, 2),
+    }
+
+    if dry_run:
+        log.info("  [dry-run] %s: %d rules (%s)", name, len(rules), behavior)
+        return meta
+
+    (dist / "mihomo").mkdir(parents=True, exist_ok=True)
+    (dist / "singbox").mkdir(parents=True, exist_ok=True)
+
+    (dist / "mihomo" / f"{name}.yaml").write_text(to_mihomo_yaml(rules, name))
+    (dist / "singbox" / f"{name}.json").write_text(to_singbox_json(rules, name))
+
+    if behavior == "classical":
+        domain_yaml = to_domain_yaml(rules, name)
+        if domain_yaml:
+            (dist / "mihomo" / f"{name}_Domain.yaml").write_text(domain_yaml)
+
+    log.info("  %s: %d rules (%s) in %.1fs", name, len(rules), behavior, elapsed)
+    return meta
+
 
 def build_category(
     category: str,
@@ -152,40 +241,9 @@ def build_category(
     dist: Path,
     dry_run: bool = False,
 ) -> dict:
-    """Resolve, compress, and emit outputs for one category."""
-    t0 = time.monotonic()
-
+    """Resolve, compress, and emit an atomic bm7 category."""
     raw_rules = resolver.effective_rules(category)
-    rules = compress(list(raw_rules))
-
-    behavior = detect_behavior(rules)
-    elapsed = time.monotonic() - t0
-
-    meta = {
-        "category": category,
-        "rule_count": len(rules),
-        "behavior": behavior,
-        "elapsed_s": round(elapsed, 2),
-    }
-
-    if dry_run:
-        log.info("  [dry-run] %s: %d rules (%s)", category, len(rules), behavior)
-        return meta
-
-    (dist / "mihomo").mkdir(parents=True, exist_ok=True)
-    (dist / "singbox").mkdir(parents=True, exist_ok=True)
-
-    (dist / "mihomo" / f"{category}.yaml").write_text(to_mihomo_yaml(rules, category))
-    (dist / "singbox" / f"{category}.json").write_text(to_singbox_json(rules, category))
-
-    # Emit domain-only split for classical categories (enables behavior:domain + .mrs)
-    if behavior == "classical":
-        domain_yaml = to_domain_yaml(rules, category)
-        if domain_yaml:
-            (dist / "mihomo" / f"{category}_Domain.yaml").write_text(domain_yaml)
-
-    log.info("  %s: %d rules (%s) in %.1fs", category, len(rules), behavior, elapsed)
-    return meta
+    return build_item(category, raw_rules, dist, dry_run)
 
 
 # ---------------------------------------------------------------------------
@@ -194,7 +252,9 @@ def build_category(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="hajimihomo build")
-    parser.add_argument("--categories", help="comma-separated list; default: all")
+    parser.add_argument("--categories", help="comma-separated bm7 categories; default: all non-skipped")
+    parser.add_argument("--groups", help="comma-separated catalog group IDs (e.g. proxy/google,meta/cn)")
+    parser.add_argument("--all-groups", action="store_true", help="build catalog groups only (skip atomics)")
     parser.add_argument("--jobs", type=int, default=8, help="parallel workers (default: 8)")
     parser.add_argument("--dry-run", action="store_true", help="parse only, no file output")
     parser.add_argument("--source-dir", default="source/rule", help="path to source rules")
@@ -213,52 +273,67 @@ def main() -> None:
 
     all_sources = load_all_sources(source_dir)
     includes_map, excludes_map = load_relationships(source_dir)
+    catalog = load_catalog(repo_root / "source" / "catalog.yaml")
 
     resolver = RuleResolver(all_sources, includes_map, excludes_map)
 
-    # Determine categories to emit (SKIP_CATEGORIES excluded from output only)
-    emit_cats: dict[str, None] = {
-        cat: None
-        for cat in sorted(all_sources)
-        if cat not in SKIP_CATEGORIES
-    }
+    # ---- Collect work items: (name, callable_that_returns_frozenset) ----
+    # Key: output file stem; value: callable producing raw frozenset of rules
+    work: dict[str, any] = {}
 
-    if args.categories:
-        wanted = set(args.categories.split(","))
-        emit_cats = {k: v for k, v in emit_cats.items() if k in wanted}
+    # Build atomics unless --all-groups is set or only --groups were requested
+    build_atomics = not args.all_groups and not (args.groups and not args.categories)
+    if build_atomics:
+        emit_cats = [cat for cat in sorted(all_sources) if cat not in SKIP_CATEGORIES]
+        if args.categories:
+            wanted = set(args.categories.split(","))
+            emit_cats = [c for c in emit_cats if c in wanted]
+        for cat in emit_cats:
+            work[cat] = lambda c=cat: resolver.effective_rules(c)
 
-    log.info("Building %d categories with %d workers", len(emit_cats), args.jobs)
+    # Catalog groups — built if --groups or --all-groups
+    if args.all_groups or args.groups:
+        catalog_groups = catalog.get("groups", {})
+        if args.groups:
+            wanted_groups = args.groups.split(",")
+        else:
+            wanted_groups = list(catalog_groups.keys())
+
+        for gid in wanted_groups:
+            if gid not in catalog_groups:
+                log.warning("Unknown catalog group: %s", gid)
+                continue
+            flat_name = gid.replace("/", "-")
+            work[flat_name] = lambda g=gid: resolve_catalog_group(g, catalog, resolver)
+
+    log.info("Building %d items with %d workers", len(work), args.jobs)
 
     results: list[dict] = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
         futures = {
-            pool.submit(build_category, cat, resolver, dist, args.dry_run): cat
-            for cat in emit_cats
+            pool.submit(build_item, name, fn(), dist, args.dry_run): name
+            for name, fn in work.items()
         }
         for future in concurrent.futures.as_completed(futures):
-            cat = futures[future]
+            name = futures[future]
             try:
                 results.append(future.result())
             except Exception as e:
-                log.error("  %s: FAILED — %s", cat, e)
-                results.append({"category": cat, "error": str(e)})
+                log.error("  %s: FAILED — %s", name, e)
+                results.append({"name": name, "error": str(e)})
 
     if not args.dry_run:
         dist.mkdir(parents=True, exist_ok=True)
         meta = {
             "built_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-            "categories": {r["category"]: r for r in results},
-            "total_categories": len(results),
+            "items": {r["name"]: r for r in results},
+            "total": len(results),
             "total_rules": sum(r.get("rule_count", 0) for r in results),
         }
         (dist / "build-meta.json").write_text(
             json.dumps(meta, ensure_ascii=False, indent=2) + "\n"
         )
-        log.info(
-            "Done: %d categories, %d total rules",
-            meta["total_categories"],
-            meta["total_rules"],
-        )
+        log.info("Done: %d items, %d total rules", meta["total"], meta["total_rules"])
 
 
 if __name__ == "__main__":

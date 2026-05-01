@@ -1,0 +1,388 @@
+# hajimihomo Rule Catalog
+# 
+# Defines semantic groups — named bundles of blackmatrix7 leaf categories.
+# Each group is designed to map directly to a policy group in mihomo/sing-box.
+# Members are bm7 category names; the build system applies their full
+# includes/excludes resolution before unioning them.
+#
+# Tiers:
+#   block/*   — traffic to reject
+#   direct/*  — traffic that bypasses proxy (domestic/private)
+#   proxy/*   — traffic that goes through proxy
+#   meta/*    — composite bundles (union of other catalog groups)
+#
+# default_action: hint for the profile builder (REJECT / DIRECT / PROXY)
+# region:         typical exit node region (any / us / jp / sg / cn)
+# tags:           for profile builder filtering / UI grouping
+
+version: 1
+
+groups:
+
+  # =========================================================================
+  # BLOCK — reject traffic
+  # =========================================================================
+
+  block/ads:
+    name: "Ads & Tracking"
+    description: >
+      Comprehensive ad-block: ad networks, tracking pixels, analytics scripts,
+      hijacking domains, and privacy trackers. Uses blackmatrix7's Advertising
+      category which already absorbs AdvertisingLite, Hijacking, and Privacy
+      and strips Direct-access domains.
+    default_action: REJECT
+    region: any
+    tags: [block, security, ads]
+    members:
+      - Advertising        # absorbs: AdvertisingLite, Hijacking, Privacy; strips: Direct
+
+  block/ads-lite:
+    name: "Ads Lite"
+    description: >
+      Conservative ad-block only — no hijacking or privacy rules.
+      Suitable for users who find the full ads list too aggressive.
+    default_action: REJECT
+    region: any
+    tags: [block, security, ads]
+    members:
+      - AdvertisingLite    # strips: Hijacking, Privacy
+
+  block/tracking:
+    name: "Privacy & Telemetry"
+    description: >
+      Telemetry endpoints, analytics trackers, EasyPrivacy domains,
+      MIUI/vendor telemetry, and DNS-over-HTTP circumvention.
+      Use alongside ads/ads-lite for comprehensive blocking.
+    default_action: REJECT
+    region: any
+    tags: [block, security, privacy]
+    members:
+      - Privacy
+      - EasyPrivacy
+      - MIUIPrivacy
+      - BlockHttpDNS
+
+  # =========================================================================
+  # DIRECT — bypass proxy (for China-based users)
+  # =========================================================================
+
+  direct/cn:
+    name: "China Domestic"
+    description: >
+      Chinese websites, apps, and media services. Includes major platforms
+      (BiliBili, iQiYI, Youku, Weibo, WeChat, CCTV, NetEase, Tencent) via
+      ChinaMedia. Route DIRECT for China-based users; overseas Chinese users
+      may prefer a CN-exit proxy instead.
+    default_action: DIRECT
+    region: cn
+    tags: [direct, cn, domestic]
+    members:
+      - China              # absorbs most Chinese service domains
+      - ChinaMedia         # BiliBili, CCTV, iQiYI, Youku, Tencent, NetEase, Sohu, ...
+      - ChinaMobile        # 中国移动 portal/services
+      - ChinaTelecom       # 中国电信 portal/services
+      - ChinaUnicom        # 中国联通 portal/services
+
+  direct/cn-ips:
+    name: "China IP Ranges"
+    description: >
+      Chinese IP address space (APNIC + BGP aggregated). Apply with
+      no-resolve since these match by IP after DNS resolves.
+    default_action: DIRECT
+    region: cn
+    tags: [direct, cn, ip]
+    members:
+      - ChinaIPs
+      - ChinaIPsBGP
+
+  # =========================================================================
+  # PROXY — services that need a proxy for China-based users
+  # =========================================================================
+
+  # --- Big Tech ---
+
+  proxy/google:
+    name: "Google"
+    description: >
+      Google Search, Maps, Gmail, Drive, Meet, Translate, Play Store,
+      Firebase, FCM push notifications. Does NOT include YouTube
+      (use proxy/youtube for that).
+    default_action: PROXY
+    region: any
+    tags: [proxy, google]
+    members:
+      - Google             # bm7 Google already excludes YouTube/YouTubeMusic
+
+  proxy/youtube:
+    name: "YouTube"
+    description: >
+      YouTube video and YouTube Music. Kept separate from Google so it can
+      be routed to a specific region for geo-restricted content.
+    default_action: PROXY
+    region: any
+    tags: [proxy, streaming, google]
+    members:
+      - YouTube
+      - YouTubeMusic
+
+  proxy/apple:
+    name: "Apple"
+    description: >
+      App Store, iCloud, TestFlight, Apple TV+, Apple Music, Apple News,
+      Find My, Fitness+, Siri, iCloud Private Relay, and hardware/firmware
+      update servers. Absorbs 15 Apple sub-categories.
+    default_action: PROXY
+    region: any
+    tags: [proxy, apple]
+    members:
+      - Apple              # absorbs: AppStore, AppleFirmware, AppleHardware, AppleMail,
+                           #   AppleMedia, AppleMusic, AppleNews, AppleProxy, AppleTV,
+                           #   FindMy, FitnessPlus, Siri, TestFlight, iCloud, iCloudPrivateRelay
+
+  proxy/microsoft:
+    name: "Microsoft"
+    description: >
+      Microsoft 365, OneDrive, Teams, Bing, Edge, Azure CDN endpoints.
+      Does NOT include GitHub (use proxy/dev for that).
+    default_action: PROXY
+    region: any
+    tags: [proxy, microsoft]
+    members:
+      - Microsoft          # bm7 Microsoft excludes GitHub
+
+  proxy/amazon:
+    name: "Amazon"
+    description: >
+      Amazon shopping, AWS endpoints, Amazon Trust certificate services.
+      Does NOT include Prime Video (in proxy/streaming).
+    default_action: PROXY
+    region: any
+    tags: [proxy, amazon]
+    members:
+      - Amazon
+      - AmazonTrust
+
+  # --- Messaging ---
+
+  proxy/telegram:
+    name: "Telegram"
+    description: >
+      Telegram messenger — all datacenter regions (NL, SG, US).
+    default_action: PROXY
+    region: any
+    tags: [proxy, messaging]
+    members:
+      - Telegram           # absorbs: TelegramNL, TelegramSG, TelegramUS
+
+  proxy/twitter:
+    name: "Twitter / X"
+    description: >
+      Twitter/X social network. Kept separate from the broader social group
+      because many users route it to a specific region.
+    default_action: PROXY
+    region: any
+    tags: [proxy, social]
+    members:
+      - Twitter
+
+  # --- Streaming ---
+
+  proxy/netflix:
+    name: "Netflix"
+    description: >
+      Netflix streaming. Geo-locked — typically requires a proxy node in the
+      target country. Kept separate from the streaming bundle for this reason.
+    default_action: PROXY
+    region: us           # common choice; adjust to your actual Netflix subscription region
+    tags: [proxy, streaming, geo-locked]
+    members:
+      - Netflix
+
+  proxy/streaming:
+    name: "Global Streaming"
+    description: >
+      Disney+, HBO (all regional variants), Hulu (US + JP), Amazon Prime Video,
+      Twitch, Spotify, Abema, Niconico, TVB, EncoreTVB. Does not include
+      Netflix (use proxy/netflix) or YouTube (use proxy/youtube).
+    default_action: PROXY
+    region: any
+    tags: [proxy, streaming]
+    members:
+      - Disney
+      - HBO
+      - HBOHK
+      - HBOUSA
+      - Hulu
+      - HuluJP
+      - HuluUSA
+      - AmazonPrimeVideo
+      - Twitch
+      - Spotify
+      - Abema
+      - AbemaTV
+      - Niconico
+      - TVB
+      - EncoreTVB
+
+  # --- Social ---
+
+  proxy/social:
+    name: "Social Media"
+    description: >
+      Facebook, Instagram, Reddit, Discord, LinkedIn, TikTok, Line, Tumblr.
+      Twitter has its own group (proxy/twitter); Telegram has its own group.
+    default_action: PROXY
+    region: any
+    tags: [proxy, social]
+    members:
+      - Facebook
+      - Instagram
+      - Reddit
+      - Discord
+      - LinkedIn
+      - TikTok
+      - Line
+      - Tumblr
+
+  # --- AI / LLM ---
+
+  proxy/ai:
+    name: "AI Services"
+    description: >
+      OpenAI (ChatGPT, API, DALL-E) and Anthropic (Claude). Typically needs
+      a US-region proxy for access from China and some other regions.
+    default_action: PROXY
+    region: us
+    tags: [proxy, ai]
+    members:
+      - OpenAI
+      - Anthropic
+
+  # --- Gaming ---
+
+  proxy/gaming:
+    name: "Gaming Platforms"
+    description: >
+      Steam (global), PlayStation Network, Nintendo, Xbox, Epic Games, Blizzard
+      (including Battle.net, WoW, Hearthstone, Overwatch, Diablo, StarCraft),
+      EA, Riot, Ubisoft, Rockstar, and more. Absorbs 25+ gaming sub-categories.
+    default_action: PROXY
+    region: any
+    tags: [proxy, gaming]
+    members:
+      - Game               # absorbs: Battle, Blizzard, Classic, DiabloIII, EA, Epic, Garena,
+                           #   Gog, Hearthstone, HeroesoftheStorm, Nintendo, Overwatch,
+                           #   PlayStation, Purikonejp, Riot, Rockstar, StarCraftII, Steam,
+                           #   SteamCN, Supercell, UBI, WildRift, WorldofWarcraft, Xbox
+
+  # --- Developer Tools ---
+
+  proxy/dev:
+    name: "Developer Tools"
+    description: >
+      GitHub, GitLab, Docker Hub, npm registry, Cloudflare (workers, pages, DNS),
+      Vercel, DigitalOcean, Heroku, JFrog Artifactory, Akamai CDN, and generic
+      developer service endpoints.
+    default_action: PROXY
+    region: any
+    tags: [proxy, dev]
+    members:
+      - GitHub
+      - GitLab
+      - Docker
+      - Cloudflare
+      - Vercel
+      - DigitalOcean
+      - Heroku
+      - Npmjs
+      - Jfrog
+      - Developer
+      - Akamai
+
+  # --- Finance & Crypto ---
+
+  proxy/finance:
+    name: "Finance & Crypto"
+    description: >
+      PayPal, Binance, OKX. For users in regions where these services
+      are restricted or rate-limited without a proxy.
+    default_action: PROXY
+    region: any
+    tags: [proxy, finance]
+    members:
+      - PayPal
+      - Binance
+      - OKX
+
+  # --- News ---
+
+  proxy/news:
+    name: "International News"
+    description: >
+      BBC, Bloomberg, CNN, Al Jazeera, NYTimes, VOA, Nikkei.
+      International news outlets commonly blocked or restricted in China.
+    default_action: PROXY
+    region: any
+    tags: [proxy, news, media]
+    members:
+      - BBC
+      - Bloomberg
+      - CNN
+      - ALJazeera
+      - NYTimes
+      - VOA
+      - Nikkei
+
+  # =========================================================================
+  # META — composite bundles for simple configs
+  # =========================================================================
+
+  meta/block:
+    name: "Block All"
+    description: >
+      Comprehensive block list: ads, tracking, and telemetry combined.
+      For most users this single group replaces picking block/ads + block/tracking.
+    default_action: REJECT
+    region: any
+    tags: [meta, block]
+    members_ref:           # references other catalog groups (not bm7 categories)
+      - block/ads
+      - block/tracking
+
+  meta/cn:
+    name: "China All"
+    description: >
+      All China domestic rules: domain list + IP ranges combined.
+    default_action: DIRECT
+    region: cn
+    tags: [meta, direct, cn]
+    members_ref:
+      - direct/cn
+      - direct/cn-ips
+
+  meta/foreign:
+    name: "Foreign Services"
+    description: >
+      All services typically needing a proxy for China-based users.
+      Includes Google, YouTube, Apple, Microsoft, Amazon, Telegram, Twitter,
+      Netflix, streaming, social, AI, gaming, dev, finance, and news.
+      Use as the catch-all PROXY group in simple configs.
+    default_action: PROXY
+    region: any
+    tags: [meta, proxy, foreign]
+    members_ref:
+      - proxy/google
+      - proxy/youtube
+      - proxy/apple
+      - proxy/microsoft
+      - proxy/amazon
+      - proxy/telegram
+      - proxy/twitter
+      - proxy/netflix
+      - proxy/streaming
+      - proxy/social
+      - proxy/ai
+      - proxy/gaming
+      - proxy/dev
+      - proxy/finance
+      - proxy/news
