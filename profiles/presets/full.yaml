@@ -6,42 +6,41 @@ description: "Comprehensive rules: ads, privacy, streaming, social, gaming, dev"
 
 categories:
   # Blocking
+  # Advertising already absorbs: AdvertisingLite, Hijacking, Privacy
   - Advertising
-  - Privacy
-  - Hijacking
 
   # China direct
+  # ChinaMedia already absorbs: BiliBili, CCTV
   - China
   - ChinaMedia
+  # Microsoft already absorbs: MicrosoftEdge, OneDrive, Teams (excludes GitHub)
   - Microsoft
 
   # Proxy — global services
+  # Apple already absorbs: AppStore, iCloud, TestFlight, AppleTV, AppleMusic, +10 more
   - Apple
+  # Google absorbs: GoogleDrive, GoogleSearch, GoogleVoice (excludes YouTube/YouTubeMusic)
   - Google
+  # GlobalMedia absorbs: YouTube, YouTubeMusic (excludes OpenAI)
+  - GlobalMedia
+  # Telegram absorbs: TelegramNL, TelegramSG, TelegramUS
   - Telegram
-  - YouTube
   - Twitter
   - Facebook
-  - Instagram
-  - WhatsApp
-  - GitHub
+  - GitHub       # safe: Microsoft excludes GitHub
   - GitLab
   - Cloudflare
   - Amazon
   - Netflix
   - Disney
   - Spotify
-  - TikTok
+  - TikTok       # safe: ByteDance excludes TikTok
   - PayPal
-  - OpenAI
+  - OpenAI       # safe: GlobalMedia excludes OpenAI
   - Anthropic
 
-  # Gaming
-  - Steam
-  - PlayStation
-  - Nintendo
-  - Blizzard
-  - Epic
+  # Gaming — Game absorbs: Steam, PlayStation, Nintendo, Blizzard, Epic, +20 more
+  - Game
 
   # Developer
   - Docker

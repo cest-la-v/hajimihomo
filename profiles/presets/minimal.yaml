@@ -5,14 +5,15 @@ name: minimal
 description: "Core rules only: ads, China direct, proxy basics"
 
 categories:
-  - Advertising       # block ads
-  - Privacy           # block tracking/telemetry
-  - China             # Chinese sites → direct
-  - Apple             # Apple services
-  - Google            # Google services → proxy
-  - Telegram          # Telegram → proxy
-  - YouTube           # YouTube → proxy
-  - GitHub            # GitHub → proxy
-  - Microsoft         # Microsoft → direct
+  # Advertising absorbs: AdvertisingLite, Hijacking, Privacy
+  - Advertising
+  - China
+  - Apple        # absorbs: AppStore, iCloud, TestFlight, +12 more
+  # Google absorbs GoogleDrive/Search/Voice; excludes YouTube
+  - Google
+  - GlobalMedia  # absorbs YouTube, YouTubeMusic
+  - Telegram     # absorbs TelegramNL/SG/US
+  - GitHub
+  - Microsoft    # absorbs OneDrive, Teams, MicrosoftEdge; excludes GitHub
 
 behavior_overrides: {}  # use auto-detected behavior per category
