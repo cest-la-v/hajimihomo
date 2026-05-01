@@ -69,19 +69,18 @@ groups:
   direct/cn:
     name: "China Domestic"
     description: >
-      Chinese websites, apps, and media services. Includes major platforms
-      (BiliBili, iQiYI, Youku, Weibo, WeChat, CCTV, NetEase, Tencent) via
-      ChinaMedia. Route DIRECT for China-based users; overseas Chinese users
-      may prefer a CN-exit proxy instead.
+      All Chinese domestic domains: major platforms (Baidu, Alibaba, WeChat,
+      Weibo, Tencent, iQiYI, Youku, NetEase, BiliBili), e-commerce (JD,
+      Pinduoduo, Meituan), banking (BOC, ICBC, CCB), telecoms, government,
+      and 200+ more services. Uses ChinaMaxNoIP which absorbs the full
+      catalogue of Chinese service categories (without IP ranges).
+      Route DIRECT for China-based users; overseas Chinese may prefer a
+      CN-exit proxy node instead.
     default_action: DIRECT
     region: cn
     tags: [direct, cn, domestic]
     members:
-      - China              # absorbs most Chinese service domains
-      - ChinaMedia         # BiliBili, CCTV, iQiYI, Youku, Tencent, NetEase, Sohu, ...
-      - ChinaMobile        # 中国移动 portal/services
-      - ChinaTelecom       # 中国电信 portal/services
-      - ChinaUnicom        # 中国联通 portal/services
+      - ChinaMaxNoIP       # absorbs 240+ CN service categories; excludes IP ranges
 
   direct/cn-ips:
     name: "China IP Ranges"
@@ -202,8 +201,10 @@ groups:
     name: "Global Streaming"
     description: >
       Disney+, HBO (all regional variants), Hulu (US + JP), Amazon Prime Video,
-      Twitch, Spotify, Abema, Niconico, TVB, EncoreTVB. Does not include
-      Netflix (use proxy/netflix) or YouTube (use proxy/youtube).
+      Twitch, Spotify, Abema, Niconico, TVB, EncoreTVB, DAZN, Fubo, Sling,
+      ITV, All4, TVer (Japan), KKTV, Bahamut (Taiwan), WeTV, NaverTV, ViuTV,
+      LiTV, LineTV, VidolTV, AsianMedia bundle. Does not include Netflix
+      (use proxy/netflix) or YouTube (use proxy/youtube).
     default_action: PROXY
     region: any
     tags: [proxy, streaming]
@@ -223,13 +224,29 @@ groups:
       - Niconico
       - TVB
       - EncoreTVB
+      - DAZN
+      - FuboTV
+      - Sling
+      - ITV
+      - All4
+      - TVer
+      - KKTV
+      - Bahamut
+      - WeTV
+      - NaverTV
+      - ViuTV
+      - LiTV
+      - LineTV
+      - VidolTV
+      - AsianMedia
 
   # --- Social ---
 
   proxy/social:
     name: "Social Media"
     description: >
-      Facebook, Instagram, Reddit, Discord, LinkedIn, TikTok, Line, Tumblr.
+      Facebook, Instagram, Reddit, Discord, LinkedIn, TikTok (international),
+      ByteDance (international services), Line, Tumblr, Pinterest.
       Twitter has its own group (proxy/twitter); Telegram has its own group.
     default_action: PROXY
     region: any
@@ -241,8 +258,10 @@ groups:
       - Discord
       - LinkedIn
       - TikTok
+      - ByteDance          # international ByteDance endpoints (distinct from DouYin domestic)
       - Line
       - Tumblr
+      - Pinterest
 
   # --- AI / LLM ---
 
@@ -251,12 +270,15 @@ groups:
     description: >
       OpenAI (ChatGPT, API, DALL-E) and Anthropic (Claude). Typically needs
       a US-region proxy for access from China and some other regions.
+      Note: Gemini/BardAI exist as bm7 categories but have no upstream sources
+      yet — add them here once bm7 populates them.
     default_action: PROXY
     region: us
     tags: [proxy, ai]
     members:
       - OpenAI
       - Anthropic
+      # Gemini / BardAI: no upstream sources yet in bm7 — add when available
 
   # --- Gaming ---
 
@@ -281,8 +303,9 @@ groups:
     name: "Developer Tools"
     description: >
       GitHub, GitLab, Docker Hub, npm registry, Cloudflare (workers, pages, DNS),
-      Vercel, DigitalOcean, Heroku, JFrog Artifactory, Akamai CDN, and generic
-      developer service endpoints.
+      Vercel, DigitalOcean, Heroku, JFrog Artifactory, Akamai CDN, Adobe Creative
+      Cloud, Atlassian (Jira, Confluence, Bitbucket), Figma, HashiCorp, Notion,
+      Slack, and generic developer service endpoints.
     default_action: PROXY
     region: any
     tags: [proxy, dev]
@@ -298,6 +321,12 @@ groups:
       - Jfrog
       - Developer
       - Akamai
+      - Adobe
+      - Atlassian
+      - Figma
+      - HashiCorp
+      - Notion
+      - Slack
 
   # --- Finance & Crypto ---
 
@@ -319,8 +348,9 @@ groups:
   proxy/news:
     name: "International News"
     description: >
-      BBC, Bloomberg, CNN, Al Jazeera, NYTimes, VOA, Nikkei.
-      International news outlets commonly blocked or restricted in China.
+      BBC, Bloomberg, CNN, Al Jazeera, NYTimes, VOA, Nikkei, Asahi Shimbun,
+      AFP, Reuters, 9News (Australia). International news outlets commonly
+      blocked or restricted in China.
     default_action: PROXY
     region: any
     tags: [proxy, news, media]
@@ -332,6 +362,10 @@ groups:
       - NYTimes
       - VOA
       - Nikkei
+      - Asahi
+      - AFP
+      - ThomsonReuters
+      - 9News
 
   # =========================================================================
   # META — composite bundles for simple configs
