@@ -2,8 +2,17 @@
 # 
 # Defines semantic groups — named bundles of blackmatrix7 leaf categories.
 # Each group is designed to map directly to a policy group in mihomo/sing-box.
-# Members are bm7 category names; the build system applies their full
-# includes/excludes resolution before unioning them.
+#
+# Group composition fields:
+#   members:      list of bm7 category names to union into this group
+#   members_ref:  list of other catalog group IDs to union (for meta groups)
+#   excludes:     list of bm7 category names to subtract from the result
+#   excludes_ref: list of other catalog group IDs to subtract from the result
+#
+# members/excludes operate at the bm7 layer — RuleResolver applies their
+# includes/excludes from relationships.yaml before the set operation.
+# members_ref/excludes_ref operate at the catalog layer — the referenced
+# group is fully resolved first, then unioned or subtracted.
 #
 # Tiers:
 #   block/*   — traffic to reject
@@ -93,6 +102,21 @@ groups:
     members:
       - ChinaIPs
       - ChinaIPsBGP
+
+  direct/cn-no-media:
+    name: "China Domestic (no media)"
+    description: >
+      All Chinese domestic domains excluding BiliBili and CCTV (ChinaMedia).
+      Useful for users who want to route Chinese media through proxy for
+      better CDN performance while keeping other CN services direct.
+      Demonstrates excludes_ref: same as direct/cn minus direct/cn-media.
+    default_action: DIRECT
+    region: cn
+    tags: [direct, cn, domestic]
+    members_ref:
+      - direct/cn
+    excludes:
+      - ChinaMedia         # subtract BiliBili + CCTV from the full CN set
 
   # =========================================================================
   # PROXY — services that need a proxy for China-based users

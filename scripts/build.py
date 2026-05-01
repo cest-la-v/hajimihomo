@@ -166,8 +166,14 @@ def resolve_catalog_group(
     """
     Resolve a catalog group to its effective rule set.
 
-    members:     → union of bm7 category effective_rules (via RuleResolver)
-    members_ref: → union of other catalog groups (recursive)
+    Supported catalog.yaml fields:
+      members:      list of bm7 category names → unioned via RuleResolver
+      members_ref:  list of other catalog group IDs → unioned recursively
+      excludes:     list of bm7 category names → subtracted from result
+      excludes_ref: list of other catalog group IDs → subtracted recursively
+
+    This mirrors the same include/exclude semantics as relationships.yaml
+    but expressed directly in catalog YAML for catalog-level composition.
     """
     if group_id in _group_stack:
         log.warning("Cycle in catalog groups: %s in %s — skipping", group_id, _group_stack)
@@ -182,13 +188,21 @@ def resolve_catalog_group(
     rules: set[tuple[str, str]] = set()
     new_stack = _group_stack | {group_id}
 
-    # Direct bm7 category members
+    # Union: direct bm7 category members
     for cat in spec.get("members", []):
         rules.update(resolver.effective_rules(cat))
 
-    # References to other catalog groups
+    # Union: references to other catalog groups
     for ref in spec.get("members_ref", []):
         rules.update(resolve_catalog_group(ref, catalog, resolver, new_stack))
+
+    # Subtract: direct bm7 categories
+    for cat in spec.get("excludes", []):
+        rules -= resolver.effective_rules(cat)
+
+    # Subtract: other catalog groups
+    for ref in spec.get("excludes_ref", []):
+        rules -= resolve_catalog_group(ref, catalog, resolver, new_stack)
 
     return frozenset(rules)
 
