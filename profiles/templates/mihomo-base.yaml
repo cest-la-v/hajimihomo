@@ -1,0 +1,75 @@
+# hajimihomo — mihomo base configuration template
+# Reference: https://wiki.metacubex.one/en_US/config/
+#
+# Placeholders replaced by profile builder:
+#   {{PROXY_PROVIDERS}}  — generated proxy-providers block
+#   {{PROXY_GROUPS}}     — generated proxy-groups block
+#   {{RULE_PROVIDERS}}   — generated rule-providers block
+#   {{RULES}}            — generated rules block
+
+mixed-port: 7890
+allow-lan: false
+bind-address: '*'
+mode: rule
+log-level: warning
+ipv6: true
+unified-delay: true
+tcp-concurrent: true
+find-process-mode: strict
+global-client-fingerprint: chrome
+
+geodata-mode: true
+geo-auto-update: true
+geo-update-interval: 168  # hours (weekly)
+geox-url:
+  geoip: "https://github.com/cest-la-v/hajimihomo/releases/latest/download/geoip.mmdb"
+  geosite: "https://github.com/cest-la-v/hajimihomo/releases/latest/download/geosite.dat"
+
+dns:
+  enable: true
+  ipv6: true
+  listen: 0.0.0.0:1053
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - '*.lan'
+    - '*.local'
+    - '*.localhost'
+    - '+.stun.*.*'
+    - '+.stun.*.*.*'
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  fallback:
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+
+proxy-providers: {{PROXY_PROVIDERS}}
+
+proxy-groups: {{PROXY_GROUPS}}
+
+rule-providers: {{RULE_PROVIDERS}}
+
+rules: {{RULES}}

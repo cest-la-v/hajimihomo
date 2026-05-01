@@ -1,0 +1,75 @@
+{
+  "log": {
+    "level": "warn",
+    "timestamp": true
+  },
+  "dns": {
+    "enabled": true,
+    "servers": [
+      {
+        "tag": "cn-dns",
+        "address": "https://doh.pub/dns-query",
+        "address_resolver": "local-dns",
+        "detour": "direct"
+      },
+      {
+        "tag": "remote-dns",
+        "address": "https://1.1.1.1/dns-query",
+        "address_resolver": "local-dns",
+        "detour": "proxy"
+      },
+      {
+        "tag": "local-dns",
+        "address": "223.5.5.5",
+        "detour": "direct"
+      },
+      {
+        "tag": "block-dns",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "rule_set": "geosite-cn",
+        "server": "cn-dns"
+      },
+      {
+        "rule_set": ["geosite-ads", "ruleset-Advertising"],
+        "server": "block-dns"
+      },
+      {
+        "outbound": "any",
+        "server": "local-dns"
+      }
+    ],
+    "final": "remote-dns",
+    "independent_cache": true
+  },
+  "inbounds": [
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "127.0.0.1",
+      "listen_port": 7890
+    },
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "interface_name": "tun0",
+      "address": ["172.19.0.1/30", "fdfe:dcba:9876::1/126"],
+      "mtu": 9000,
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "mixed",
+      "sniff": true,
+      "sniff_override_destination": false
+    }
+  ],
+  "outbounds": "{{OUTBOUNDS}}",
+  "route": {
+    "rule_set": "{{RULE_SETS_INLINE}}",
+    "rules": "{{ROUTE_RULES}}",
+    "final": "proxy",
+    "auto_detect_interface": true
+  }
+}

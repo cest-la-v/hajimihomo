@@ -1,0 +1,53 @@
+# full preset — comprehensive rule set
+# Includes streaming services, social media, gaming platforms, developer tools
+
+name: full
+description: "Comprehensive rules: ads, privacy, streaming, social, gaming, dev"
+
+categories:
+  # Blocking
+  - Advertising
+  - Privacy
+  - Hijacking
+
+  # China direct
+  - China
+  - ChinaMedia
+  - Microsoft
+
+  # Proxy — global services
+  - Apple
+  - Google
+  - Telegram
+  - YouTube
+  - Twitter
+  - Facebook
+  - Instagram
+  - WhatsApp
+  - GitHub
+  - GitLab
+  - Cloudflare
+  - Amazon
+  - Netflix
+  - Disney
+  - Spotify
+  - TikTok
+  - PayPal
+  - OpenAI
+  - Anthropic
+
+  # Gaming
+  - Steam
+  - PlayStation
+  - Nintendo
+  - Blizzard
+  - Epic
+
+  # Developer
+  - Docker
+  - Notion
+  - Figma
+  - Slack
+  - Zoom
+
+behavior_overrides: {}
