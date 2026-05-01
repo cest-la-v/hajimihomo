@@ -1,0 +1,19 @@
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: cest-la-v/hajimihomo/.github/workflows/build.yml@dev
+    secrets: inherit
+    permissions:
+      contents: write
+
+  pages:
+    uses: cest-la-v/hajimihomo/.github/workflows/pages.yml@dev
+    secrets: inherit
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
