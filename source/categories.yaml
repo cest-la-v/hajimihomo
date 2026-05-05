@@ -219,6 +219,8 @@ Advertising:
     - https://raw.githubusercontent.com/yjqiang/surge_scripts/main/modules/hupu/hupu.sgmodule
     - https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt
     - https://raw.githubusercontent.com/zqzess/rule_for_quantumultX/master/QuantumultX/rules/AdBlock.list
+  exclude:
+    - file:source/overrides/Advertising.remove.list
 
 AdvertisingLite:
   sources:
@@ -228,6 +230,8 @@ AdvertisingLite:
     - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/source/rule/Advertising/Advertising.list
     - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/source/rule/Advertising/LianXiangJia/LianXiangJia.list
     - https://raw.githubusercontent.com/yjqiang/surge_scripts/main/modules/hupu/hupu.sgmodule
+  exclude:
+    - file:source/overrides/Advertising.remove.list
 
 AdvertisingMiTV:
   sources:

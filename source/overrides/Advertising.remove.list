@@ -1,0 +1,32 @@
+# False positives removed per MetaCubeX/meta-rules-dat reject-need-to-remove.txt
+# These domains appear in bm7 Advertising/AdvertisingLite but should not be blocked.
+
+# Legitimate business/analytics
+DOMAIN-SUFFIX,4paradigm.com
+DOMAIN-SUFFIX,newrelic.com
+DOMAIN-SUFFIX,addthis.com
+DOMAIN-SUFFIX,addthisedge.com
+
+# Alibaba marketing infra (blocks legitimate Taobao/Tmall pages)
+DOMAIN-SUFFIX,alimama.com
+DOMAIN,alimama.com
+DOMAIN-SUFFIX,alimama.alicdn.com
+
+# Push / messaging services
+DOMAIN-SUFFIX,mtalk.google.com
+DOMAIN,app.chat.xiaomi.net
+DOMAIN,cdn.onesignal.com
+DOMAIN-SUFFIX,resolver.msg.xiaomi.net
+
+# CDN / tracking used by legitimate sites
+DOMAIN-SUFFIX,tagtic.cn
+DOMAIN-SUFFIX,tongji.baidu.com
+DOMAIN-SUFFIX,bdtj.tagtic.cn
+DOMAIN-SUFFIX,pingjs.qq.com
+DOMAIN-SUFFIX,icons.mydrivers.com
+DOMAIN-SUFFIX,ue.yeyoucdn.com
+DOMAIN-SUFFIX,knet.cn
+DOMAIN-SUFFIX,click.redditmail.com
+
+# Content sites incorrectly classified as ads
+DOMAIN,jav321.com
