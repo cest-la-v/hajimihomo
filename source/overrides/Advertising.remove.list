@@ -1,5 +1,6 @@
-# False positives removed per MetaCubeX/meta-rules-dat reject-need-to-remove.txt
-# These domains appear in bm7 Advertising/AdvertisingLite but should not be blocked.
+# False positives removed from bm7 Advertising/AdvertisingLite.
+# Sources: MetaCubeX/meta-rules-dat reject-need-to-remove.txt
+#          Loyalsoldier/v2ray-rules-dat (hidden) reject-need-to-remove.txt
 
 # Legitimate business/analytics
 DOMAIN-SUFFIX,4paradigm.com
@@ -30,3 +31,32 @@ DOMAIN-SUFFIX,click.redditmail.com
 
 # Content sites incorrectly classified as ads
 DOMAIN,jav321.com
+
+# Google services (YouTube CDN + Analytics must not be blocked)
+DOMAIN,s.youtube.com
+DOMAIN,analytics.google.com
+
+# Dev / crash-reporting SDKs (not user-facing ads)
+DOMAIN-SUFFIX,fabric.io
+
+# Chinese CDNs, media, and platform domains
+DOMAIN,d.ifengimg.com
+DOMAIN,img.alibaba.com
+DOMAIN,offer.alibaba.com
+DOMAIN,tv.sohu.com
+DOMAIN,sf3-ttcdn-tos.pstatp.com
+DOMAIN-SUFFIX,qlogo.cn
+DOMAIN-SUFFIX,umeng.com
+DOMAIN-SUFFIX,busuanzi.ibruce.info
+
+# Travel and entertainment platforms
+DOMAIN-SUFFIX,ctrip.com
+DOMAIN-SUFFIX,telegra.ph
+
+# Social / messaging infrastructure
+DOMAIN-SUFFIX,t.co
+DOMAIN,wl.spotify.com
+DOMAIN,mx.technolutions.net
+
+# Institutional / education
+DOMAIN,mail.tsinghua.edu.cn

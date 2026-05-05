@@ -1,7 +1,45 @@
-# Domains removed per MetaCubeX/meta-rules-dat direct-need-to-remove.txt
-# These appear in CN-direct upstream sources but should NOT be routed direct —
-# they are blocked/inaccessible from mainland China without a proxy.
+# Domains removed from CN-direct upstream sources.
+# These are incorrectly routed direct — they are blocked/inaccessible from mainland China.
+# Sources: MetaCubeX/meta-rules-dat direct-need-to-remove.txt
+#          Loyalsoldier/v2ray-rules-dat (hidden) direct-need-to-remove.txt
 
 # CNBeta — tech news site blocked in mainland China
 DOMAIN-SUFFIX,cnbeta.com
 DOMAIN-SUFFIX,cnbetacdn.com
+
+# Cloud storage services requiring proxy
+DOMAIN-SUFFIX,mypikpak.com
+DOMAIN-SUFFIX,mypikpak.net
+
+# International travel / entertainment (geo-blocked in mainland)
+DOMAIN-SUFFIX,airasia.com
+DOMAIN-SUFFIX,galaxymacau.com
+
+# Mobile game global servers (blocked in mainland, only CN server accessible)
+DOMAIN-SUFFIX,nikke-global.com
+DOMAIN-SUFFIX,nikke-en.com
+DOMAIN-SUFFIX,nikke-de.com
+DOMAIN-SUFFIX,nikke-fr.com
+DOMAIN-SUFFIX,nikke-jp.com
+DOMAIN-SUFFIX,nikke-kr.com
+DOMAIN-SUFFIX,nikke-sea.com
+
+# Manga / anime reading sites (blocked in mainland)
+DOMAIN-SUFFIX,vol.moe
+DOMAIN-SUFFIX,mox.moe
+DOMAIN-SUFFIX,kox.moe
+
+# Software / warez sites (inaccessible from mainland)
+DOMAIN-SUFFIX,xclient.info
+
+# AI tools (blocked in mainland)
+DOMAIN-SUFFIX,lovart.ai
+
+# Chinese-language media / communities outside mainland
+DOMAIN-SUFFIX,cnpolitics.org
+DOMAIN-SUFFIX,hostloc.com
+DOMAIN-SUFFIX,shuangtv.net
+DOMAIN-SUFFIX,itiger.com
+
+# Google endpoint incorrectly in CN-direct lists (Google is blocked in mainland)
+DOMAIN,kh.google.com
