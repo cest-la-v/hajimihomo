@@ -316,11 +316,12 @@ def build_item(
         "rule_count": len(rules),
         "behavior": behavior,
         "elapsed_s": round(elapsed, 2),
-        "splits": sorted(set(mh_splits) | set(sb_splits)),
+        "mihomo_splits": sorted(mh_splits.keys()),
+        "singbox_splits": sorted(sb_splits.keys()),
     }
 
     if dry_run:
-        splits_str = ",".join(sorted(set(mh_splits) | set(sb_splits))) or "none"
+        splits_str = ",".join(sorted(mh_splits.keys())) or "none"
         log.info("  [dry-run] %s: %d rules (%s) splits=[%s]", name, len(rules), behavior, splits_str)
         return meta
 
@@ -340,7 +341,7 @@ def build_item(
 
     log.info("  %s: %d rules (%s) splits=[%s] in %.1fs",
              name, len(rules), behavior,
-             ",".join(meta["splits"]) or "none",
+             ",".join(meta["mihomo_splits"]) or "none",
              elapsed)
     return meta
 
@@ -438,16 +439,57 @@ def main() -> None:
 
     if not args.dry_run:
         dist.mkdir(parents=True, exist_ok=True)
-        meta = {
-            "built_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        built_at = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+
+        # Build metadata — technical artifact (timings, counts, errors)
+        build_meta = {
+            "built_at": built_at,
             "items": {r["name"]: r for r in results},
             "total": len(results),
             "total_rules": sum(r.get("rule_count", 0) for r in results),
         }
         (dist / "build-meta.json").write_text(
-            json.dumps(meta, ensure_ascii=False, indent=2) + "\n"
+            json.dumps(build_meta, ensure_ascii=False, indent=2) + "\n"
         )
-        log.info("Done: %d items, %d total rules", meta["total"], meta["total_rules"])
+
+        # rulesets.json — profile builder manifest; copied to ruleset/mihomo branch root
+        catalog_groups = catalog.get("groups", {})
+        flat_to_gid = {gid.replace("/", "-"): gid for gid in catalog_groups}
+        rulesets_items: dict = {}
+        for r in results:
+            if "error" in r:
+                continue
+            name = r["name"]
+            entry: dict = {
+                "behavior": r["behavior"],
+                "rule_count": r["rule_count"],
+                "targets": {
+                    "mihomo": {"splits": r.get("mihomo_splits", [])},
+                    "singbox": {"splits": r.get("singbox_splits", [])},
+                },
+            }
+            gid = flat_to_gid.get(name)
+            if gid:
+                spec = catalog_groups[gid]
+                entry["kind"] = "group"
+                entry["group_id"] = gid
+                entry["name"] = spec.get("name", name)
+                entry["default_action"] = spec.get("default_action", "PROXY")
+                entry["region"] = spec.get("region", "any")
+                entry["tags"] = spec.get("tags", [])
+            else:
+                entry["kind"] = "category"
+            rulesets_items[name] = entry
+
+        rulesets_payload = {
+            "built_at": built_at,
+            "items": rulesets_items,
+        }
+        (dist / "rulesets.json").write_text(
+            json.dumps(rulesets_payload, ensure_ascii=False, indent=2) + "\n"
+        )
+
+        log.info("Done: %d items, %d total rules", build_meta["total"], build_meta["total_rules"])
 
 
 if __name__ == "__main__":

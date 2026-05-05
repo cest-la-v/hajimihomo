@@ -1,4 +1,4 @@
-import { loadCatalog, buildRuleProviders, buildMihomoGroups } from './ProfileBuilder.js'
+import { loadCatalog, getGroups, buildMihomoGroups, buildSingboxRuleSets } from './ProfileBuilder.js'
 
 const app = document.getElementById('app')
 
@@ -8,6 +8,14 @@ app.innerHTML = `
     <select id="kernel">
       <option value="mihomo">mihomo (Clash Meta)</option>
       <option value="singbox">sing-box</option>
+    </select>
+  </div>
+
+  <div class="section">
+    <label>规则集格式</label>
+    <select id="tier">
+      <option value="1">Tier 1 — 经典合并（兼容性最佳）</option>
+      <option value="2">Tier 2 — 分离格式（域名/IP 分离，性能最优）</option>
     </select>
   </div>
 
@@ -38,16 +46,42 @@ app.innerHTML = `
   <div id="output" class="output-block" style="display:none"></div>
 `
 
+// Catalog group IDs for presets
 const PRESETS = {
-  minimal: ['Advertising', 'Privacy', 'China', 'Apple', 'Google', 'Telegram', 'YouTube', 'GitHub', 'Microsoft'],
-  full: ['Advertising', 'Privacy', 'Hijacking', 'China', 'ChinaMedia', 'Microsoft', 'Apple',
-    'Google', 'Telegram', 'YouTube', 'Twitter', 'Facebook', 'GitHub', 'GitLab',
-    'Cloudflare', 'Amazon', 'Netflix', 'Disney', 'Spotify', 'TikTok', 'OpenAI',
-    'Steam', 'PlayStation', 'Docker', 'Notion', 'Slack'],
+  minimal: [
+    'block/ads',
+    'direct/cn',
+    'proxy/apple',
+    'proxy/google',
+    'proxy/telegram',
+    'proxy/youtube',
+    'proxy/dev',
+  ],
+  full: [
+    'block/ads',
+    'block/tracking',
+    'direct/cn',
+    'direct/cn-ips',
+    'proxy/google',
+    'proxy/youtube',
+    'proxy/apple',
+    'proxy/microsoft',
+    'proxy/amazon',
+    'proxy/telegram',
+    'proxy/twitter',
+    'proxy/netflix',
+    'proxy/streaming',
+    'proxy/social',
+    'proxy/ai',
+    'proxy/gaming',
+    'proxy/dev',
+    'proxy/finance',
+    'proxy/news',
+  ],
 }
 
 let catalog = null
-let selectedCats = new Set(PRESETS.minimal)
+let selectedGroups = new Set(PRESETS.minimal)
 
 async function init() {
   try {
@@ -55,28 +89,29 @@ async function init() {
     populateCatalogGrid(catalog)
   } catch (e) {
     console.warn('Could not load catalog:', e)
-    catalog = {}
+    catalog = { items: {} }
   }
 }
 
 function populateCatalogGrid(catalog) {
   const grid = document.getElementById('cat-grid')
   grid.innerHTML = ''
-  const all = Object.keys(catalog).sort()
-  for (const cat of all) {
-    const info = catalog[cat]
-    const behaviorTag = info.behavior === 'domain' ? ''
-      : info.behavior === 'ipcidr' ? '<span class="tag ip">ip</span>'
-      : '<span class="tag mixed">mixed</span>'
+  const groups = getGroups(catalog)
+  for (const group of groups) {
+    const actionBadge = group.defaultAction === 'REJECT'
+      ? '<span class="tag block">block</span>'
+      : group.defaultAction === 'DIRECT'
+        ? '<span class="tag direct">direct</span>'
+        : '<span class="tag proxy">proxy</span>'
     const item = document.createElement('label')
     item.className = 'cat-item'
     item.innerHTML = `
-      <input type="checkbox" value="${cat}" ${selectedCats.has(cat) ? 'checked' : ''}>
-      <span>${cat}${behaviorTag}</span>
+      <input type="checkbox" value="${group.id}" ${selectedGroups.has(group.id) ? 'checked' : ''}>
+      <span>${group.name}${actionBadge}</span>
     `
     item.querySelector('input').addEventListener('change', e => {
-      if (e.target.checked) selectedCats.add(cat)
-      else selectedCats.delete(cat)
+      if (e.target.checked) selectedGroups.add(group.id)
+      else selectedGroups.delete(group.id)
       updateCatCount()
     })
     grid.appendChild(item)
@@ -85,7 +120,7 @@ function populateCatalogGrid(catalog) {
 }
 
 function updateCatCount() {
-  document.getElementById('cat-count').textContent = `(${selectedCats.size} 已选)`
+  document.getElementById('cat-count').textContent = `(${selectedGroups.size} 已选)`
 }
 
 document.getElementById('preset').addEventListener('change', e => {
@@ -93,9 +128,9 @@ document.getElementById('preset').addEventListener('change', e => {
   const isCustom = val === 'custom'
   document.getElementById('cat-section').style.display = isCustom ? '' : 'none'
   if (!isCustom) {
-    selectedCats = new Set(PRESETS[val] || [])
+    selectedGroups = new Set(PRESETS[val] || [])
     document.querySelectorAll('#cat-grid input[type="checkbox"]').forEach(cb => {
-      cb.checked = selectedCats.has(cb.value)
+      cb.checked = selectedGroups.has(cb.value)
     })
     updateCatCount()
   }
@@ -103,8 +138,9 @@ document.getElementById('preset').addEventListener('change', e => {
 
 document.getElementById('generate').addEventListener('click', () => {
   const kernel = document.getElementById('kernel').value
+  const tier   = parseInt(document.getElementById('tier').value, 10)
   const preset = document.getElementById('preset').value
-  const cats = preset === 'custom' ? [...selectedCats] : (PRESETS[preset] || [])
+  const groupIds = preset === 'custom' ? [...selectedGroups] : (PRESETS[preset] || [])
   const subs = document.getElementById('subs').value.trim().split('\n').filter(Boolean)
 
   if (subs.length === 0) {
@@ -112,12 +148,9 @@ document.getElementById('generate').addEventListener('click', () => {
     return
   }
 
-  let output
-  if (kernel === 'mihomo') {
-    output = generateMihomo(cats, subs)
-  } else {
-    output = generateSingbox(cats, subs)
-  }
+  const output = kernel === 'mihomo'
+    ? generateMihomo(groupIds, subs, tier)
+    : generateSingbox(groupIds, subs, tier)
 
   const el = document.getElementById('output')
   el.textContent = output
@@ -129,14 +162,13 @@ document.getElementById('copy').addEventListener('click', () => {
   if (text) navigator.clipboard.writeText(text).then(() => alert('已复制'))
 })
 
-function generateMihomo(cats, subs) {
-  const { proxyProviders, groups, rules } = buildMihomoGroups(subs, cats, catalog || {})
-  const providers = buildRuleProviders(cats, catalog || {})
+function generateMihomo(groupIds, subs, tier) {
+  const { proxyProviders, groups, providers, rules } =
+    buildMihomoGroups(subs, groupIds, catalog || { items: {} }, { tier })
 
-  // minimal YAML serialization (no external dep)
   const lines = [
     '# generated by hajimihomo profile builder',
-    '# paste into your mihomo config or use as rule-providers fragment',
+    `# tier: ${tier}  groups: ${groupIds.length}`,
     '',
     'proxy-providers:',
     ...Object.entries(proxyProviders).flatMap(([k, v]) => [
@@ -152,11 +184,12 @@ function generateMihomo(cats, subs) {
     '',
     'proxy-groups:',
     ...groups.flatMap(g => {
-      const lines = [`  - name: ${g.name}`, `    type: ${g.type}`]
-      if (g.use) lines.push(`    use: [${g.use.join(', ')}]`)
-      if (g.proxies) lines.push(`    proxies: [${g.proxies.join(', ')}]`)
-      if (g.url) lines.push(`    url: "${g.url}"`, `    interval: ${g.interval}`)
-      return lines
+      const out = [`  - name: ${g.name}`, `    type: ${g.type}`]
+      if (g.use)      out.push(`    use: [${g.use.join(', ')}]`)
+      if (g.proxies)  out.push(`    proxies: [${g.proxies.join(', ')}]`)
+      if (g.url)      out.push(`    url: "${g.url}"`, `    interval: ${g.interval}`)
+      if (g.tolerance) out.push(`    tolerance: ${g.tolerance}`)
+      return out
     }),
     '',
     'rule-providers:',
@@ -171,46 +204,37 @@ function generateMihomo(cats, subs) {
     '',
     'rules:',
     ...rules.map(r => `  - ${r}`),
+    '  - GEOIP,CN,DIRECT',
+    '  - MATCH,PROXY',
   ]
   return lines.join('\n')
 }
 
-function generateSingbox(cats, subs) {
-  // minimal sing-box fragment — outbounds + route rules
+function generateSingbox(groupIds, subs, tier) {
+  // sing-box output is a route/rule_set fragment.
+  // Subscription-based outbounds must be imported separately via the kernel.
+  const { ruleSets, routeRules } =
+    buildSingboxRuleSets(groupIds, catalog || { items: {} }, { tier })
+
   const outbounds = [
-    { tag: 'proxy', type: 'selector', outbounds: ['auto', 'direct'] },
-    { tag: 'auto', type: 'urltest', outbounds: ['direct'], url: 'https://cp.cloudflare.com', interval: '5m' },
-    { tag: 'direct', type: 'direct' },
-    { tag: 'block', type: 'block' },
+    { tag: 'proxy',   type: 'selector', outbounds: ['auto', 'direct'] },
+    { tag: 'auto',    type: 'urltest',  outbounds: ['direct'],
+      url: 'https://cp.cloudflare.com', interval: '5m' },
+    { tag: 'direct',  type: 'direct' },
+    { tag: 'block',   type: 'block' },
     { tag: 'dns-out', type: 'dns' },
   ]
 
-  const ruleSets = cats.map(cat => ({
-    tag: `ruleset-${cat}`,
-    type: 'remote',
-    format: 'binary',
-    url: `https://github.com/cest-la-v/hajimihomo/releases/latest/download/${cat}.srs`,
-    download_detour: 'proxy',
-    update_interval: '1d',
-  }))
-
-  const BLOCK = new Set(['Advertising', 'Privacy', 'Hijacking'])
-  const DIRECT = new Set(['China', 'ChinaMedia', 'Microsoft'])
-  const routeRules = [
-    { protocol: 'dns', outbound: 'dns-out' },
-    ...cats.map(cat => ({
-      rule_set: `ruleset-${cat}`,
-      outbound: BLOCK.has(cat) ? 'block' : DIRECT.has(cat) ? 'direct' : 'proxy',
-    })),
-    { geoip: 'cn', outbound: 'direct' },
-  ]
-
   const config = {
-    '$comment': 'generated by hajimihomo profile builder',
+    '$comment': `generated by hajimihomo profile builder — tier ${tier}`,
     outbounds,
     route: {
       rule_set: ruleSets,
-      rules: routeRules,
+      rules: [
+        { protocol: 'dns', outbound: 'dns-out' },
+        ...routeRules,
+        { geoip: 'cn', outbound: 'direct' },
+      ],
       final: 'proxy',
       auto_detect_interface: true,
     },
