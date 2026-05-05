@@ -1,4 +1,4 @@
-import { loadCatalog, getGroups, buildMihomoGroups, buildSingboxRuleSets } from './ProfileBuilder.js'
+import { loadCatalog, loadPresets, getGroups, buildMihomoGroups, buildSingboxRuleSets } from './ProfileBuilder.js'
 
 const app = document.getElementById('app')
 
@@ -46,27 +46,18 @@ app.innerHTML = `
   <div id="output" class="output-block" style="display:none"></div>
 `
 
-// Presets are loaded from rulesets.json at runtime (build.py embeds profiles/presets/*.yaml)
-// Fallback used only when catalog fetch fails in dev without a built ruleset branch.
-const PRESET_FALLBACK = {
-  minimal: { groups: ['block/ads', 'direct/cn', 'proxy/apple', 'proxy/google', 'proxy/telegram', 'proxy/youtube', 'proxy/dev'] },
-  full:    { groups: ['block/ads', 'block/tracking', 'direct/cn', 'direct/cn-ips', 'proxy/apple', 'proxy/google', 'proxy/youtube', 'proxy/microsoft', 'proxy/amazon', 'proxy/telegram', 'proxy/twitter', 'proxy/netflix', 'proxy/streaming', 'proxy/social', 'proxy/ai', 'proxy/gaming', 'proxy/dev', 'proxy/finance', 'proxy/news'] },
-}
-
-let presets = PRESET_FALLBACK
+let presets = {}
 let catalog = null
-let selectedGroups = new Set(PRESET_FALLBACK.minimal.groups)
+let selectedGroups = new Set()
 
 async function init() {
-  try {
-    catalog = await loadCatalog()
-    presets = catalog.presets || PRESET_FALLBACK
-    selectedGroups = new Set((presets.minimal || PRESET_FALLBACK.minimal).groups)
-    populateCatalogGrid(catalog)
-  } catch (e) {
-    console.warn('Could not load catalog:', e)
-    catalog = { items: {} }
-  }
+  const [catalogResult, presetsResult] = await Promise.allSettled([loadCatalog(), loadPresets()])
+  catalog = catalogResult.status === 'fulfilled' ? catalogResult.value : { items: {} }
+  presets = presetsResult.status === 'fulfilled' ? presetsResult.value : {}
+  if (catalogResult.status === 'rejected') console.warn('Could not load catalog:', catalogResult.reason)
+  if (presetsResult.status === 'rejected')  console.warn('Could not load presets:', presetsResult.reason)
+  selectedGroups = new Set((presets.minimal || { groups: [] }).groups)
+  populateCatalogGrid(catalog)
 }
 
 function populateCatalogGrid(catalog) {

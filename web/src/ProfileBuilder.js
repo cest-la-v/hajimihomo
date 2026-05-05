@@ -39,6 +39,13 @@ export async function loadCatalog() {
   return resp.json()
 }
 
+/** @returns {Promise<Object>} presets from gh-pages presets.json (built from profiles/presets/*.yaml) */
+export async function loadPresets() {
+  const resp = await fetch('presets.json')
+  if (!resp.ok) throw new Error(`Failed to load presets: ${resp.status}`)
+  return resp.json()
+}
+
 /**
  * List available catalog groups from rulesets.json, sorted by group ID.
  * @param {Object} catalog — from loadCatalog()

@@ -225,22 +225,6 @@ def load_catalog(catalog_path: Path) -> dict:
     return yaml.safe_load(catalog_path.read_text()) or {}
 
 
-def _load_presets() -> dict:
-    """Read profiles/presets/*.yaml and return {name: {description, groups}} dict."""
-    presets_dir = Path(__file__).parent.parent / "profiles" / "presets"
-    presets = {}
-    if not presets_dir.exists():
-        return presets
-    for path in sorted(presets_dir.glob("*.yaml")):
-        data = yaml.safe_load(path.read_text()) or {}
-        name = data.get("name") or path.stem
-        presets[name] = {
-            "description": data.get("description", ""),
-            "groups": data.get("groups", []),
-        }
-    return presets
-
-
 def resolve_catalog_group(
     group_id: str,
     catalog: dict,
@@ -500,7 +484,6 @@ def main() -> None:
         rulesets_payload = {
             "built_at": built_at,
             "items": rulesets_items,
-            "presets": _load_presets(),
         }
         (dist / "rulesets.json").write_text(
             json.dumps(rulesets_payload, ensure_ascii=False, indent=2) + "\n"
