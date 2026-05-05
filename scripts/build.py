@@ -11,10 +11,20 @@ Two build targets:
    Each group unions effective_rules of its bm7 members: or other groups
    in members_ref:. IDs use slashes (proxy/google) → flat filenames (proxy-google).
 
-Output per name:
-  dist/mihomo/<name>.yaml         — mihomo rule-provider YAML
-  dist/mihomo/<name>_Domain.yaml  — domain-only subset (for classical categories)
-  dist/singbox/<name>.json        — sing-box rule-set JSON v3
+Output per name (Tier 1 always; splits only for classical-behavior categories):
+  dist/mihomo/<name>.yaml              — Tier 1: all-in-one (all rule types)
+  dist/mihomo/<name>.domain.yaml       — split: DOMAIN + DOMAIN-SUFFIX (behavior:domain)
+  dist/mihomo/<name>.ip.yaml           — split: IP-CIDR with no-resolve (behavior:ipcidr)
+  dist/mihomo/<name>.ip-resolve.yaml   — split: IP-CIDR without no-resolve (load LAST)
+  dist/mihomo/<name>.residual.yaml     — split: DOMAIN-KEYWORD + DOMAIN-REGEX + IP-ASN
+  dist/mihomo/<name>.process.yaml      — split: PROCESS-NAME only
+  dist/singbox/<name>.json             — Tier 1: all-in-one
+  dist/singbox/<name>.domain.json      — split: DOMAIN + DOMAIN-SUFFIX
+  dist/singbox/<name>.ip.json          — split: all IP-CIDR (no ip-resolve split for sing-box)
+  dist/singbox/<name>.residual.json    — split: DOMAIN-KEYWORD + DOMAIN-REGEX
+  dist/singbox/<name>.process.json     — split: PROCESS-NAME only
+
+Do NOT combine the Tier-1 file with splits — rules would be evaluated twice.
 
 Usage:
   python3 scripts/build.py [--categories cat1,...] [--groups grp1,...] [--jobs N]
@@ -36,8 +46,22 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from convert.parse import fetch_and_parse, parse_lines
 from convert.compress import compress
-from convert.mihomo import detect_behavior, to_yaml as to_mihomo_yaml, to_domain_yaml
-from convert.singbox import to_json as to_singbox_json
+from convert.mihomo import (
+    detect_behavior,
+    to_yaml as to_mihomo_yaml,
+    to_domain_yaml,
+    to_ip_yaml,
+    to_ip_resolve_yaml,
+    to_residual_yaml,
+    to_process_yaml,
+)
+from convert.singbox import (
+    to_json as to_singbox_json,
+    to_domain_json,
+    to_ip_json,
+    to_residual_json,
+    to_process_json,
+)
 
 # ---------------------------------------------------------------------------
 # Categories excluded from OUTPUT emission (still resolved as dependencies)
@@ -261,35 +285,63 @@ def build_item(
     dist: Path,
     dry_run: bool = False,
 ) -> dict:
-    """Compress and emit outputs for one named rule set."""
+    """Compress and emit all outputs for one named rule set."""
     t0 = time.monotonic()
     rules = compress(list(raw_rules))
     behavior = detect_behavior(rules)
     elapsed = time.monotonic() - t0
+
+    # Compute splits — only for classical-behavior categories (pure domain/ipcidr
+    # categories already have the right behavior:* in their Tier-1 file)
+    mh_splits: dict[str, str] = {}
+    sb_splits: dict[str, str] = {}
+    if behavior == "classical":
+        for split_name, mh_fn, sb_fn in [
+            ("domain",     lambda: to_domain_yaml(rules, name),     lambda: to_domain_json(rules, name)),
+            ("ip",         lambda: to_ip_yaml(rules, name),          lambda: to_ip_json(rules, name)),
+            ("ip-resolve", lambda: to_ip_resolve_yaml(rules, name),  None),
+            ("residual",   lambda: to_residual_yaml(rules, name),    lambda: to_residual_json(rules, name)),
+            ("process",    lambda: to_process_yaml(rules, name),     lambda: to_process_json(rules, name)),
+        ]:
+            mh_content = mh_fn()
+            if mh_content:
+                mh_splits[split_name] = mh_content
+            if sb_fn is not None:
+                sb_content = sb_fn()
+                if sb_content:
+                    sb_splits[split_name] = sb_content
 
     meta = {
         "name": name,
         "rule_count": len(rules),
         "behavior": behavior,
         "elapsed_s": round(elapsed, 2),
+        "splits": sorted(set(mh_splits) | set(sb_splits)),
     }
 
     if dry_run:
-        log.info("  [dry-run] %s: %d rules (%s)", name, len(rules), behavior)
+        splits_str = ",".join(sorted(set(mh_splits) | set(sb_splits))) or "none"
+        log.info("  [dry-run] %s: %d rules (%s) splits=[%s]", name, len(rules), behavior, splits_str)
         return meta
 
-    (dist / "mihomo").mkdir(parents=True, exist_ok=True)
-    (dist / "singbox").mkdir(parents=True, exist_ok=True)
+    mihomo_dir = dist / "mihomo"
+    singbox_dir = dist / "singbox"
+    mihomo_dir.mkdir(parents=True, exist_ok=True)
+    singbox_dir.mkdir(parents=True, exist_ok=True)
 
-    (dist / "mihomo" / f"{name}.yaml").write_text(to_mihomo_yaml(rules, name))
-    (dist / "singbox" / f"{name}.json").write_text(to_singbox_json(rules, name))
+    (mihomo_dir / f"{name}.yaml").write_text(to_mihomo_yaml(rules, name))
+    (singbox_dir / f"{name}.json").write_text(to_singbox_json(rules, name))
 
-    if behavior == "classical":
-        domain_yaml = to_domain_yaml(rules, name)
-        if domain_yaml:
-            (dist / "mihomo" / f"{name}_Domain.yaml").write_text(domain_yaml)
+    for split_name, content in mh_splits.items():
+        (mihomo_dir / f"{name}.{split_name}.yaml").write_text(content)
 
-    log.info("  %s: %d rules (%s) in %.1fs", name, len(rules), behavior, elapsed)
+    for split_name, content in sb_splits.items():
+        (singbox_dir / f"{name}.{split_name}.json").write_text(content)
+
+    log.info("  %s: %d rules (%s) splits=[%s] in %.1fs",
+             name, len(rules), behavior,
+             ",".join(meta["splits"]) or "none",
+             elapsed)
     return meta
 
 
