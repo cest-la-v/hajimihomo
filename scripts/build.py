@@ -4,8 +4,8 @@ hajimihomo build orchestrator.
 
 Two build targets:
 
-1. Atomic categories — source/rule/*/sources.yaml (one file per bm7 category)
-   Resolved with sub-rule includes/excludes from source/rule/relationships.yaml.
+1. Atomic categories — source/categories.yaml (all bm7 categories in one file)
+   Resolved with sub-rule includes/excludes from source/relationships.yaml.
 
 2. Catalog groups    — source/catalog.yaml (semantic bundles for policy groups)
    Each group unions effective_rules of its bm7 members: or other groups
@@ -164,44 +164,53 @@ class RuleResolver:
 # Loaders
 # ---------------------------------------------------------------------------
 
-def load_all_sources(source_dir: Path) -> tuple[
+def _resolve_entries(entries: list[str], repo_root: Path) -> frozenset[tuple[str, str]]:
+    """Resolve a list of inline rules or file: references into a frozenset of parsed rules."""
+    rules: list[tuple[str, str]] = []
+    for entry in entries:
+        if entry.startswith("file:"):
+            path = repo_root / entry[5:]
+            if path.exists():
+                rules.extend(parse_lines(path.read_text()))
+            else:
+                log.warning("override file not found: %s", path)
+        else:
+            parsed = parse_lines(entry)
+            rules.extend(parsed)
+    return frozenset(rules)
+
+
+def load_all_sources(categories_file: Path) -> tuple[
     dict[str, list[str]],
     dict[str, frozenset[tuple[str, str]]],
     dict[str, frozenset[tuple[str, str]]],
 ]:
     """
-    Discover all categories under source_dir and return:
-      sources  — {cat: [url, ...]}          from sources.yaml
-      appends  — {cat: frozenset of rules}   from append.list
-      removes  — {cat: frozenset of rules}   from remove.list
-
-    A category is discovered if its directory contains any of these files.
+    Load source/categories.yaml and return:
+      sources  — {cat: [url, ...]}
+      appends  — {cat: frozenset of rules}   from append: entries (inline or file:)
+      removes  — {cat: frozenset of rules}   from exclude: entries (inline or file:)
     """
+    repo_root = categories_file.parent.parent
     sources: dict[str, list[str]] = {}
     appends: dict[str, frozenset[tuple[str, str]]] = {}
     removes: dict[str, frozenset[tuple[str, str]]] = {}
 
-    for cat_dir in sorted(source_dir.iterdir()):
-        if not cat_dir.is_dir():
+    data = yaml.safe_load(categories_file.read_text()) or {}
+    for category, entry in data.items():
+        if not isinstance(entry, dict):
             continue
-        category = cat_dir.name
-
-        sources_file = cat_dir / "sources.yaml"
-        if sources_file.exists():
-            data = yaml.safe_load(sources_file.read_text())
-            urls = data.get("sources", [])
-            if urls:
-                sources[category] = urls
-
-        append_file = cat_dir / "append.list"
-        if append_file.exists():
-            rules = frozenset(parse_lines(append_file.read_text()))
+        urls = entry.get("sources", [])
+        if urls:
+            sources[category] = urls
+        append_entries = entry.get("append", [])
+        if append_entries:
+            rules = _resolve_entries(append_entries, repo_root)
             if rules:
                 appends[category] = rules
-
-        remove_file = cat_dir / "remove.list"
-        if remove_file.exists():
-            rules = frozenset(parse_lines(remove_file.read_text()))
+        exclude_entries = entry.get("exclude", [])
+        if exclude_entries:
+            rules = _resolve_entries(exclude_entries, repo_root)
             if rules:
                 removes[category] = rules
 
@@ -370,7 +379,7 @@ def main() -> None:
                         help="build all atomics AND all catalog groups (default CI mode)")
     parser.add_argument("--jobs", type=int, default=8, help="parallel workers (default: 8)")
     parser.add_argument("--dry-run", action="store_true", help="parse only, no file output")
-    parser.add_argument("--source-dir", default="source/rule", help="path to source rules")
+    parser.add_argument("--source-dir", default="source", help="path to source dir (contains categories.yaml and relationships.yaml)")
     parser.add_argument("--dist-dir", default="dist", help="output directory")
     parser.add_argument("-v", "--verbose", action="store_true")
     args = parser.parse_args()
@@ -384,7 +393,7 @@ def main() -> None:
     source_dir = repo_root / args.source_dir
     dist = repo_root / args.dist_dir
 
-    all_sources, appends, removes = load_all_sources(source_dir)
+    all_sources, appends, removes = load_all_sources(source_dir / "categories.yaml")
     includes_map, excludes_map = load_relationships(source_dir)
     catalog = load_catalog(repo_root / "source" / "catalog.yaml")
 
