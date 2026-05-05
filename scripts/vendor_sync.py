@@ -78,7 +78,14 @@ def sync_repo(owner_repo: str, refs: set[str], dry_run: bool) -> str:
             capture_output=True, text=True,
         )
         if result.returncode != 0:
-            fetch_errors.append(f"{ref}: {result.stderr.strip()[:80]}")
+            # Only warn if origin/HEAD isn't available either — if it is,
+            # parse.py will fall back to origin/HEAD and the repo is usable.
+            head_ok = subprocess.run(
+                ["git", "-C", str(vendor_dir), "rev-parse", "--verify", "origin/HEAD"],
+                capture_output=True,
+            )
+            if head_ok.returncode != 0:
+                fetch_errors.append(f"{ref}: {result.stderr.strip()[:80]}")
 
     refs_str = ", ".join(sorted(refs))
     if fetch_errors:
