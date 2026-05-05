@@ -51,6 +51,9 @@ _DOMAIN_RE = re.compile(
     r"^(?!\-)([a-zA-Z0-9\-*_]+\.)+[a-zA-Z]{2,}$"
 )
 
+_CIDR4_RE = re.compile(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/\d{1,2}$")
+_CIDR6_RE = re.compile(r"^[0-9a-fA-F:]+:[0-9a-fA-F:]*/\d{1,3}$")
+
 
 def _is_bare_domain(token: str) -> bool:
     return bool(_DOMAIN_RE.match(token))
@@ -118,6 +121,15 @@ def parse_lines(text: str) -> Iterator[tuple[str, str]]:
         # bare domain (no RULE_TYPE prefix), only outside yaml payload context
         if not in_payload and _is_bare_domain(parts[0]):
             yield ("DOMAIN-SUFFIX", parts[0].strip())
+            continue
+
+        # bare CIDR lines (e.g. Loyalsoldier geoip text files: '1.0.1.0/24')
+        bare = parts[0].strip()
+        if _CIDR4_RE.match(bare):
+            yield ("IP-CIDR", bare)
+            continue
+        if _CIDR6_RE.match(bare):
+            yield ("IP-CIDR6", bare)
             continue
 
         # unknown type — skip silently
