@@ -1,0 +1,7 @@
+# Domains removed per MetaCubeX/meta-rules-dat direct-need-to-remove.txt
+# These appear in CN-direct upstream sources but should NOT be routed direct —
+# they are blocked/inaccessible from mainland China without a proxy.
+
+# CNBeta — tech news site blocked in mainland China
+DOMAIN-SUFFIX,cnbeta.com
+DOMAIN-SUFFIX,cnbetacdn.com

@@ -753,6 +753,8 @@ China:
     - https://raw.githubusercontent.com/sve1r/Rules-For-Quantumult-X/develop/Rules/Region/China.list
     - https://raw.githubusercontent.com/dler-io/Rules/main/Clash/Provider/Domestic.yaml
     - https://raw.githubusercontent.com/zqzess/rule_for_quantumultX/master/QuantumultX/rules/Mainland.list
+  exclude:
+    - file:source/overrides/China.remove.list
 
 ChinaDNS:
   sources:
@@ -1074,6 +1076,8 @@ ChinaMax:
     - https://ruleset.isagood.day/alibaba.conf
     - https://ruleset.isagood.day/bilibili.conf
     - https://raw.githubusercontent.com/missuo/ASN-China/main/IP.China.list
+  exclude:
+    - file:source/overrides/China.remove.list
 
 ChinaMaxNoIP:
   sources:
@@ -1377,6 +1381,8 @@ ChinaMaxNoIP:
     - https://ruleset.isagood.day/alibaba.conf
     - https://ruleset.isagood.day/bilibili.conf
     - https://raw.githubusercontent.com/missuo/ASN-China/main/IP.China.list
+  exclude:
+    - file:source/overrides/China.remove.list
 
 ChinaMaxNoMedia:
   sources:
@@ -1680,6 +1686,8 @@ ChinaMaxNoMedia:
     - https://ruleset.isagood.day/alibaba.conf
     - https://ruleset.isagood.day/bilibili.conf
     - https://raw.githubusercontent.com/missuo/ASN-China/main/IP.China.list
+  exclude:
+    - file:source/overrides/China.remove.list
 
 ChinaMedia:
   sources:
@@ -1708,6 +1716,8 @@ ChinaNoMedia:
     - https://raw.githubusercontent.com/sve1r/Rules-For-Quantumult-X/develop/Rules/Region/China.list
     - https://raw.githubusercontent.com/dler-io/Rules/main/Clash/Provider/Domestic.yaml
     - https://raw.githubusercontent.com/zqzess/rule_for_quantumultX/master/QuantumultX/rules/Mainland.list
+  exclude:
+    - file:source/overrides/China.remove.list
 
 ChinaTelecom:
   sources:
@@ -1924,6 +1934,8 @@ Direct:
     - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/source/rule/WhiteList/WhiteList.list
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/PublicDirectCDN.list
+  exclude:
+    - file:source/overrides/Direct.remove.list
 
 Discord:
   sources:

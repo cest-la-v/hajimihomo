@@ -1,0 +1,5 @@
+# Domains removed per MetaCubeX/meta-rules-dat direct-need-to-remove.txt
+# These appear in CN-direct upstream sources but require a proxy to access.
+
+# ACG.rip — anime/manga content site, blocked in mainland China
+DOMAIN-SUFFIX,acg.rip
