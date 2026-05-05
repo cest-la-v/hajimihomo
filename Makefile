@@ -50,6 +50,9 @@ vendor-sync:
 vendor-coverage:
 	python3 scripts/validate/coverage.py --output scripts/validate/coverage-report.md
 
+vendor-analysis:
+	python3 scripts/analyze/vendor_analysis.py --jobs $(JOBS)
+
 web-install:
 	cd web && bun install
 

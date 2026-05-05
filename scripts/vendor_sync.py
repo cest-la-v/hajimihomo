@@ -45,24 +45,34 @@ def sync_repo(owner_repo: str, refs: set[str], dry_run: bool) -> str:
     vendor_dir = VENDOR / owner_repo
     gh_url = f"https://github.com/{owner_repo}.git"
 
+    # Each repo only needs one ref in practice. Clone the first ref directly
+    # with --filter=blob:none --single-branch so the clone is small and fast.
+    # Blobs are lazy-fetched on first 'git show' access; trees/commits are local.
+    primary_ref = sorted(refs)[0]
+
     if not vendor_dir.exists():
-        action = f"clone {gh_url}"
         if dry_run:
-            return f"[dry-run] would {action}"
+            return f"[dry-run] would clone {gh_url} @ {primary_ref}"
         vendor_dir.parent.mkdir(parents=True, exist_ok=True)
         result = subprocess.run(
-            ["git", "clone", "--filter=blob:none", "--no-checkout", "--depth=1",
-             gh_url, str(vendor_dir)],
+            ["git", "clone", "--filter=blob:none", "--single-branch",
+             "--branch", primary_ref, "--depth=1", gh_url, str(vendor_dir)],
             capture_output=True, text=True,
         )
         if result.returncode != 0:
-            return f"ERROR cloning {owner_repo}: {result.stderr.strip()}"
+            # Branch may not exist by that name — fall back to default branch
+            result = subprocess.run(
+                ["git", "clone", "--filter=blob:none", "--single-branch",
+                 "--depth=1", gh_url, str(vendor_dir)],
+                capture_output=True, text=True,
+            )
+            if result.returncode != 0:
+                return f"ERROR cloning {owner_repo}: {result.stderr.strip()}"
         action_done = "cloned"
     else:
-        action_done = "fetched"
+        action_done = "updated"
 
-    # Fetch each required ref at depth=1 to make it available for git-show.
-    # Skip if ref already resolves locally (e.g. it's the default branch fetched by clone).
+    # Fetch any additional refs (rare: most repos need exactly one)
     fetch_errors = []
     for ref in sorted(refs):
         if dry_run:
@@ -72,14 +82,13 @@ def sync_repo(owner_repo: str, refs: set[str], dry_run: bool) -> str:
             capture_output=True,
         )
         if already.returncode == 0:
-            continue  # already available
+            continue
         result = subprocess.run(
-            ["git", "-C", str(vendor_dir), "fetch", "--depth=1", "origin", ref],
+            ["git", "-C", str(vendor_dir), "fetch", "--filter=blob:none",
+             "--depth=1", "origin", ref],
             capture_output=True, text=True,
         )
         if result.returncode != 0:
-            # Only warn if origin/HEAD isn't available either — if it is,
-            # parse.py will fall back to origin/HEAD and the repo is usable.
             head_ok = subprocess.run(
                 ["git", "-C", str(vendor_dir), "rev-parse", "--verify", "origin/HEAD"],
                 capture_output=True,
