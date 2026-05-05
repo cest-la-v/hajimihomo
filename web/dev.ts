@@ -1,5 +1,5 @@
 // @ts-nocheck — run with `bun run dev.ts`
-// Set RULESET_DIR env var to serve rulesets.json from a local build output:
+// Set RULESET_DIR env var to serve rulesets from a local build output:
 //   RULESET_DIR=../dist bun run dev.ts
 import index from "./index.html";
 import { readdir, readFile } from "node:fs/promises";
@@ -15,14 +15,26 @@ for (const file of (await readdir(presetsDir)).filter(f => f.endsWith(".yaml")).
 }
 const presetsJson = JSON.stringify(presets, null, 2);
 
-// Optional: serve local rulesets.json instead of CDN
 const rulesetDir = process.env.RULESET_DIR
   ? resolve(import.meta.dir, process.env.RULESET_DIR, "mihomo")
   : null;
 const localRulesetsJson = rulesetDir
   ? await readFile(resolve(rulesetDir, "rulesets.json"), "utf8").catch(() => null)
   : null;
-if (localRulesetsJson) console.log(`Local rulesets.json loaded from ${rulesetDir}`);
+
+const CDN_RULESET = "https://cdn.jsdelivr.net/gh/cest-la-v/hajimihomo@ruleset/mihomo";
+
+async function serveRulesetFile(pathname) {
+  // Local file takes priority; fall back to CDN proxy
+  if (rulesetDir) {
+    const content = await readFile(resolve(rulesetDir, pathname), "utf8").catch(() => null);
+    if (content) {
+      const ct = pathname.endsWith(".json") ? "application/json" : "text/plain";
+      return new Response(content, { headers: { "Content-Type": ct } });
+    }
+  }
+  return fetch(`${CDN_RULESET}/${pathname}`);
+}
 
 Bun.serve({
   routes: {
@@ -30,27 +42,20 @@ Bun.serve({
     "/presets.json": () => new Response(presetsJson, {
       headers: { "Content-Type": "application/json" },
     }),
-    // Proxy rule files from local build output when RULESET_DIR is set
-    ...(rulesetDir && {
-      "/ruleset/mihomo/*": async (req) => {
-        const path = new URL(req.url).pathname.replace("/ruleset/mihomo/", "");
-        const content = await readFile(resolve(rulesetDir, path), "utf8").catch(() => null);
-        if (!content) return new Response("Not found", { status: 404 });
-        const ct = path.endsWith(".json") ? "application/json" : "text/plain";
-        return new Response(content, { headers: { "Content-Type": ct } });
-      },
-      "/ruleset/mihomo/rulesets.json": () => new Response(localRulesetsJson, {
-        headers: { "Content-Type": "application/json" },
-      }),
-    }),
+    // Always intercept /ruleset/mihomo/* — local file or CDN proxy
+    "/ruleset/mihomo/rulesets.json": () =>
+      localRulesetsJson
+        ? new Response(localRulesetsJson, { headers: { "Content-Type": "application/json" } })
+        : fetch(`${CDN_RULESET}/rulesets.json`),
+    "/ruleset/mihomo/*": (req) => {
+      const pathname = new URL(req.url).pathname.replace("/ruleset/mihomo/", "");
+      return serveRulesetFile(pathname);
+    },
   },
-  development: {
-    hmr: true,
-    console: true,
-  },
+  development: { hmr: true, console: true },
   port: 5173,
 });
 
 console.log("hajimihomo dev server → http://localhost:5173");
-if (rulesetDir) console.log(`  rule files: local ${rulesetDir}`);
-else            console.log("  rule files: CDN (set RULESET_DIR=../dist to use local build)");
+if (localRulesetsJson) console.log(`  rulesets: local ${rulesetDir}`);
+else                   console.log("  rulesets: CDN proxy (set RULESET_DIR=../dist for local)");
