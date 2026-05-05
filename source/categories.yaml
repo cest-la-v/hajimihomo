@@ -1743,6 +1743,7 @@ DiscoveryPlus:
 Disney:
   sources:
   - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/Disney.list
+  - https://raw.githubusercontent.com/666OS/rules/release/mihomo/Disney.txt
 Disqus:
   sources:
   - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Disqus.list
@@ -1776,6 +1777,7 @@ Download:
   - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Special/Download.list
   - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Download.list
   - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Download.yaml
+  - https://raw.githubusercontent.com/666OS/rules/release/mihomo/Download.txt
 Dropbox:
   sources:
   - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Dropbox.list
@@ -1836,6 +1838,7 @@ Embl:
 Emby:
   sources:
   - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Emby/Emby.list
+  - https://raw.githubusercontent.com/666OS/rules/release/mihomo/Emby.txt
 Emojipedia:
   sources:
   - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Emojipedia.list
@@ -2957,12 +2960,14 @@ Speedtest:
   sources:
   - https://raw.githubusercontent.com/GeQ1an/Rules/master/QuantumultX/Filter/Speedtest.list
   - https://raw.githubusercontent.com/dler-io/Rules/main/Clash/Provider/Speedtest.yaml
+  - https://raw.githubusercontent.com/666OS/rules/release/mihomo/Speedtest.txt
 Spotify:
   sources:
   - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Spotify.list
   - https://raw.githubusercontent.com/GeQ1an/Rules/master/QuantumultX/Filter/Optional/Spotify.list
   - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/Spotify.list
   - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Spotify.yaml
+  - https://raw.githubusercontent.com/666OS/rules/release/mihomo/Spotify.txt
 Stackexchange:
   sources:
   - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Stackexchange.list
@@ -3008,6 +3013,7 @@ SystemOTA:
   - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/source/rule/SystemOTA/SystemOTA.list
   - https://raw.githubusercontent.com/an0na/R/master/Filter/IOS_OTA.list
   - https://raw.githubusercontent.com/LuzMasonj/Quantumult/master/QuantumultX/Filter/BlockiOSServices.conf
+  - https://raw.githubusercontent.com/666OS/rules/release/mihomo/SystemOTA.txt
 TCL:
   sources:
   - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/TCL.list
@@ -3115,6 +3121,7 @@ TikTok:
   - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/TikTok.list
   - https://raw.githubusercontent.com/Semporia/Quantumult-X/master/Filter/TikTok.list
   - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/TikTok.yaml
+  - https://raw.githubusercontent.com/666OS/rules/release/mihomo/TikTok.txt
 Tmdb:
   sources:
   - https://rules.kr328.app/tmdb.yaml
@@ -3497,3 +3504,24 @@ myTVSUPER:
 zhanqi:
   sources:
   - https://rules.kr328.app/zhanqi.yaml
+Games:
+  sources:
+  - https://raw.githubusercontent.com/666OS/rules/release/mihomo/Games.txt
+NewsMedia:
+  sources:
+  - https://raw.githubusercontent.com/666OS/rules/release/mihomo/NewsMedia.txt
+SocialMedia:
+  sources:
+  - https://raw.githubusercontent.com/666OS/rules/release/mihomo/SocialMedia.txt
+Streaming:
+  sources:
+  - https://raw.githubusercontent.com/666OS/rules/release/mihomo/Streaming.txt
+Tracking:
+  sources:
+  - https://raw.githubusercontent.com/666OS/rules/release/mihomo/Tracking.txt
+Private:
+  sources:
+  - https://raw.githubusercontent.com/666OS/rules/release/mihomo/Private.txt
+XPTV:
+  sources:
+  - https://raw.githubusercontent.com/666OS/rules/release/mihomo/XPTV.txt
