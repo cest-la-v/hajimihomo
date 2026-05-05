@@ -10,12 +10,21 @@ Handles formats:
 
 Skipped rule types: USER-AGENT, URL-REGEX, DEST-PORT, SRC-PORT, GEOIP, GEOSITE,
                     AND, OR, NOT, RULE-SET, FINAL, MATCH
+
+Source URL schemes:
+  - https://...          standard HTTP fetch
+  - repo:owner/repo/ref/path  read from vendor/{owner}/{repo} via git-show;
+                              falls back to raw.githubusercontent.com if not cloned
 """
 
 import re
+import subprocess
 import urllib.request
 import urllib.error
+from pathlib import Path
 from typing import Iterator
+
+_REPO_ROOT = Path(__file__).parent.parent.parent
 
 # Types emitted as-is into output
 SUPPORTED_TYPES = {
@@ -135,8 +144,45 @@ def parse_lines(text: str) -> Iterator[tuple[str, str]]:
         # unknown type — skip silently
 
 
+def _repo_url_to_http(url: str) -> str:
+    """Convert repo:owner/repo/ref/path to https://raw.githubusercontent.com/..."""
+    return "https://raw.githubusercontent.com/" + url[5:]
+
+
+def _read_repo_local(url: str) -> str | None:
+    """
+    Try to read a repo: URL from a local vendor clone via git-show.
+    Returns file text on success, None if vendor not available.
+    """
+    # url format: repo:owner/repo/ref/path/to/file
+    rest = url[5:]
+    parts = rest.split("/", 3)
+    if len(parts) < 4:
+        return None
+    owner, repo, ref, path = parts
+    vendor_dir = _REPO_ROOT / "vendor" / owner / repo
+    if not vendor_dir.exists():
+        return None
+    for git_ref in (ref, f"origin/{ref}"):
+        result = subprocess.run(
+            ["git", "show", f"{git_ref}:{path}"],
+            cwd=vendor_dir,
+            capture_output=True, text=True,
+        )
+        if result.returncode == 0:
+            return result.stdout
+    return None
+
+
 def fetch_and_parse(url: str, timeout: int = 30) -> list[tuple[str, str]]:
-    """Download a URL and return parsed (rule_type, value) list."""
+    """Fetch a source URL (http:// or repo:) and return parsed (rule_type, value) list."""
+    if url.startswith("repo:"):
+        text = _read_repo_local(url)
+        if text is not None:
+            return list(parse_lines(text))
+        # Fall back to HTTP — transparent for CI and missing vendor repos
+        url = _repo_url_to_http(url)
+
     req = urllib.request.Request(
         url,
         headers={"User-Agent": "hajimihomo/1.0 (github.com/cest-la-v/hajimihomo)"},

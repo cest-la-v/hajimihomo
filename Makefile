@@ -1,4 +1,4 @@
-.PHONY: help build build-groups build-dry validate extract extract-check dev web-build web-dev web-install
+.PHONY: help build build-groups build-dry validate extract extract-check dev web-build web-dev web-install vendor-sync vendor-coverage
 
 GROUPS ?= proxy/telegram,block/ads,direct/cn
 JOBS   ?= 8
@@ -12,6 +12,10 @@ help:
 	@echo "  make validate        validate source YAML files"
 	@echo "  make extract         re-extract sources from bm7 vendor (updates categories.yaml)"
 	@echo "  make extract-check   check coverage gaps vs bm7 without writing"
+	@echo ""
+	@echo "Vendor management:"
+	@echo "  make vendor-sync     clone/update all repos referenced by repo: sources"
+	@echo "  make vendor-coverage generate vendor coverage report (scripts/validate/coverage-report.md)"
 	@echo ""
 	@echo "Profile builder (web):"
 	@echo "  make web-install     install web dependencies (js-yaml)"
@@ -39,6 +43,12 @@ extract:
 
 extract-check:
 	python3 scripts/extract_sources.py --check
+
+vendor-sync:
+	python3 scripts/vendor_sync.py --jobs $(JOBS)
+
+vendor-coverage:
+	python3 scripts/validate/coverage.py --output scripts/validate/coverage-report.md
 
 web-install:
 	cd web && bun install
