@@ -1,19 +1,12 @@
-# minimal preset — essential categories only
-# Used by profile builder when user wants a lean config
-
+# minimal preset — essential groups only
 name: minimal
-description: "Core rules only: ads, China direct, proxy basics"
+description: "Core rules: ad block, China direct, key proxy services"
 
-categories:
-  # Advertising absorbs: AdvertisingLite, Hijacking, Privacy
-  - Advertising
-  - China
-  - Apple        # absorbs: AppStore, iCloud, TestFlight, +12 more
-  # Google absorbs GoogleDrive/Search/Voice; excludes YouTube
-  - Google
-  - GlobalMedia  # absorbs YouTube, YouTubeMusic
-  - Telegram     # absorbs TelegramNL/SG/US
-  - GitHub
-  - Microsoft    # absorbs OneDrive, Teams, MicrosoftEdge; excludes GitHub
-
-behavior_overrides: {}  # use auto-detected behavior per category
+groups:
+  - block/ads
+  - direct/cn
+  - proxy/apple
+  - proxy/google
+  - proxy/youtube
+  - proxy/telegram
+  - proxy/dev

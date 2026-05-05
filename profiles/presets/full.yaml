@@ -1,52 +1,24 @@
 # full preset — comprehensive rule set
-# Includes streaming services, social media, gaming platforms, developer tools
-
 name: full
-description: "Comprehensive rules: ads, privacy, streaming, social, gaming, dev"
+description: "Full rules: ads, privacy, streaming, social, gaming, dev tools"
 
-categories:
-  # Blocking
-  # Advertising already absorbs: AdvertisingLite, Hijacking, Privacy
-  - Advertising
-
-  # China direct
-  # ChinaMedia already absorbs: BiliBili, CCTV
-  - China
-  - ChinaMedia
-  # Microsoft already absorbs: MicrosoftEdge, OneDrive, Teams (excludes GitHub)
-  - Microsoft
-
-  # Proxy — global services
-  # Apple already absorbs: AppStore, iCloud, TestFlight, AppleTV, AppleMusic, +10 more
-  - Apple
-  # Google absorbs: GoogleDrive, GoogleSearch, GoogleVoice (excludes YouTube/YouTubeMusic)
-  - Google
-  # GlobalMedia absorbs: YouTube, YouTubeMusic (excludes OpenAI)
-  - GlobalMedia
-  # Telegram absorbs: TelegramNL, TelegramSG, TelegramUS
-  - Telegram
-  - Twitter
-  - Facebook
-  - GitHub       # safe: Microsoft excludes GitHub
-  - GitLab
-  - Cloudflare
-  - Amazon
-  - Netflix
-  - Disney
-  - Spotify
-  - TikTok       # safe: ByteDance excludes TikTok
-  - PayPal
-  - OpenAI       # safe: GlobalMedia excludes OpenAI
-  - Anthropic
-
-  # Gaming — Game absorbs: Steam, PlayStation, Nintendo, Blizzard, Epic, +20 more
-  - Game
-
-  # Developer
-  - Docker
-  - Notion
-  - Figma
-  - Slack
-  - Zoom
-
-behavior_overrides: {}
+groups:
+  - block/ads
+  - block/tracking
+  - direct/cn
+  - direct/cn-ips
+  - proxy/apple
+  - proxy/google
+  - proxy/youtube
+  - proxy/microsoft
+  - proxy/amazon
+  - proxy/telegram
+  - proxy/twitter
+  - proxy/netflix
+  - proxy/streaming
+  - proxy/social
+  - proxy/ai
+  - proxy/gaming
+  - proxy/dev
+  - proxy/finance
+  - proxy/news

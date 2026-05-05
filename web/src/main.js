@@ -46,46 +46,22 @@ app.innerHTML = `
   <div id="output" class="output-block" style="display:none"></div>
 `
 
-// Catalog group IDs for presets
-const PRESETS = {
-  minimal: [
-    'block/ads',
-    'direct/cn',
-    'proxy/apple',
-    'proxy/google',
-    'proxy/telegram',
-    'proxy/youtube',
-    'proxy/dev',
-  ],
-  full: [
-    'block/ads',
-    'block/tracking',
-    'direct/cn',
-    'direct/cn-ips',
-    'proxy/google',
-    'proxy/youtube',
-    'proxy/apple',
-    'proxy/microsoft',
-    'proxy/amazon',
-    'proxy/telegram',
-    'proxy/twitter',
-    'proxy/netflix',
-    'proxy/streaming',
-    'proxy/social',
-    'proxy/ai',
-    'proxy/gaming',
-    'proxy/dev',
-    'proxy/finance',
-    'proxy/news',
-  ],
+// Presets are loaded from rulesets.json at runtime (build.py embeds profiles/presets/*.yaml)
+// Fallback used only when catalog fetch fails in dev without a built ruleset branch.
+const PRESET_FALLBACK = {
+  minimal: { groups: ['block/ads', 'direct/cn', 'proxy/apple', 'proxy/google', 'proxy/telegram', 'proxy/youtube', 'proxy/dev'] },
+  full:    { groups: ['block/ads', 'block/tracking', 'direct/cn', 'direct/cn-ips', 'proxy/apple', 'proxy/google', 'proxy/youtube', 'proxy/microsoft', 'proxy/amazon', 'proxy/telegram', 'proxy/twitter', 'proxy/netflix', 'proxy/streaming', 'proxy/social', 'proxy/ai', 'proxy/gaming', 'proxy/dev', 'proxy/finance', 'proxy/news'] },
 }
 
+let presets = PRESET_FALLBACK
 let catalog = null
-let selectedGroups = new Set(PRESETS.minimal)
+let selectedGroups = new Set(PRESET_FALLBACK.minimal.groups)
 
 async function init() {
   try {
     catalog = await loadCatalog()
+    presets = catalog.presets || PRESET_FALLBACK
+    selectedGroups = new Set((presets.minimal || PRESET_FALLBACK.minimal).groups)
     populateCatalogGrid(catalog)
   } catch (e) {
     console.warn('Could not load catalog:', e)
@@ -128,7 +104,7 @@ document.getElementById('preset').addEventListener('change', e => {
   const isCustom = val === 'custom'
   document.getElementById('cat-section').style.display = isCustom ? '' : 'none'
   if (!isCustom) {
-    selectedGroups = new Set(PRESETS[val] || [])
+    selectedGroups = new Set((presets[val] || { groups: [] }).groups)
     document.querySelectorAll('#cat-grid input[type="checkbox"]').forEach(cb => {
       cb.checked = selectedGroups.has(cb.value)
     })
@@ -140,7 +116,7 @@ document.getElementById('generate').addEventListener('click', () => {
   const kernel = document.getElementById('kernel').value
   const tier   = parseInt(document.getElementById('tier').value, 10)
   const preset = document.getElementById('preset').value
-  const groupIds = preset === 'custom' ? [...selectedGroups] : (PRESETS[preset] || [])
+  const groupIds = preset === 'custom' ? [...selectedGroups] : ((presets[preset] || { groups: [] }).groups)
   const subs = document.getElementById('subs').value.trim().split('\n').filter(Boolean)
 
   if (subs.length === 0) {
