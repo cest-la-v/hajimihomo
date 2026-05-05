@@ -2,6 +2,8 @@ name: Build rule-sets
 
 on:
   workflow_call:  # called from main branch trigger.yml
+  schedule:
+    - cron: '0 19 * * *'  # daily 19:00 UTC = 03:00 UTC+8
   push:
     branches: [dev]
     paths:
@@ -14,6 +16,7 @@ concurrency:
 
 permissions:
   contents: write
+  actions: write  # needed for delete-workflow-runs
 
 jobs:
   build:
@@ -45,8 +48,35 @@ jobs:
       - name: Purge jsDelivr CDN cache
         run: python3 scripts/publish/purge_cdn.py
 
-      # Binary compilation requires sing-box CLI for .srs and mihomo CLI for .mrs
-      # Skip if binaries directory doesn't exist yet
+      - name: Compile sing-box binaries (.srs)
+        run: |
+          SING_BOX_VERSION=$(curl -sSL https://api.github.com/repos/SagerNet/sing-box/releases/latest \
+            | python3 -c "import json,sys; print(json.load(sys.stdin)['tag_name'])")
+          echo "sing-box $SING_BOX_VERSION"
+          curl -sSL "https://github.com/SagerNet/sing-box/releases/download/${SING_BOX_VERSION}/sing-box-${SING_BOX_VERSION#v}-linux-amd64.tar.gz" \
+            | tar xzf - --wildcards '*/sing-box' --strip-components=1
+          mkdir -p dist/binaries/singbox
+          for f in dist/singbox/*.json; do
+            name=$(basename "$f" .json)
+            ./sing-box rule-set compile --output "dist/binaries/singbox/${name}.srs" "$f"
+          done
+          echo "Compiled $(ls dist/binaries/singbox/*.srs 2>/dev/null | wc -l) .srs files"
+
+      - name: Compile mihomo binaries (.mrs)
+        run: |
+          MIHOMO_VERSION=$(curl -sSL https://api.github.com/repos/MetaCubeX/mihomo/releases/latest \
+            | python3 -c "import json,sys; print(json.load(sys.stdin)['tag_name'])")
+          echo "mihomo $MIHOMO_VERSION"
+          curl -sSL "https://github.com/MetaCubeX/mihomo/releases/download/${MIHOMO_VERSION}/mihomo-linux-amd64-${MIHOMO_VERSION}.gz" \
+            | gunzip > ./mihomo && chmod +x ./mihomo
+          mkdir -p dist/binaries/mihomo
+          for f in dist/mihomo/*.yaml; do
+            name=$(basename "$f" .yaml)
+            behavior=$(grep -m1 "^# behavior:" "$f" | awk '{print $3}' || echo "classical")
+            ./mihomo convert-ruleset "$behavior" yaml "$f" "dist/binaries/mihomo/${name}.mrs" 2>/dev/null || true
+          done
+          echo "Compiled $(ls dist/binaries/mihomo/*.mrs 2>/dev/null | wc -l) .mrs files"
+
       - name: Validate binaries
         run: |
           if [ -d dist/binaries ]; then
@@ -69,3 +99,11 @@ jobs:
         with:
           name: build-meta
           path: dist/build-meta.json
+
+      - name: Delete old workflow runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: 3
+          keep_minimum_runs: 1
