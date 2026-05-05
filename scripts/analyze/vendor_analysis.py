@@ -68,6 +68,8 @@ def git_read(vendor_dir: Path, ref: str, path: str) -> str:
     Read a file from a local git repo. Tries {ref} then origin/{ref} then origin/HEAD.
     Raises RuntimeError if none resolve — caller decides how to handle.
     """
+    import urllib.parse
+    path = urllib.parse.unquote(path)
     for git_ref in (ref, f"origin/{ref}", "origin/HEAD"):
         r = subprocess.run(
             ["git", "show", f"{git_ref}:{path}"],
@@ -195,28 +197,31 @@ def parse_rules(raw: str) -> list[Rule]:
 
 @dataclass
 class RuleIndex:
-    domains:  set[str] = field(default_factory=set)
-    suffixes: set[str] = field(default_factory=set)
-    cidrs4:   list[ipaddress.IPv4Network] = field(default_factory=list)
-    cidrs6:   list[ipaddress.IPv6Network] = field(default_factory=list)
+    domains:     set[str] = field(default_factory=set)
+    suffixes:    set[str] = field(default_factory=set)
+    cidr_exact:  set[str] = field(default_factory=set)   # normalised CIDR strings, exact-match only
 
     def add(self, rule: Rule) -> None:
         if rule.rtype == "DOMAIN":
             self.domains.add(rule.value)
         elif rule.rtype == "DOMAIN-SUFFIX":
             self.suffixes.add(rule.value)
-        elif rule.rtype == "IP-CIDR":
+        elif rule.rtype in ("IP-CIDR", "IP-CIDR6"):
             try:
-                self.cidrs4.append(ipaddress.ip_network(rule.value, strict=False))
-            except ValueError:
-                pass
-        elif rule.rtype == "IP-CIDR6":
-            try:
-                self.cidrs6.append(ipaddress.ip_network(rule.value, strict=False))
+                self.cidr_exact.add(
+                    str(ipaddress.ip_network(rule.value, strict=False))
+                )
             except ValueError:
                 pass
 
+    def finalise(self) -> None:
+        pass  # no-op; kept for call-site compatibility
+
     def covers(self, rule: Rule) -> bool:
+        """
+        Domain rules: subsumption (suffix hierarchy) — O(depth) hash lookups.
+        CIDR rules:   exact match only — O(1).  Subsumption is too slow at scale.
+        """
         if rule.rtype in ("DOMAIN", "DOMAIN-SUFFIX"):
             v = rule.value
             if v in self.domains:
@@ -228,9 +233,8 @@ class RuleIndex:
             return False
         if rule.rtype in ("IP-CIDR", "IP-CIDR6"):
             try:
-                net = ipaddress.ip_network(rule.value, strict=False)
-                pool = self.cidrs6 if isinstance(net, ipaddress.IPv6Network) else self.cidrs4
-                return any(net.subnet_of(p) for p in pool)
+                norm = str(ipaddress.ip_network(rule.value, strict=False))
+                return norm in self.cidr_exact
             except (ValueError, TypeError):
                 return False
         return False
@@ -282,9 +286,19 @@ def collect_repo_files(cats: dict) -> dict[str, dict[tuple[str,str,str], list[st
 CURATION_LABELS = ["likely auto-generated", "mixed", "likely curated"]
 
 
-def curation_score(rd: RepoData, all_repos: list[RepoData]) -> dict:
+def build_global_rule_counts(repos: list[RepoData]) -> dict[tuple[str,str], int]:
+    """Count how many repos contain each (rtype, value) rule — O(total_rules)."""
+    counts: dict[tuple[str,str], int] = {}
+    for rd in repos:
+        for key in rd.rule_set:
+            counts[key] = counts.get(key, 0) + 1
+    return counts
+
+
+def curation_score(rd: RepoData, global_counts: dict[tuple[str,str], int]) -> dict:
     """
     Returns a dict of component metrics + final label.
+    Uses exact-match uniqueness (O(n)) via pre-built global_counts.
     Higher score = more curated.
     """
     n = len(rd.rules)
@@ -309,12 +323,8 @@ def curation_score(rd: RepoData, all_repos: list[RepoData]) -> dict:
     div_pts = 2 if diversity >= 4 else 1 if diversity >= 2 else 0
     score += div_pts
 
-    # 5. Uniqueness ratio (rules not covered by any other repo)
-    other_indices = [o.index for o in all_repos if o.name != rd.name]
-    unique = sum(
-        1 for r in rd.rules
-        if not any(idx.covers(r) for idx in other_indices)
-    )
+    # 5. Exact-match uniqueness: rules appearing in only this repo (O(n) hash lookup)
+    unique = sum(1 for key in rd.rule_set if global_counts.get(key, 0) == 1)
     unique_ratio = unique / n if n else 0
     uniq_pts = 3 if unique_ratio > 0.5 else 2 if unique_ratio > 0.2 else 1 if unique_ratio > 0.05 else 0
     score += uniq_pts
@@ -339,24 +349,37 @@ def curation_score(rd: RepoData, all_repos: list[RepoData]) -> dict:
 # Coverage matrix
 # ---------------------------------------------------------------------------
 
-def compute_coverage(repos: list[RepoData]) -> dict[str, dict[str, float]]:
+def compute_coverage(repos: list[RepoData], jobs: int = 4) -> dict[str, dict[str, float]]:
     """
     Returns matrix[A][B] = fraction of A's rules covered by B's index.
+    Rows computed in parallel; zero-rule repos get all-zero rows.
     """
-    matrix: dict[str, dict[str, float]] = {}
-    for a in repos:
-        row: dict[str, float] = {}
+    active = [r for r in repos if r.rules]
+
+    def _row(a: RepoData) -> tuple[str, dict[str, float]]:
         n = len(a.rules)
+        row: dict[str, float] = {}
         for b in repos:
             if a.name == b.name:
                 row[b.name] = 1.0
-                continue
-            if n == 0:
+            elif not b.rules:
                 row[b.name] = 0.0
-                continue
-            covered = sum(1 for r in a.rules if b.index.covers(r))
-            row[b.name] = covered / n
-        matrix[a.name] = row
+            else:
+                covered = sum(1 for r in a.rules if b.index.covers(r))
+                row[b.name] = covered / n
+        return a.name, row
+
+    matrix: dict[str, dict[str, float]] = {
+        r.name: {b.name: (1.0 if r.name == b.name else 0.0) for b in repos}
+        for r in repos if not r.rules
+    }
+    with ThreadPoolExecutor(max_workers=jobs) as pool:
+        done = 0
+        for name, row in pool.map(_row, active):
+            matrix[name] = row
+            done += 1
+            print(f"  matrix {done}/{len(active)}", end="\r")
+    print()
     return matrix
 
 
@@ -620,6 +643,7 @@ def main() -> None:
                 rd.index.add(rule)
 
         repos.append(rd)
+        rd.index.finalise()
         print(f"  {repo_key:<45} {len(rd.rules):>7,} rules  "
               f"({rd.files_loaded} files, {rd.files_failed} failed)")
 
@@ -630,15 +654,16 @@ def main() -> None:
         matrix: dict = {r.name: {r2.name: 1.0 if r.name == r2.name else 0.0
                                    for r2 in repos} for r in repos}
     else:
-        print(f"\nComputing {len(repos)}×{len(repos)} coverage matrix...")
-        matrix = compute_coverage(repos)
+        print(f"\nComputing {len(repos)}×{len(repos)} coverage matrix ({args.jobs} threads)...")
+        matrix = compute_coverage(repos, jobs=args.jobs)
         print("Matrix done.")
 
     # --- Curation scores ---
     print("\nComputing curation scores...")
+    global_counts = build_global_rule_counts(repos)
     curation: dict[str, dict] = {}
     for rd in repos:
-        curation[rd.name] = curation_score(rd, repos)
+        curation[rd.name] = curation_score(rd, global_counts)
 
     # --- Outputs ---
     report_path = out_dir / "vendor_analysis.md"
