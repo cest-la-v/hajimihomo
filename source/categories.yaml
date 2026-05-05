@@ -40,6 +40,10 @@
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/36kr.list
 
+3Type:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/3Type/3Type.list
+
 3dm:
   sources:
     - https://rules.kr328.app/3dm.yaml
@@ -173,6 +177,10 @@ AddToAny:
   sources:
     - https://rules.kr328.app/addtoany.yaml
 
+Addthis:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Addthis/Addthis.list
+
 Adidas:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Adidas.list
@@ -184,6 +192,10 @@ Adobe:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Adobe.list
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Adobe.yaml
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Adobe.yaml
+
+AdobeActivation:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/AdobeActivation/AdobeActivation.list
 
 Advertising:
   sources:
@@ -216,6 +228,10 @@ AdvertisingLite:
     - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/source/rule/Advertising/Advertising.list
     - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/source/rule/Advertising/LianXiangJia/LianXiangJia.list
     - https://raw.githubusercontent.com/yjqiang/surge_scripts/main/modules/hupu/hupu.sgmodule
+
+AdvertisingMiTV:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/AdvertisingMiTV/AdvertisingMiTV.list
 
 AdvertisingTest:
   sources:
@@ -317,6 +333,10 @@ Amazon:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Amazon.yaml
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Amazon.yaml
 
+AmazonCN:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/AmazonCN/AmazonCN.list
+
 AmazonIP:
   sources:
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/AmazonIp.list
@@ -338,9 +358,21 @@ AnTianKeJi:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/AnTianKeJi.list
 
+Anaconda:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Anaconda/Anaconda.list
+
 AnandTech:
   sources:
     - https://rules.kr328.app/anandtech.yaml
+
+Android:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Android/Android.list
+
+Anime:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Anime/Anime.list
 
 Anjuke:
   sources:
@@ -420,9 +452,17 @@ AppleID:
   sources:
     - https://gitlab.com/lodepuly/vpn_tool/raw/main/Tool/Loon/Rule/AppleID.list
 
+AppleMail:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/AppleMail/AppleMail.list
+
 AppleMedia:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Apple/AppleMedia.list
+
+AppleMusic:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/AppleMusic/AppleMusic.list
 
 AppleNews:
   sources:
@@ -484,6 +524,10 @@ Bahamut:
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bahamut.list
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Bahamut.yaml
 
+BaiDuTieBa:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BaiDuTieBa/BaiDuTieBa.list
+
 BaiFenDian:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/BaiFenDian.list
@@ -500,6 +544,14 @@ Baidu:
 BaoFengYingYin:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/BaoFengYingYin.list
+
+BardAI:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BardAI/BardAI.list
+
+Battle:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Battle/Battle.list
 
 BeStore:
   sources:
@@ -529,11 +581,19 @@ BiliBili:
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Bilibili.yaml
     - https://ruleset.isagood.day/bilibili.conf
 
+BiliBiliIntl:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBiliIntl/BiliBiliIntl.list
+
 Binance:
   sources:
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Binance.list
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Binance.yaml
     - https://github.com/StricklandF/Filter/blob/main/Binance.list
+
+Bing:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Bing/Bing.list
 
 Blizzard:
   sources:
@@ -567,6 +627,10 @@ BrightCove:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/BrightCove.list
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/BrightCove.yaml
+
+BritboxUK:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BritboxUK/BritboxUK.list
 
 Buypass:
   sources:
@@ -659,6 +723,10 @@ CaiNiao:
 CaiXinChuanMei:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/CaiXinChuanMei.list
+
+Cake:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Cake/Cake.list
 
 Camera360:
   sources:
@@ -1655,6 +1723,10 @@ ChinaUnicom:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/ChinaUnicom.list
 
+Chromecast:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Chromecast/Chromecast.list
+
 ChuangKeTie:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/ChuangKeTie.list
@@ -1667,6 +1739,18 @@ Cisco:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Cisco.list
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Cisco.yaml
+
+Civitai:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Civitai/Civitai.list
+
+Classic:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Classic/Classic.list
+
+Claude:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.list
 
 Cloudflare:
   sources:
@@ -1686,6 +1770,10 @@ ClubhouseIP:
   sources:
     - https://raw.githubusercontent.com/tengyuankoo/qx/main/Clubhouse_IP.list
 
+Cnet:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Cnet/Cnet.list
+
 Collabora:
   sources:
     - https://rules.kr328.app/collabora.yaml
@@ -1704,6 +1792,8 @@ Coolapk:
     - https://rules.kr328.app/coolapk.yaml
 
 Copilot:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Copilot/Copilot.list
   append:
     - file:source/overrides/Copilot.append.list
 
@@ -1711,6 +1801,10 @@ Crypto:
   sources:
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Crypto.yaml
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Crypto.list
+
+Cryptocurrency:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Cryptocurrency/Cryptocurrency.list
 
 CyberTrust:
   sources:
@@ -1794,6 +1888,10 @@ DiLianWangLuo:
 DiSiFanShi:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/DiSiFanShi.list
+
+DiabloIII:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/DiabloIII/DiabloIII.list
 
 DianCeWangKe:
   sources:
@@ -1953,6 +2051,10 @@ Embl:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Embl.list
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Embl.yaml
 
+Emby:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Emby/Emby.list
+
 Emojipedia:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Emojipedia.list
@@ -1962,6 +2064,10 @@ EncoreTVB:
   sources:
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/EncoreTVB.list
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/EncoreTVB.yaml
+
+Entrust:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Entrust/Entrust.list
 
 Epic:
   sources:
@@ -1978,6 +2084,10 @@ FOXNOW:
   sources:
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/FoxNow.list
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/FoxNow.yaml
+
+FOXPlus:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/FOXPlus/FOXPlus.list
 
 Facebook:
   sources:
@@ -2021,6 +2131,14 @@ Figma:
 Fiio:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/Fiio.list
+
+FindMy:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/FindMy/FindMy.list
+
+FitnessPlus:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/FitnessPlus/FitnessPlus.list
 
 FlipBoard:
   sources:
@@ -2097,6 +2215,10 @@ Garena:
 Geely:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/Geely.list
+
+Gemini:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.list
 
 Gettyimages:
   sources:
@@ -2187,6 +2309,10 @@ Google:
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Google.list
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Google.yaml
 
+GoogleDrive:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GoogleDrive/GoogleDrive.list
+
 GoogleEarth:
   sources:
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleEarth.list
@@ -2197,6 +2323,14 @@ GoogleFCM:
     - https://raw.githubusercontent.com/dler-io/Rules/main/Clash/Provider/Google%20FCM.yaml
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleFCM.yaml
+
+GoogleSearch:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GoogleSearch/GoogleSearch.list
+
+GoogleVoice:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GoogleVoice/GoogleVoice.list
 
 GovCN:
   sources:
@@ -2217,6 +2351,10 @@ HBO:
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/HBO.list
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/HBO.yaml
 
+HBOAsia:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HBOAsia/HBOAsia.list
+
 HBOHK:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/HBO.list
@@ -2230,6 +2368,10 @@ HKBN:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/HKBN.list
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/HKBN.yaml
+
+HKOpenTV:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HKOpenTV/HKOpenTV.list
 
 HKedcity:
   sources:
@@ -2271,6 +2413,14 @@ HeMa:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/HeMa.list
 
+Hearthstone:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Hearthstone/Hearthstone.list
+
+HeroesoftheStorm:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HeroesoftheStorm/HeroesoftheStorm.list
+
 Heroku:
   sources:
     - https://rules.kr328.app/heroku.yaml
@@ -2288,6 +2438,10 @@ Himalaya:
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Ximalaya.list
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/XiMaLaYa.list
 
+Hkgolden:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Hkgolden/Hkgolden.list
+
 HoYoverse:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game/HoYoverse.list
@@ -2303,6 +2457,10 @@ HuYa:
 HuaShuTV:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/HuaShuTV.list
+
+HuanJu:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HuanJu/HuanJu.list
 
 Huawei:
   sources:
@@ -2565,6 +2723,10 @@ LiTV:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/LiTV.list
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/LiTV.list
 
+LianMeng:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/LianMeng/LianMeng.list
+
 Limelight:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Limelight.list
@@ -2589,6 +2751,10 @@ LinkedIn:
   sources:
     - https://rules.kr328.app/linkedin@cn.yaml
     - https://rules.kr328.app/linkedin.yaml
+
+Linux:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Linux/Linux.list
 
 LivePerson:
   sources:
@@ -2631,10 +2797,18 @@ MOOV:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/MOOV.list
 
+Mail:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Mail/Mail.list
+
 Mailru:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Mailru.list
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Mailru.yaml
+
+Majsoul:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Majsoul/Majsoul.list
 
 Manorama:
   sources:
@@ -2687,6 +2861,10 @@ Microsoft:
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Microsoft.yaml
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/OneDrive.yaml
     - https://raw.githubusercontent.com/zqzess/rule_for_quantumultX/master/QuantumultX/rules/Microsoft.list
+
+MicrosoftEdge:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/MicrosoftEdge/MicrosoftEdge.list
 
 Migu:
   sources:
@@ -2812,6 +2990,10 @@ Notion:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Notion.list
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Notion.yaml
 
+NowE:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/NowE/NowE.list
+
 Npmjs:
   sources:
     - https://rules.kr328.app/npmjs.yaml
@@ -2879,6 +3061,14 @@ OuPeng:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/OuPeng.list
 
+Overcast:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Overcast/Overcast.list
+
+Overwatch:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Overwatch/Overwatch.list
+
 PBS:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/PBS.list
@@ -2918,6 +3108,14 @@ PandoraTV:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/PandoraTV.list
 
+ParamountPlus:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ParamountPlus/ParamountPlus.list
+
+Patreon:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Patreon/Patreon.list
+
 PayPal:
   sources:
     - https://raw.githubusercontent.com/GeQ1an/Rules/master/QuantumultX/Filter/Optional/PayPal.list
@@ -2925,6 +3123,10 @@ PayPal:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/PayPal.list
     - https://raw.githubusercontent.com/dler-io/Rules/main/Clash/Provider/PayPal.yaml
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/PayPal.yaml
+
+Peacock:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Peacock/Peacock.list
 
 Picacg:
   sources:
@@ -2972,6 +3174,10 @@ PlayStation:
 PotatoChat:
   sources:
     - https://raw.githubusercontent.com/sve1r/Rules-For-Quantumult-X/develop/Rules/Services/SNS/PotatoChat.list
+
+PrimeVideo:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/PrimeVideo/PrimeVideo.list
 
 Privacy:
   sources:
@@ -3041,6 +3247,10 @@ Qualcomm:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Qualcomm.list
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Qualcomm.yaml
 
+QuickConnect:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/QuickConnect/QuickConnect.list
+
 Qyyjt:
   sources:
     - https://rules.kr328.app/qyyjt.yaml
@@ -3063,6 +3273,10 @@ Razer:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Razer.list
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Razer.yaml
+
+Reabble:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Reabble/Reabble.list
 
 Reddit:
   sources:
@@ -3173,6 +3387,10 @@ Sina:
     - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/source/rule/Weibo/Weibo.list
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/Sina.list
 
+Siri:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Siri/Siri.list
+
 SkyGO:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/SkyGO.list
@@ -3250,6 +3468,10 @@ Stackexchange:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Stackexchange.list
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Stackexchange.yaml
 
+StarCraftII:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/StarCraftII/StarCraftII.list
+
 Starbucks:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Starbucks.list
@@ -3267,6 +3489,10 @@ SteamCN:
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/SteamCN.list
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/SteamCN.yaml
 
+Stripe:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Stripe/Stripe.list
+
 SuNing:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/SuNing.list
@@ -3279,6 +3505,14 @@ SublimeText:
 SuiShiChuanMei:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/SuiShiChuanMei.list
+
+Supercell:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Supercell/Supercell.list
+
+Synology:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Synology/Synology.list
 
 SystemOTA:
   sources:
@@ -3332,6 +3566,10 @@ Teambition:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/Teambition.list
 
+Teams:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Teams/Teams.list
+
 Telegram:
   sources:
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Telegram.list
@@ -3346,6 +3584,18 @@ Telegram:
     - https://raw.githubusercontent.com/dler-io/Rules/main/Clash/Provider/Telegram.yaml
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Telegram.yaml
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Telegram.yaml
+
+TelegramNL:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TelegramNL/TelegramNL.list
+
+TelegramSG:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TelegramSG/TelegramSG.list
+
+TelegramUS:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TelegramUS/TelegramUS.list
 
 Tencent:
   sources:
@@ -3416,6 +3666,10 @@ TrustWave:
   sources:
     - https://rules.kr328.app/trustwave.yaml
 
+TruthSocial:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TruthSocial/TruthSocial.list
+
 Tumblr:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Tumblr.list
@@ -3453,9 +3707,17 @@ UCloud:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/UCloud.list
 
+UKMedia:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/UKMedia/UKMedia.list
+
 UPYun:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/UPYun.list
+
+USMedia:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/USMedia/USMedia.list
 
 Ubisoft:
   sources:
@@ -3564,6 +3826,10 @@ WanMeiShiJie:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/WanMeiShiJie.list
 
+Wanfang:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Wanfang/Wanfang.list
+
 WangSuKeJi:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/WangSuKeJi.list
@@ -3582,6 +3848,10 @@ WeChat:
 WeTV:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/WeTV.list
+
+WeType:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/WeType/WeType.list
 
 WeiZhiYunDong:
   sources:
@@ -3633,6 +3903,10 @@ Wordpress:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Wordpress.list
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Wordpress.yaml
 
+WorldofWarcraft:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/WorldofWarcraft/WorldofWarcraft.list
+
 Wteam:
   sources:
     - https://rules.kr328.app/wteam-ads.yaml
@@ -3654,6 +3928,10 @@ XianYu:
 XiaoGouKeJi:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/XiaoGouKeJi.list
+
+XiaoHongShu:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/XiaoHongShu/XiaoHongShu.list
 
 XiaoMi:
   sources:
@@ -3747,6 +4025,10 @@ ZDNS:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/ZDNS.list
 
+Zalo:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Zalo/Zalo.list
+
 Zee:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Zee.list
@@ -3772,6 +4054,14 @@ ZhiYinManKe:
 ZhiYunZhong:
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/ZhiYunZhong.list
+
+Zhihu:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Zhihu/Zhihu.list
+
+ZhihuAds:
+  sources:
+    - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ZhihuAds/ZhihuAds.list
 
 ZhongGuoShiHua:
   sources:

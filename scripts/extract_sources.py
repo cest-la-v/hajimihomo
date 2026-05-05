@@ -51,17 +51,37 @@ def main() -> None:
         raw = yaml.safe_load(out_file.read_text()) or {}
         existing = {str(k): v for k, v in raw.items()}
 
+    BM7_RAW = "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master"
+
+    def has_clash_content(cat: str) -> bool:
+        """Return True if bm7's built Clash list for this category has actual rules."""
+        f = clash_dir / cat / f"{cat}.list"
+        if not f.exists():
+            return False
+        return any(l.strip() and not l.startswith("#") for l in f.read_text().splitlines())
+
+    def fallback_source(cat: str) -> list[str]:
+        """For categories with no upstream data sources, use the built Clash URL directly."""
+        if has_clash_content(cat):
+            return [f"{BM7_RAW}/rule/Clash/{cat}/{cat}.list"]
+        return []
+
     categories = sorted(d.name for d in clash_dir.iterdir() if d.is_dir())
     print(f"Found {len(categories)} categories in bm7", file=sys.stderr)
 
     if args.check:
         our = set(existing.keys())
-        bm7_cats = {cat for cat in categories if (clash_dir / cat / "README.md").exists()
-                    and extract_sources(clash_dir / cat / "README.md")}
+        bm7_cats = set()
+        for cat in categories:
+            readme = clash_dir / cat / "README.md"
+            if not readme.exists():
+                continue
+            if extract_sources(readme) or has_clash_content(cat):
+                bm7_cats.add(cat)
         missing = sorted(bm7_cats - our)
         extra = sorted(our - bm7_cats)
         print(f"Our categories.yaml: {len(our)}")
-        print(f"bm7 categories with sources: {len(bm7_cats)}")
+        print(f"bm7 categories with content: {len(bm7_cats)}")
         if missing:
             print(f"\nIn bm7 but MISSING from categories.yaml ({len(missing)}):")
             for c in missing:
@@ -90,6 +110,9 @@ def main() -> None:
         if not readme.exists():
             continue
         sources = extract_sources(readme)
+        # Fallback: categories with no upstream sources use bm7's own built Clash list
+        if not sources:
+            sources = fallback_source(cat)
         prev = existing.get(cat) or {}
         overrides = {k: prev[k] for k in ("append", "exclude") if k in prev}
         if not sources and not overrides:
