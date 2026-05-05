@@ -61,18 +61,24 @@ def sync_repo(owner_repo: str, refs: set[str], dry_run: bool) -> str:
     else:
         action_done = "fetched"
 
-    # Fetch each required ref at depth=1 to make it available for git-show
+    # Fetch each required ref at depth=1 to make it available for git-show.
+    # Skip if ref already resolves locally (e.g. it's the default branch fetched by clone).
     fetch_errors = []
     for ref in sorted(refs):
         if dry_run:
             continue
+        already = subprocess.run(
+            ["git", "-C", str(vendor_dir), "rev-parse", "--verify", f"origin/{ref}"],
+            capture_output=True,
+        )
+        if already.returncode == 0:
+            continue  # already available
         result = subprocess.run(
             ["git", "-C", str(vendor_dir), "fetch", "--depth=1", "origin", ref],
             capture_output=True, text=True,
         )
         if result.returncode != 0:
-            # Some refs may already be fetched — not a hard error
-            fetch_errors.append(f"{ref}: {result.stderr.strip()[:60]}")
+            fetch_errors.append(f"{ref}: {result.stderr.strip()[:80]}")
 
     refs_str = ", ".join(sorted(refs))
     if fetch_errors:

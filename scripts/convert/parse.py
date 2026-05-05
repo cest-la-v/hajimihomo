@@ -163,7 +163,8 @@ def _read_repo_local(url: str) -> str | None:
     vendor_dir = _REPO_ROOT / "vendor" / owner / repo
     if not vendor_dir.exists():
         return None
-    for git_ref in (ref, f"origin/{ref}"):
+    # Try exact ref, then origin/ prefix, then origin/HEAD (handles main/master mismatch)
+    for git_ref in (ref, f"origin/{ref}", "origin/HEAD"):
         result = subprocess.run(
             ["git", "show", f"{git_ref}:{path}"],
             cwd=vendor_dir,
