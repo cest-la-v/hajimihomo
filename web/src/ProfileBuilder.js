@@ -20,7 +20,12 @@
 
 const REPO = 'cest-la-v/hajimihomo'
 const CDN_BASE = `https://cdn.jsdelivr.net/gh/${REPO}`
-const RULESETS_URL = `${CDN_BASE}@ruleset/mihomo/rulesets.json`
+// In local dev with RULESET_DIR set, dev.ts proxies /ruleset/mihomo/* from local build.
+// Detection: if the page is served from localhost, use a relative URL so the proxy intercepts.
+const _isLocal = typeof location !== 'undefined' && location.hostname === 'localhost'
+const RULESETS_URL = _isLocal
+  ? '/ruleset/mihomo/rulesets.json'
+  : `${CDN_BASE}@ruleset/mihomo/rulesets.json`
 
 // Ordering within a group's splits — ip-resolve is handled separately (always last globally)
 const SPLIT_ORDER = ['domain', 'residual', 'process', 'ip']
