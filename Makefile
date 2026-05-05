@@ -1,4 +1,4 @@
-.PHONY: help build build-groups build-dry validate dev web-build web-dev web-install
+.PHONY: help build build-groups build-dry validate extract extract-check dev web-build web-dev web-install
 
 GROUPS ?= proxy/telegram,block/ads,direct/cn
 JOBS   ?= 8
@@ -10,6 +10,8 @@ help:
 	@echo "  make build-groups GROUPS=proxy/telegram,block/ads"
 	@echo "  make build-dry       dry-run: validate build graph, no output"
 	@echo "  make validate        validate source YAML files"
+	@echo "  make extract         re-extract sources from bm7 vendor (updates categories.yaml)"
+	@echo "  make extract-check   check coverage gaps vs bm7 without writing"
 	@echo ""
 	@echo "Profile builder (web):"
 	@echo "  make web-install     install web dependencies (js-yaml)"
@@ -31,6 +33,12 @@ build-dry:
 
 validate:
 	python3 scripts/validate.py
+
+extract:
+	python3 scripts/extract_sources.py
+
+extract-check:
+	python3 scripts/extract_sources.py --check
 
 web-install:
 	cd web && bun install

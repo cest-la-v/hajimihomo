@@ -2,11 +2,11 @@
 # To add custom rules, create source/overrides/<Category>.append.list
 # or source/overrides/<Category>.remove.list and reference them here.
 
-115:
+"115":
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/115.list
 
-12306:
+"12306":
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/12306.list
 
@@ -14,11 +14,11 @@
   sources:
     - https://rules.kr328.app/1337x.yaml
 
-17173:
+"17173":
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/17173.list
 
-178:
+"178":
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/178.list
 
@@ -30,7 +30,7 @@
   sources:
     - https://rules.kr328.app/2kgames.yaml
 
-360:
+"360":
   sources:
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/360.list
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/360.list
@@ -44,7 +44,7 @@
   sources:
     - https://rules.kr328.app/3dm.yaml
 
-4399:
+"4399":
   sources:
     - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/4399.list
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/4399.list
@@ -65,7 +65,7 @@
   sources:
     - https://rules.kr328.app/51nod.yaml
 
-56:
+"56":
   sources:
     - https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/56.list
 

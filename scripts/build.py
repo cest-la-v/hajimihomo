@@ -197,7 +197,8 @@ def load_all_sources(categories_file: Path) -> tuple[
     removes: dict[str, frozenset[tuple[str, str]]] = {}
 
     data = yaml.safe_load(categories_file.read_text()) or {}
-    for category, entry in data.items():
+    for raw_key, entry in data.items():
+        category = str(raw_key)  # guard: YAML parses bare numbers as int
         if not isinstance(entry, dict):
             continue
         urls = entry.get("sources", [])
