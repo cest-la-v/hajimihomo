@@ -68,8 +68,13 @@ export function getGroups(catalog) {
  */
 export function buildRuleProviders(groupIds, catalog, { tier = 1 } = {}) {
   const providers = {}
-  const regularRules   = []
-  const ipResolveRules = []  // collected separately; appended LAST
+  // Global type buckets — CRITICAL for correct cross-group ordering.
+  // Per-group ordering (domain→residual→process→ip per group) is WRONG:
+  //   direct-cn-process would precede proxy-telegram-domain, letting process
+  //   rules shadow domain policy from later groups.
+  // Correct order: ALL .domain → ALL .residual → ALL .process → ALL .ip →
+  //                ALL .ip-resolve (LAST — triggers DNS).
+  const buckets = { domain: [], residual: [], process: [], ip: [], 'ip-resolve': [] }
 
   for (const gid of groupIds) {
     const flatName = gid.replace(/\//g, '-')
@@ -81,30 +86,32 @@ export function buildRuleProviders(groupIds, catalog, { tier = 1 } = {}) {
     const useSplits    = tier >= 2 && mihomoSplits.length > 0
 
     if (!useSplits) {
-      // Tier 1: all-in-one classical file
+      // Tier 1: all-in-one classical — goes in domain bucket (first phase)
       providers[flatName] = _provider(flatName, `${flatName}.yaml`, info.behavior || 'classical')
-      regularRules.push(`RULE-SET,${flatName},${action}`)
+      buckets.domain.push(`RULE-SET,${flatName},${action}`)
     } else {
-      // Tier 2: splits in canonical order
-      for (const split of SPLIT_ORDER) {
+      // Tier 2: place each split in its global type bucket
+      for (const split of [...SPLIT_ORDER, 'ip-resolve']) {
         if (!mihomoSplits.includes(split)) continue
         const key = `${flatName}-${split}`
-        providers[key] = _provider(key, `${flatName}.${split}.yaml`, SPLIT_BEHAVIOR[split])
-        // .ip has no-resolve: triggers no DNS resolution, safe anywhere in list
-        regularRules.push(split === 'ip'
+        providers[key] = _provider(key, `${flatName}.${split}.yaml`, SPLIT_BEHAVIOR[split] || 'ipcidr')
+        buckets[split].push(split === 'ip'
           ? `RULE-SET,${key},${action},no-resolve`
           : `RULE-SET,${key},${action}`)
-      }
-      // ip-resolve: triggers DNS — must be absolute last across all groups
-      if (mihomoSplits.includes('ip-resolve')) {
-        const key = `${flatName}-ip-resolve`
-        providers[key] = _provider(key, `${flatName}.ip-resolve.yaml`, 'ipcidr')
-        ipResolveRules.push(`RULE-SET,${key},${action}`)
       }
     }
   }
 
-  return { providers, rules: [...regularRules, ...ipResolveRules] }
+  return {
+    providers,
+    rules: [
+      ...buckets.domain,
+      ...buckets.residual,
+      ...buckets.process,
+      ...buckets.ip,
+      ...buckets['ip-resolve'],  // must be absolute last — triggers DNS
+    ],
+  }
 }
 
 function _provider(name, filename, behavior) {
@@ -126,8 +133,10 @@ function _provider(name, filename, behavior) {
  * @returns {{ ruleSets: Object[], routeRules: Object[] }}
  */
 export function buildSingboxRuleSets(groupIds, catalog, { tier = 1 } = {}) {
-  const ruleSets   = []
-  const routeRules = []
+  const ruleSets = []
+  // Same global bucket pattern as buildRuleProviders — process must follow all domain.
+  // sing-box has no no-resolve; ip-resolve bucket stays empty but is kept for symmetry.
+  const buckets = { domain: [], residual: [], process: [], ip: [], 'ip-resolve': [] }
 
   for (const gid of groupIds) {
     const flatName = gid.replace(/\//g, '-')
@@ -142,17 +151,23 @@ export function buildSingboxRuleSets(groupIds, catalog, { tier = 1 } = {}) {
     if (!useSplits) {
       const tag = `ruleset-${flatName}`
       ruleSets.push(_sbRuleSet(tag, `singbox/${flatName}.json`))
-      routeRules.push({ rule_set: tag, outbound })
+      buckets.domain.push({ rule_set: tag, outbound })
     } else {
       for (const split of SPLIT_ORDER) {
         if (!sbSplits.includes(split)) continue
         const tag = `ruleset-${flatName}-${split}`
         ruleSets.push(_sbRuleSet(tag, `singbox/${flatName}.${split}.json`))
-        routeRules.push({ rule_set: tag, outbound })
+        buckets[split].push({ rule_set: tag, outbound })
       }
     }
   }
 
+  const routeRules = [
+    ...buckets.domain,
+    ...buckets.residual,
+    ...buckets.process,
+    ...buckets.ip,
+  ]
   return { ruleSets, routeRules }
 }
 
