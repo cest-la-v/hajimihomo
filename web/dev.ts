@@ -15,11 +15,12 @@ for (const file of (await readdir(presetsDir)).filter(f => f.endsWith(".yaml")).
 }
 const presetsJson = JSON.stringify(presets, null, 2);
 
-const rulesetDir = process.env.RULESET_DIR
-  ? resolve(import.meta.dir, process.env.RULESET_DIR, "mihomo")
+const distDir = process.env.RULESET_DIR
+  ? resolve(import.meta.dir, process.env.RULESET_DIR)
   : null;
-const localRulesetsJson = rulesetDir
-  ? await readFile(resolve(rulesetDir, "rulesets.json"), "utf8").catch(() => null)
+const rulesetDir = distDir ? resolve(distDir, "mihomo") : null;
+const localRulesetsJson = distDir
+  ? await readFile(resolve(distDir, "rulesets.json"), "utf8").catch(() => null)
   : null;
 
 const CDN_RULESET = "https://cdn.jsdelivr.net/gh/cest-la-v/hajimihomo@ruleset/mihomo";
