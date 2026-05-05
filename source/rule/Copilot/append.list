@@ -1,0 +1,5 @@
+# Copilot custom rules — no public upstream sources (bm7 hand-crafted)
+# ASN 14061 = DigitalOcean (OpenAI / Copilot AI backend)
+# ASN 20473 = Vultr (OpenAI / Copilot inference endpoints)
+IP-ASN,14061,no-resolve
+IP-ASN,20473,no-resolve

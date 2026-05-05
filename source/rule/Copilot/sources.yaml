@@ -1,0 +1,6 @@
+# Microsoft Copilot routing rules
+# Note: bm7 states "当前规则未直接引用数据源" — no public upstream sources exist.
+# Domain rules are maintained in append.list. Add upstream URLs here if community
+# sources become available.
+name: Copilot
+sources: []

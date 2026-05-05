@@ -1,0 +1,3 @@
+# WeChat custom rules
+# ASN 132203 = Tencent (WeChat server ASN — not in ACL4SSR upstreams)
+IP-ASN,132203,no-resolve

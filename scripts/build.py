@@ -34,7 +34,7 @@ import yaml  # PyYAML
 import sys
 sys.path.insert(0, str(Path(__file__).parent))
 
-from convert.parse import fetch_and_parse
+from convert.parse import fetch_and_parse, parse_lines
 from convert.compress import compress
 from convert.mihomo import detect_behavior, to_yaml as to_mihomo_yaml, to_domain_yaml
 from convert.singbox import to_json as to_singbox_json
@@ -66,6 +66,8 @@ class RuleResolver:
     effective(cat) = parse(direct_sources(cat))
                      ∪ effective(included)   for each included sub-category
                      - effective(excluded)   for each excluded category
+                     ∪ appends[cat]          our custom additions (survive exclusion)
+                     - removes[cat]          our explicit removals (always win)
 
     Results are memoized; thread-safe for parallel builds (last-write-wins on
     cache is safe because results are deterministic).
@@ -76,10 +78,14 @@ class RuleResolver:
         sources: dict[str, list[str]],
         includes: dict[str, list[str]],
         excludes: dict[str, list[str]],
+        appends: dict[str, frozenset[tuple[str, str]]] | None = None,
+        removes: dict[str, frozenset[tuple[str, str]]] | None = None,
     ) -> None:
         self._sources = sources
         self._includes = includes
         self._excludes = excludes
+        self._appends = appends or {}
+        self._removes = removes or {}
         self._cache: dict[str, frozenset[tuple[str, str]]] = {}
         self._lock = threading.Lock()
 
@@ -118,6 +124,12 @@ class RuleResolver:
         for exc in self._excludes.get(category, []):
             rules -= self.effective_rules(exc, new_stack)
 
+        # 4. Our custom additions (survive category-level exclusion)
+        rules |= self._appends.get(category, frozenset())
+
+        # 5. Our explicit removals (always win, applied last)
+        rules -= self._removes.get(category, frozenset())
+
         result = frozenset(rules)
         with self._lock:
             self._cache[category] = result
@@ -128,16 +140,48 @@ class RuleResolver:
 # Loaders
 # ---------------------------------------------------------------------------
 
-def load_all_sources(source_dir: Path) -> dict[str, list[str]]:
-    """Return {category: [url, ...]} for ALL categories (no SKIP filtering)."""
-    result: dict[str, list[str]] = {}
-    for f in sorted(source_dir.glob("*/sources.yaml")):
-        category = f.parent.name
-        data = yaml.safe_load(f.read_text())
-        urls = data.get("sources", [])
-        if urls:
-            result[category] = urls
-    return result
+def load_all_sources(source_dir: Path) -> tuple[
+    dict[str, list[str]],
+    dict[str, frozenset[tuple[str, str]]],
+    dict[str, frozenset[tuple[str, str]]],
+]:
+    """
+    Discover all categories under source_dir and return:
+      sources  — {cat: [url, ...]}          from sources.yaml
+      appends  — {cat: frozenset of rules}   from append.list
+      removes  — {cat: frozenset of rules}   from remove.list
+
+    A category is discovered if its directory contains any of these files.
+    """
+    sources: dict[str, list[str]] = {}
+    appends: dict[str, frozenset[tuple[str, str]]] = {}
+    removes: dict[str, frozenset[tuple[str, str]]] = {}
+
+    for cat_dir in sorted(source_dir.iterdir()):
+        if not cat_dir.is_dir():
+            continue
+        category = cat_dir.name
+
+        sources_file = cat_dir / "sources.yaml"
+        if sources_file.exists():
+            data = yaml.safe_load(sources_file.read_text())
+            urls = data.get("sources", [])
+            if urls:
+                sources[category] = urls
+
+        append_file = cat_dir / "append.list"
+        if append_file.exists():
+            rules = frozenset(parse_lines(append_file.read_text()))
+            if rules:
+                appends[category] = rules
+
+        remove_file = cat_dir / "remove.list"
+        if remove_file.exists():
+            rules = frozenset(parse_lines(remove_file.read_text()))
+            if rules:
+                removes[category] = rules
+
+    return sources, appends, removes
 
 
 def load_relationships(source_dir: Path) -> tuple[dict, dict]:
@@ -287,11 +331,14 @@ def main() -> None:
     source_dir = repo_root / args.source_dir
     dist = repo_root / args.dist_dir
 
-    all_sources = load_all_sources(source_dir)
+    all_sources, appends, removes = load_all_sources(source_dir)
     includes_map, excludes_map = load_relationships(source_dir)
     catalog = load_catalog(repo_root / "source" / "catalog.yaml")
 
-    resolver = RuleResolver(all_sources, includes_map, excludes_map)
+    resolver = RuleResolver(all_sources, includes_map, excludes_map, appends, removes)
+
+    # All discovered categories: union of sources, appends, removes keys
+    all_categories = set(all_sources) | set(appends) | set(removes)
 
     # ---- Collect work items: (name, callable_that_returns_frozenset) ----
     # Key: output file stem; value: callable producing raw frozenset of rules
@@ -300,7 +347,7 @@ def main() -> None:
     # Build atomics unless --all-groups is set or only --groups were requested
     build_atomics = not args.all_groups and not (args.groups and not args.categories)
     if build_atomics:
-        emit_cats = [cat for cat in sorted(all_sources) if cat not in SKIP_CATEGORIES]
+        emit_cats = [cat for cat in sorted(all_categories) if cat not in SKIP_CATEGORIES]
         if args.categories:
             wanted = set(args.categories.split(","))
             emit_cats = [c for c in emit_cats if c in wanted]

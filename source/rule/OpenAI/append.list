@@ -1,0 +1,3 @@
+# OpenAI custom rules
+# ASN 20473 = Vultr (OpenAI inference endpoints — not in ACL4SSR upstreams)
+IP-ASN,20473,no-resolve

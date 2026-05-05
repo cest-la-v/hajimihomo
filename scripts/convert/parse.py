@@ -6,9 +6,10 @@ Handles formats:
   - YAML payload:       payload:\n  - RULE_TYPE,VALUE
   - Loyalsoldier YAML:  payload:\n  - '+.domain.com'  (= DOMAIN-SUFFIX)
   - Raw domain lines:   domain.com  (treated as DOMAIN-SUFFIX)
+  - QuantumultX:        ip-asn,<asn>,<policy>  (lowercase; policy stripped)
 
 Skipped rule types: USER-AGENT, URL-REGEX, DEST-PORT, SRC-PORT, GEOIP, GEOSITE,
-                    AND, OR, NOT, IP-ASN, RULE-SET, FINAL, MATCH
+                    AND, OR, NOT, RULE-SET, FINAL, MATCH
 """
 
 import re
@@ -26,6 +27,7 @@ SUPPORTED_TYPES = {
     "IP-CIDR6",
     "IP6-CIDR",
     "PROCESS-NAME",  # kept in classical; stripped from domain/ipcidr
+    "IP-ASN",        # classical only; value: "<asn>" or "<asn>,no-resolve"
 }
 
 # Types silently dropped
@@ -39,7 +41,6 @@ SKIP_TYPES = {
     "AND",
     "OR",
     "NOT",
-    "IP-ASN",
     "RULE-SET",
     "FINAL",
     "MATCH",
@@ -105,11 +106,12 @@ def parse_lines(text: str) -> Iterator[tuple[str, str]]:
             if len(parts) < 2:
                 continue
             value = parts[1].strip()
-            # preserve no-resolve as part of value for IP-CIDR
-            if rule_type in ("IP-CIDR", "IP-CIDR6", "IP6-CIDR") and len(parts) >= 3:
+            # preserve no-resolve flag for IP-CIDR and IP-ASN
+            if rule_type in ("IP-CIDR", "IP-CIDR6", "IP6-CIDR", "IP-ASN") and len(parts) >= 3:
                 flag = parts[-1].strip().upper()
                 if flag == "NO-RESOLVE":
                     value = f"{value},no-resolve"
+                # For IP-ASN: if third field is not NO-RESOLVE, it's a QX policy name — strip it
             yield (rule_type, value)
             continue
 
