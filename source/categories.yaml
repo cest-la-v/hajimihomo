@@ -147,18 +147,14 @@ Advertising:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/BanAD.list
   - repo:NobyDa/ND-AD/master/Surge/AD_Block.txt
-  - repo:NobyDa/Script/master/Surge/AdRule.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/Advertising/Advertising.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/Advertising/LianXiangJia/LianXiangJia.list
-  - repo:scomper/surge-list/master/reject.list
-  - repo:scomper/surge-list/master/adblock.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/BanEasyList.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/BanEasyListChina.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list
   - repo:limbopro/Adblock4limbo/main/Adblock4limbo.list
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/Custom/ad-domains.list
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/Custom/video-ad.list
-  - repo:an0na/R/master/Filter/AdBlock.list
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Advertising/AdReject.list
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Advertising/Hijacking.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/BanEasyPrivacy.list
@@ -171,7 +167,6 @@ AdvertisingLite:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/BanAD.list
   - repo:NobyDa/ND-AD/master/Surge/AD_Block.txt
-  - repo:NobyDa/Script/master/Surge/AdRule.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/Advertising/Advertising.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/Advertising/LianXiangJia/LianXiangJia.list
   - repo:yjqiang/surge_scripts/main/modules/hupu/hupu.sgmodule
@@ -184,29 +179,22 @@ AdvertisingTest:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/BanAD.list
   - repo:NobyDa/ND-AD/master/Surge/AD_Block.txt
-  - repo:NobyDa/Script/master/Surge/AdRule.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/Advertising/Advertising.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/Advertising/LianXiangJia/LianXiangJia.list
-  - repo:scomper/surge-list/master/reject.list
-  - repo:scomper/surge-list/master/adblock.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/BanEasyList.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/BanEasyListChina.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list
   - repo:limbopro/Adblock4limbo/main/Adblock4limbo.list
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/Custom/ad-domains.list
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/Custom/video-ad.list
-  - repo:an0na/R/master/Filter/AdBlock.list
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Advertising/AdReject.list
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Advertising/Hijacking.list
-  - repo:NobyDa/Script/master/QuantumultX/AdRuleTest.list
-  - repo:NobyDa/Script/master/Surge/AdRuleTest.list
   - repo:geekdada/surge-list/master/domain-set/adaway.txt
   - repo:geekdada/surge-list/master/domain-set/base-filter.txt
   - repo:geekdada/surge-list/master/domain-set/chinese-filter.txt
   - repo:geekdada/surge-list/master/domain-set/neohosts-full.txt
   - repo:geekdada/surge-list/master/domain-set/tracking-protection-filter.txt
   - repo:Loyalsoldier/surge-rules/release/ruleset/reject.txt
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/AdBlock.list
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Advertising/antiAD-V4.list
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Advertising/NormalApp/AppAdBlock.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/BanEasyPrivacy.list
@@ -323,7 +311,6 @@ Apple:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/AppleTV.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Apple.list
   - repo:Loyalsoldier/surge-rules/release/ruleset/apple.txt
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/Apple.list
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Services/Apple.list
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/Basic/Apple-proxy.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/AppleBlock/AppleBlock.list
@@ -578,7 +565,6 @@ China:
   sources:
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/Basic/CN.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/China/China.list
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/Mainland.list
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Region/China.list
   - repo:dler-io/Rules/main/Clash/Provider/Domestic.yaml
   - repo:zqzess/rule_for_quantumultX/master/QuantumultX/rules/Mainland.list
@@ -623,7 +609,6 @@ ChinaMax:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ByteDance.list
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/Basic/CN.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/China/China.list
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/Mainland.list
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Region/China.list
   - repo:Loyalsoldier/surge-rules/release/ruleset/direct.txt
   - repo:Loyalsoldier/surge-rules/release/ruleset/cncidr.txt
@@ -925,7 +910,6 @@ ChinaMaxNoIP:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ByteDance.list
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/Basic/CN.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/China/China.list
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/Mainland.list
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Region/China.list
   - repo:Loyalsoldier/surge-rules/release/ruleset/direct.txt
   - repo:Loyalsoldier/surge-rules/release/ruleset/cncidr.txt
@@ -1227,7 +1211,6 @@ ChinaMaxNoMedia:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ByteDance.list
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/Basic/CN.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/China/China.list
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/Mainland.list
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Region/China.list
   - repo:Loyalsoldier/surge-rules/release/ruleset/direct.txt
   - repo:Loyalsoldier/surge-rules/release/ruleset/cncidr.txt
@@ -1524,7 +1507,6 @@ ChinaNoMedia:
   sources:
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/Basic/CN.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/China/China.list
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/Mainland.list
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Region/China.list
   - repo:dler-io/Rules/main/Clash/Provider/Domestic.yaml
   - repo:zqzess/rule_for_quantumultX/master/QuantumultX/rules/Mainland.list
@@ -1537,7 +1519,6 @@ ChinaTest:
   sources:
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/Basic/CN.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/China/China.list
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/Mainland.list
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Region/China.list
   - repo:Loyalsoldier/surge-rules/release/ruleset/direct.txt
   - repo:dler-io/Rules/main/Clash/Provider/Domestic.yaml
@@ -1744,7 +1725,6 @@ Douyu:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Douyu.yaml
 Download:
   sources:
-  - repo:NobyDa/Script/master/Surge/Download.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Download.list
   - repo:LM-Firefly/Rules/master/Special/Download.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Download.list
@@ -1844,7 +1824,6 @@ Facebook:
   - repo:LM-Firefly/Rules/master/PROXY/Facebook.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Facebook.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Facebook.list
-  - repo:tkzc11/QX-Rules/main/Meta.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Facebook.yaml
   - repo:Loyalsoldier/geoip/release/text/facebook.txt
 FanFou:
@@ -1980,7 +1959,6 @@ Global:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/Proxy/Proxy.list
   - repo:Loyalsoldier/surge-rules/release/ruleset/greatfire.txt
   - repo:Loyalsoldier/surge-rules/release/ruleset/gfw.txt
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/Outside.list
   - repo:Loyalsoldier/clash-rules/release/gfw.txt
   - repo:Loyalsoldier/clash-rules/release/greatfire.txt
   - repo:Loyalsoldier/clash-rules/release/proxy.txt
@@ -1988,7 +1966,6 @@ Global:
 GlobalMedia:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/Optional/YouTube.list
   - repo:LM-Firefly/Rules/master/Global-Services/YouTube.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
@@ -2063,7 +2040,6 @@ HBOHK:
 HBOUSA:
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/HBO.list
-  - repo:luuanng/surge/main/HBOUSA.list
 HKBN:
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/HKBN.list
@@ -2317,7 +2293,6 @@ LG:
 Lan:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/LAN.list
   - repo:Loyalsoldier/clash-rules/release/lancidr.txt
   - repo:Loyalsoldier/clash-rules/release/private.txt
   - repo:dler-io/Rules/main/Clash/Provider/LAN.yaml
@@ -2524,9 +2499,7 @@ NetEaseMusic:
 Netflix:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/Optional/Netflix.list
   - repo:LM-Firefly/Rules/master/Global-Services/Netflix.list
-  - repo:QiuSimons/Netflix_IP/master/getflix.txt
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/NetflixIP.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Netflix.yaml
   - repo:zqzess/rule_for_quantumultX/master/QuantumultX/rules/Netflix.list
@@ -2658,7 +2631,6 @@ Patreon:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Patreon/Patreon.list
 PayPal:
   sources:
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/Optional/PayPal.list
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Services/Paypal.list
   - repo:LM-Firefly/Rules/master/PROXY/PayPal.list
   - repo:dler-io/Rules/main/Clash/Provider/PayPal.yaml
@@ -2728,14 +2700,12 @@ Proxy:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/Proxy/Proxy.list
   - repo:Loyalsoldier/surge-rules/release/ruleset/greatfire.txt
   - repo:Loyalsoldier/surge-rules/release/ruleset/gfw.txt
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/Outside.list
   - repo:Loyalsoldier/clash-rules/release/gfw.txt
   - repo:Loyalsoldier/clash-rules/release/greatfire.txt
   - repo:dler-io/Rules/main/Clash/Provider/Proxy.yaml
 ProxyLite:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/ProxyLite.list
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/Outside.list
   - repo:dler-io/Rules/main/Clash/Provider/Proxy.yaml
 Purikonejp:
   sources:
@@ -2922,13 +2892,11 @@ Spark:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Spark.yaml
 Speedtest:
   sources:
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/Speedtest.list
   - repo:dler-io/Rules/main/Clash/Provider/Speedtest.yaml
   - repo:666OS/rules/release/mihomo/Speedtest.txt
 Spotify:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Spotify.list
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/Optional/Spotify.list
   - repo:LM-Firefly/Rules/master/Global-Services/Spotify.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Spotify.yaml
   - repo:666OS/rules/release/mihomo/Spotify.txt
@@ -2975,7 +2943,6 @@ Synology:
 SystemOTA:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/SystemOTA/SystemOTA.list
-  - repo:an0na/R/master/Filter/IOS_OTA.list
   - repo:LuzMasonj/Quantumult/master/QuantumultX/Filter/BlockiOSServices.conf
   - repo:666OS/rules/release/mihomo/SystemOTA.txt
 TCL:
@@ -3023,7 +2990,6 @@ Telegram:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Telegram.list
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/App/social/Telegram.list
   - repo:Loyalsoldier/surge-rules/release/ruleset/telegramcidr.txt
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/Optional/Telegram.list
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Services/SNS/Telegram.list
   - repo:LM-Firefly/Rules/master/PROXY/Telegram.list
   - repo:Loyalsoldier/clash-rules/release/telegramcidr.txt
@@ -3347,7 +3313,6 @@ YouMengChuangXiang:
 YouTube:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
-  - repo:GeQ1an/Rules/master/QuantumultX/Filter/Optional/YouTube.list
   - repo:LM-Firefly/Rules/master/Global-Services/YouTube.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/YouTube.yaml
 YouTubeMusic:
