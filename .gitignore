@@ -2,3 +2,5 @@ vendor/
 __pycache__/
 *.pyc
 dist/
+scripts/analyze/output/
+scripts/validate/coverage-report.md
