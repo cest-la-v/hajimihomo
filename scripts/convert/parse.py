@@ -187,6 +187,19 @@ def _read_repo_local(url: str) -> str | None:
     return None
 
 
+def _read_http_local(url: str) -> str | None:
+    """
+    Check vendor/http/{host}/{path} for a locally cached copy of an HTTP source.
+    Returns file text if cache exists, None otherwise.
+    """
+    import urllib.parse as _up
+    parsed = _up.urlparse(url)
+    cache_path = _REPO_ROOT / "vendor" / "http" / (parsed.netloc + parsed.path)
+    if cache_path.exists():
+        return cache_path.read_text(encoding="utf-8", errors="replace")
+    return None
+
+
 def fetch_and_parse(url: str, timeout: int = 30) -> list[tuple[str, str]]:
     """Fetch a source URL (http:// or repo:) and return parsed (rule_type, value) list."""
     if url.startswith("repo:"):
@@ -195,6 +208,11 @@ def fetch_and_parse(url: str, timeout: int = 30) -> list[tuple[str, str]]:
             return list(parse_lines(text))
         # Fall back to HTTP — transparent for CI and missing vendor repos
         url = _repo_url_to_http(url)
+
+    # Check local HTTP cache (populated by vendor_sync.py) before going online
+    cached = _read_http_local(url)
+    if cached is not None:
+        return list(parse_lines(cached))
 
     req = urllib.request.Request(
         url,

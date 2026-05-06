@@ -16,15 +16,19 @@ Usage:
 import argparse
 import subprocess
 import sys
+import urllib.request
+import urllib.error
+import urllib.parse
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import yaml
 
-REPO_ROOT = Path(__file__).parent.parent
-VENDOR = REPO_ROOT / "vendor"
-CATS = REPO_ROOT / "source" / "categories.yaml"
+REPO_ROOT  = Path(__file__).parent.parent
+VENDOR     = REPO_ROOT / "vendor"
+VENDOR_HTTP = VENDOR / "http"
+CATS       = REPO_ROOT / "source" / "categories.yaml"
 
 
 def parse_repo_sources(cats_path: Path) -> dict[str, set[str]]:
@@ -42,6 +46,46 @@ def parse_repo_sources(cats_path: Path) -> dict[str, set[str]]:
             ref = parts[2]
             repo_refs[owner_repo].add(ref)
     return repo_refs
+
+
+def parse_http_sources(cats_path: Path) -> set[str]:
+    """Return all unique http/https sources in categories.yaml."""
+    data = yaml.safe_load(cats_path.read_text())
+    return {
+        src
+        for cat in data.values()
+        for src in cat.get("sources", [])
+        if src.startswith("http://") or src.startswith("https://")
+    }
+
+
+def http_cache_path(url: str) -> Path:
+    """Map a URL to vendor/http/{host}/{path}."""
+    parsed = urllib.parse.urlparse(url)
+    # strip leading slash from path
+    rel = parsed.netloc + parsed.path
+    return VENDOR_HTTP / rel
+
+
+def sync_http(url: str, dry_run: bool = False) -> str:
+    """Download a URL into the local HTTP cache. Returns a status string."""
+    dest = http_cache_path(url)
+    if dry_run:
+        return f"[dry-run] would fetch {url} → {dest.relative_to(REPO_ROOT)}"
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    req = urllib.request.Request(
+        url,
+        headers={"User-Agent": "hajimihomo/1.0 (github.com/cest-la-v/hajimihomo)"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            content = resp.read()
+        dest.write_bytes(content)
+        return f"fetched {url} ({len(content):,} bytes)"
+    except urllib.error.HTTPError as e:
+        return f"HTTP {e.code} fetching {url}"
+    except Exception as e:
+        return f"ERROR fetching {url}: {e}"
 
 
 def _is_blobless(vendor_dir: Path) -> bool:
@@ -133,6 +177,7 @@ def main() -> None:
     parser.add_argument("--reclone", action="store_true", help="Force reclone all repos")
     args = parser.parse_args()
 
+    # --- git repos ---
     repo_refs = parse_repo_sources(CATS)
     total = len(repo_refs)
     already = sum(1 for r in repo_refs if (VENDOR / r).exists())
@@ -154,6 +199,18 @@ def main() -> None:
                 print(f"  {msg}")
             except Exception as exc:
                 print(f"  ERROR {owner_repo}: {exc}", file=sys.stderr)
+
+    # --- HTTP sources ---
+    http_urls = parse_http_sources(CATS)
+    if http_urls:
+        print(f"\nFound {len(http_urls)} HTTP source(s) to cache locally")
+        with ThreadPoolExecutor(max_workers=args.jobs) as pool:
+            futures = {pool.submit(sync_http, url, args.dry_run): url for url in http_urls}
+            for future in as_completed(futures):
+                try:
+                    print(f"  {future.result()}")
+                except Exception as exc:
+                    print(f"  ERROR: {exc}", file=sys.stderr)
 
     print("Done.")
 

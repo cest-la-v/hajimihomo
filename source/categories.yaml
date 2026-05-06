@@ -457,7 +457,7 @@ Binance:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Binance.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Binance.yaml
-  - https://raw.githubusercontent.com/StricklandF/Filter/main/Binance.list
+  - repo:StricklandF/Filter/main/Binance.list
 Bing:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Bing/Bing.list
