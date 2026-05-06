@@ -6,7 +6,7 @@
   - repo:LM-Firefly/Rules/master/Domestic-Services/12306.list
 1337x:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/1337x/1337x.list
+  - https://rules.kr328.app/1337x.yaml
 '17173':
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/17173.list
@@ -18,7 +18,7 @@
   - repo:LM-Firefly/Rules/master/Domestic-Services/17zuoye.list
 2KGames:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/2KGames/2KGames.list
+  - https://rules.kr328.app/2kgames.yaml
 '360':
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/360.list
@@ -32,23 +32,23 @@
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/3Type/3Type.list
 3dm:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/3dm/3dm.list
+  - https://rules.kr328.app/3dm.yaml
 '4399':
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/4399.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/4399.list
 4Paradigm:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/4Paradigm/4Paradigm.list
+  - https://rules.kr328.app/4paradigm.yaml
 4chan:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/4chan/4chan.list
+  - https://rules.kr328.app/4chan.yaml
 51Job:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/51Job.list
 51nod:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/51nod/51nod.list
+  - https://rules.kr328.app/51nod.yaml
 '56':
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/56.list
@@ -60,7 +60,7 @@
   - repo:LM-Firefly/Rules/master/Domestic-Services/6JianFang.list
 6park:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/6park/6park.list
+  - https://rules.kr328.app/6park.yaml
 8btc:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/8btc.list
@@ -80,26 +80,27 @@ AFP:
   - repo:LM-Firefly/Rules/master/Global-Services/AFP.list
 ALJazeera:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/ALJazeera/ALJazeera.list
+  - https://rules.kr328.app/aljazeera.yaml
 AMD:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AMD/AMD.list
+  - https://rules.kr328.app/amd.yaml
+  - https://rules.kr328.app/amd@cn.yaml
 AMP:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AMP/AMP.list
+  - https://rules.kr328.app/amp@cn.yaml
 AOL:
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/AOL.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/AOL.yaml
 APKCombo:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/APKCombo/APKCombo.list
+  - https://rules.kr328.app/apkcombo.yaml
 ATTWatchTV:
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/ATTWatchTV.list
 Abema:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Abema/Abema.list
+  - https://rules.kr328.app/abema.yaml
 AbemaTV:
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/AbemaTV.list
@@ -110,26 +111,27 @@ AcFun:
   - repo:LM-Firefly/Rules/master/Domestic-Services/AcFun.list
 Accuweather:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Accuweather/Accuweather.list
+  - https://rules.kr328.app/accuweather.yaml
 Acer:
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Acer.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Acer.yaml
 Acplay:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Acplay/Acplay.list
+  - https://rules.kr328.app/acplay.yaml
 Actalis:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Actalis/Actalis.list
+  - https://rules.kr328.app/actalis.yaml
 AdColony:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AdColony/AdColony.list
+  - https://rules.kr328.app/adcolony-ads@ads.yaml
+  - https://rules.kr328.app/adcolony-ads.yaml
 AdGuardSDNSFilter:
   sources:
   - https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
 AddToAny:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AddToAny/AddToAny.list
+  - https://rules.kr328.app/addtoany.yaml
 Addthis:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Addthis/Addthis.list
@@ -225,29 +227,31 @@ AdvertisingTest:
   - repo:zqzess/rule_for_quantumultX/master/QuantumultX/rules/AdBlock.list
 Aerogard:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Aerogard/Aerogard.list
+  - https://rules.kr328.app/aerogard@cn.yaml
+  - https://rules.kr328.app/aerogard.yaml
 Afdian:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Afdian/Afdian.list
+  - https://rules.kr328.app/afdian.yaml
 Agora:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Agora.list
 AiQiCha:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AiQiCha/AiQiCha.list
+  - https://rules.kr328.app/aiqicha.yaml
 AirChina:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AirChina/AirChina.list
+  - https://rules.kr328.app/airchina.yaml
 AirWick:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AirWick/AirWick.list
+  - https://rules.kr328.app/airwick@cn.yaml
+  - https://rules.kr328.app/airwick.yaml
 Akamai:
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Akamai.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Akamai.yaml
 Ali213:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Ali213/Ali213.list
+  - https://rules.kr328.app/ali213.yaml
 AliPay:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/AliPay.list
@@ -256,6 +260,7 @@ Alibaba:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Alibaba.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/Alibaba.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Alibaba.yaml
+  - https://ruleset.isagood.day/alibaba.conf
 All4:
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/All4.list
@@ -279,7 +284,7 @@ AmazonPrimeVideo:
   - repo:LM-Firefly/Rules/master/Global-Services/AmazonPrimeVideo.list
 AmazonTrust:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AmazonTrust/AmazonTrust.list
+  - https://rules.kr328.app/amazontrust.yaml
 Americasvoice:
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Americasvoice.list
@@ -291,7 +296,7 @@ Anaconda:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Anaconda/Anaconda.list
 AnandTech:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AnandTech/AnandTech.list
+  - https://rules.kr328.app/anandtech.yaml
 Android:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Android/Android.list
@@ -303,23 +308,24 @@ Anjuke:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Anjuke.list
 Anonv:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Anonv/Anonv.list
+  - https://rules.kr328.app/anon-v.yaml
 Anthropic:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Anthropic/Anthropic.list
+  - https://rules.kr328.app/anthropic.yaml
 Antutu:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Antutu/Antutu.list
+  - https://rules.kr328.app/antutu.yaml
 Apifox:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Apifox/Apifox.list
+  - https://rules.kr328.app/apifox.yaml
 Apkpure:
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Apkpure.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Apkpure.yaml
 AppLovin:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AppLovin/AppLovin.list
+  - https://rules.kr328.app/applovin-ads.yaml
+  - https://rules.kr328.app/applovin-ads@ads.yaml
 AppStore:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/AppStore/AppStore.list
@@ -350,7 +356,7 @@ Apple:
   - repo:666OS/rules/release/mihomo/AppleCN.txt
 AppleDaily:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AppleDaily/AppleDaily.list
+  - https://rules.kr328.app/appledaily.yaml
 AppleDev:
   sources:
   - repo:LM-Firefly/Rules/master/Apple/AppleDev.list
@@ -362,7 +368,7 @@ AppleHardware:
   - repo:LM-Firefly/Rules/master/Apple/AppleHardware.list
 AppleID:
   sources:
-  - https://raw.githubusercontent.com/lodepuly/vpn_tool/main/Tool/Loon/Rule/AppleID.list
+  - https://gitlab.com/lodepuly/vpn_tool/raw/main/Tool/Loon/Rule/AppleID.list
 AppleMail:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AppleMail/AppleMail.list
@@ -386,10 +392,10 @@ AppleTV:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/AppleTV.yaml
 Arphic:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Arphic/Arphic.list
+  - https://rules.kr328.app/arphic.yaml
 Asahi:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Asahi/Asahi.list
+  - https://rules.kr328.app/asahi.yaml
 AsianMedia:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/AsianMedia/AsianMedia.list
@@ -399,7 +405,7 @@ Atlassian:
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Atlassian.yaml
 Atomdata:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Atomdata/Atomdata.list
+  - https://rules.kr328.app/atom-data-ads@ads.yaml
 BBC:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/BBC.list
@@ -462,6 +468,7 @@ BiliBili:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BiliBili.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bilibili.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Bilibili.yaml
+  - https://ruleset.isagood.day/bilibili.conf
 BiliBiliIntl:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/BiliBiliIntl/BiliBiliIntl.list
@@ -469,7 +476,7 @@ Binance:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Binance.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Binance.yaml
-  - https://raw.githubusercontent.com/StricklandF/Filter/main/Binance.list
+  - https://github.com/StricklandF/Filter/blob/main/Binance.list
 Bing:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Bing/Bing.list
@@ -910,6 +917,8 @@ ChinaMax:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BesTV.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/CETV.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/SMG.list
+  - https://ruleset.isagood.day/alibaba.conf
+  - https://ruleset.isagood.day/bilibili.conf
   - repo:missuo/ASN-China/main/IP.China.list
   exclude:
   - file:source/overrides/China.remove.list
@@ -1212,6 +1221,8 @@ ChinaMaxNoIP:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BesTV.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/CETV.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/SMG.list
+  - https://ruleset.isagood.day/alibaba.conf
+  - https://ruleset.isagood.day/bilibili.conf
   - repo:missuo/ASN-China/main/IP.China.list
   exclude:
   - file:source/overrides/China.remove.list
@@ -1514,6 +1525,8 @@ ChinaMaxNoMedia:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BesTV.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/CETV.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/SMG.list
+  - https://ruleset.isagood.day/alibaba.conf
+  - https://ruleset.isagood.day/bilibili.conf
   - repo:missuo/ASN-China/main/IP.China.list
   exclude:
   - file:source/overrides/China.remove.list
@@ -1526,6 +1539,7 @@ ChinaMedia:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bilibili.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Bilibili.yaml
   - repo:zqzess/rule_for_quantumultX/master/QuantumultX/rules/CMedia.list
+  - https://ruleset.isagood.day/bilibili.conf
 ChinaMobile:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ChinaMobile.list
@@ -1587,7 +1601,7 @@ Cloudflare:
   - repo:Loyalsoldier/geoip/release/text/cloudflare.txt
 Cloudflarecn:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Cloudflarecn/Cloudflarecn.list
+  - https://rules.kr328.app/cloudflare-cn.yaml
 Clubhouse:
   sources:
   - repo:tengyuankoo/qx/main/Clubhouse.list
@@ -1599,17 +1613,17 @@ Cnet:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Cnet/Cnet.list
 Collabora:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Collabora/Collabora.list
+  - https://rules.kr328.app/collabora.yaml
 Comodo:
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Comodo.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Comodo.yaml
 Contentful:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Contentful/Contentful.list
+  - https://rules.kr328.app/contentful.yaml
 Coolapk:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Coolapk/Coolapk.list
+  - https://rules.kr328.app/coolapk.yaml
 Copilot:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Copilot/Copilot.list
@@ -1626,7 +1640,7 @@ Cryptocurrency:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Cryptocurrency/Cryptocurrency.list
 CyberTrust:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/CyberTrust/CyberTrust.list
+  - https://rules.kr328.app/cybertrust.yaml
 DAZN:
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/DAZN.list
@@ -1788,7 +1802,8 @@ DuoWan:
   - repo:LM-Firefly/Rules/master/Domestic-Services/DuoWan.list
 Duolingo:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Duolingo/Duolingo.list
+  - https://rules.kr328.app/duolingo.yaml
+  - https://rules.kr328.app/duolingo@cn.yaml
 DynDNS:
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/DynDNS.list
@@ -1813,7 +1828,7 @@ EasyPrivacy:
   - https://easylist-downloads.adblockplus.org/easyprivacy.txt
 Electron:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Electron/Electron.list
+  - https://rules.kr328.app/electron.yaml
 Eleme:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Eleme.list
@@ -1844,7 +1859,7 @@ Epic:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Epic.yaml
 Espn:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Espn/Espn.list
+  - https://rules.kr328.app/espn.yaml
 FOXNOW:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/FoxNow.list
@@ -1883,7 +1898,7 @@ FengXiaWangLuo:
   - repo:LM-Firefly/Rules/master/Domestic-Services/FengXiaWangLuo.list
 Figma:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Figma/Figma.list
+  - https://rules.kr328.app/figma.yaml
 Fiio:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Fiio.list
@@ -1899,13 +1914,13 @@ FlipBoard:
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/FlipBoard.yaml
 Flurry:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Flurry/Flurry.list
+  - https://rules.kr328.app/flurry-ads.yaml
 Fox:
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Fox.list
 FreeCodeCamp:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/FreeCodeCamp/FreeCodeCamp.list
+  - https://rules.kr328.app/freecodecamp.yaml
 FuboTV:
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/FuboTV.list
@@ -1986,7 +2001,7 @@ GitLab:
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Gitlab.yaml
 Gitee:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Gitee/Gitee.list
+  - https://rules.kr328.app/gitee.yaml
 Global:
   sources:
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Region/Global.list
@@ -2003,6 +2018,7 @@ Global:
   - repo:Loyalsoldier/clash-rules/release/greatfire.txt
   - repo:Loyalsoldier/clash-rules/release/proxy.txt
   - repo:dler-io/Rules/main/Clash/Provider/Proxy.yaml
+  - https://ruleset.isagood.day/global_domain.conf
 GlobalMedia:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
@@ -2116,7 +2132,7 @@ HashiCorp:
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/HashiCorp.yaml
 Haveibeenpwned:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Haveibeenpwned/Haveibeenpwned.list
+  - https://rules.kr328.app/haveibeenpwned.yaml
 HeMa:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/HeMa.list
@@ -2128,7 +2144,7 @@ HeroesoftheStorm:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/HeroesoftheStorm/HeroesoftheStorm.list
 Heroku:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Heroku/Heroku.list
+  - https://rules.kr328.app/heroku.yaml
 HibyMusic:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/HibyMusic.list
@@ -2196,7 +2212,7 @@ IKEA:
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/IKEA.yaml
 IMDB:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/IMDB/IMDB.list
+  - https://rules.kr328.app/imdb.yaml
 IPTVMainland:
   sources:
   - repo:imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E5%9B%BD%E5%86%85%E7%94%B5%E8%A7%86%E5%8F%B02023.m3u8
@@ -2381,10 +2397,11 @@ LineTV:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/LineTV.yaml
 Linguee:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Linguee/Linguee.list
+  - https://rules.kr328.app/linguee.yaml
 LinkedIn:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/LinkedIn/LinkedIn.list
+  - https://rules.kr328.app/linkedin@cn.yaml
+  - https://rules.kr328.app/linkedin.yaml
 Linux:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Linux/Linux.list
@@ -2490,7 +2507,7 @@ Mojitianqi:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Mojitianqi.list
 Movefree:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Movefree/Movefree.list
+  - https://rules.kr328.app/movefree.yaml
 Mozilla:
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Mozilla.list
@@ -2505,6 +2522,7 @@ NBC:
 NGA:
   sources:
   - repo:ameyukisora/Clash-Rule/master/provider/nga.yaml
+  - https://rules.kr328.app/nga.yaml
 NGAA:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/NGAA.list
@@ -2580,14 +2598,14 @@ NowE:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/NowE/NowE.list
 Npmjs:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Npmjs/Npmjs.list
+  - https://rules.kr328.app/npmjs.yaml
 Nvidia:
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Nvidia.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Nvidia.yaml
 OKX:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/OKX/OKX.list
+  - https://rules.kr328.app/okx@cn.yaml
 OP:
   sources:
   - repo:LM-Firefly/Rules/master/Game/OP.list
@@ -2686,7 +2704,7 @@ Peacock:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Peacock/Peacock.list
 Picacg:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Picacg/Picacg.list
+  - https://rules.kr328.app/picacg.yaml
 Picsee:
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Picsee.list
@@ -2757,7 +2775,7 @@ ProxyLite:
   - repo:dler-io/Rules/main/Clash/Provider/Proxy.yaml
 Pubmatic:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Pubmatic/Pubmatic.list
+  - https://rules.kr328.app/pubmatic-ads@ads.yaml
 Purikonejp:
   sources:
   - repo:LM-Firefly/Rules/master/Game/Purikonejp.list
@@ -2785,7 +2803,7 @@ QuickConnect:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/QuickConnect/QuickConnect.list
 Qyyjt:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Qyyjt/Qyyjt.list
+  - https://rules.kr328.app/qyyjt.yaml
 RTHK:
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/RTHK.list
@@ -2835,7 +2853,7 @@ SMZDM:
   - repo:LM-Firefly/Rules/master/Domestic-Services/SMZDM.list
 STUN:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/STUN/STUN.list
+  - https://ruleset.isagood.day/stun.conf
 Salesforce:
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Salesforce.list
@@ -2867,7 +2885,7 @@ Shanling:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Shanling.list
 Sharethis:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Sharethis/Sharethis.list
+  - https://rules.kr328.app/sharethis.yaml
 ShenMa:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ShenMa.list
@@ -2902,7 +2920,7 @@ Slack:
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Slack.yaml
 SlideShare:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/SlideShare/SlideShare.list
+  - https://rules.kr328.app/slideshare.yaml
 Sling:
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Sling.list
@@ -3088,7 +3106,7 @@ ThomsonReuters:
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/ThomsonReuters.yaml
 Threads:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Threads/Threads.list
+  - https://rules.kr328.app/threads.yaml
 TianTianKanKan:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/TianTianKanKan.list
@@ -3110,13 +3128,13 @@ TikTok:
   - repo:666OS/rules/release/mihomo/TikTok.txt
 Tmdb:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Tmdb/Tmdb.list
+  - https://rules.kr328.app/tmdb.yaml
 TongCheng:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/TongCheng.list
 TrustWave:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/TrustWave/TrustWave.list
+  - https://rules.kr328.app/trustwave.yaml
 TruthSocial:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/TruthSocial/TruthSocial.list
@@ -3162,14 +3180,14 @@ USMedia:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/USMedia/USMedia.list
 Ubisoft:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Ubisoft/Ubisoft.list
+  - https://rules.kr328.app/ubisoft@cn.yaml
 Ubuntu:
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Ubuntu.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Ubuntu.yaml
 Udacity:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Udacity/Udacity.list
+  - https://rules.kr328.app/udacity.yaml
 UnionPay:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/UnionPay.list
@@ -3232,7 +3250,7 @@ Voxmedia:
   - repo:LM-Firefly/Rules/master/Global-Services/Voxmedia.list
 W3schools:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/W3schools/W3schools.list
+  - https://rules.kr328.app/w3schools.yaml
 WIX:
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/WIX.list
@@ -3308,7 +3326,7 @@ WorldofWarcraft:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/WorldofWarcraft/WorldofWarcraft.list
 Wteam:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Wteam/Wteam.list
+  - https://rules.kr328.app/wteam-ads.yaml
 Xbox:
   sources:
   - repo:LM-Firefly/Rules/master/Game/Xbox.list
@@ -3338,7 +3356,7 @@ XieCheng:
   - repo:LM-Firefly/Rules/master/Domestic-Services/XieCheng.list
 XingKongWuXian:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/XingKongWuXian/XingKongWuXian.list
+  - https://rules.kr328.app/xingkongwuxianmedia.yaml
 XueErSi:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/XueErSi.list
@@ -3448,7 +3466,7 @@ Zoho:
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Zoho.yaml
 aiXcoder:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/aiXcoder/aiXcoder.list
+  - https://rules.kr328.app/aixcoder.yaml
 eBay:
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/eBay.list
@@ -3462,7 +3480,7 @@ iCloud:
   - repo:Loyalsoldier/clash-rules/release/icloud.txt
 iCloudPrivateRelay:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/iCloudPrivateRelay/iCloudPrivateRelay.list
+  - https://rules.kr328.app/icloudprivaterelay.yaml
 iFlytek:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/iFlytek.list
@@ -3490,7 +3508,7 @@ myTVSUPER:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/MyTVSuper.list
 zhanqi:
   sources:
-  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/zhanqi/zhanqi.list
+  - https://rules.kr328.app/zhanqi.yaml
 Games:
   sources:
   - repo:666OS/rules/release/mihomo/Games.txt
