@@ -114,7 +114,7 @@ def main() -> None:
         if not sources:
             sources = fallback_source(cat)
         prev = existing.get(cat) or {}
-        overrides = {k: prev[k] for k in ("append", "exclude") if k in prev}
+        overrides = {k: prev[k] for k in ("append", "remove") if k in prev}
         if not sources and not overrides:
             continue  # skip empty entries
         lines.append(f"{yaml_key(cat)}:")
@@ -134,7 +134,7 @@ def main() -> None:
     for cat, entry in existing.items():
         if cat not in bm7_cats and isinstance(entry, dict):
             lines.append(f"{yaml_key(cat)}:")
-            for key in ("sources", "append", "exclude"):
+            for key in ("sources", "append", "remove"):
                 if key in entry:
                     lines.append(f"  {key}:")
                     for ref in entry[key]:

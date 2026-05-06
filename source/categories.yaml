@@ -161,8 +161,8 @@ Advertising:
   - repo:yjqiang/surge_scripts/main/modules/hupu/hupu.sgmodule
   - repo:Loyalsoldier/clash-rules/release/reject.txt
   - repo:zqzess/rule_for_quantumultX/master/QuantumultX/rules/AdBlock.list
-  exclude:
-  - file:source/overrides/Advertising.remove.list
+  remove:
+  - override:Advertising.remove.list
 AdvertisingLite:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/BanAD.list
@@ -170,8 +170,8 @@ AdvertisingLite:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/Advertising/Advertising.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/Advertising/LianXiangJia/LianXiangJia.list
   - repo:yjqiang/surge_scripts/main/modules/hupu/hupu.sgmodule
-  exclude:
-  - file:source/overrides/Advertising.remove.list
+  remove:
+  - override:Advertising.remove.list
 AdvertisingMiTV:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AdvertisingMiTV/AdvertisingMiTV.list
@@ -568,8 +568,8 @@ China:
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Region/China.list
   - repo:dler-io/Rules/main/Clash/Provider/Domestic.yaml
   - repo:zqzess/rule_for_quantumultX/master/QuantumultX/rules/Mainland.list
-  exclude:
-  - file:source/overrides/China.remove.list
+  remove:
+  - override:China.remove.list
 ChinaDNS:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/ChinaDNS.list
@@ -884,8 +884,8 @@ ChinaMax:
   - repo:LM-Firefly/Rules/master/Domestic-Services/CETV.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/SMG.list
   - repo:missuo/ASN-China/main/IP.China.list
-  exclude:
-  - file:source/overrides/China.remove.list
+  remove:
+  - override:China.remove.list
 ChinaMaxNoIP:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMaxNoIP/ChinaMaxNoIP.list
@@ -1186,8 +1186,8 @@ ChinaMaxNoIP:
   - repo:LM-Firefly/Rules/master/Domestic-Services/CETV.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/SMG.list
   - repo:missuo/ASN-China/main/IP.China.list
-  exclude:
-  - file:source/overrides/China.remove.list
+  remove:
+  - override:China.remove.list
 ChinaMaxNoMedia:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/DiDi.list
@@ -1487,8 +1487,8 @@ ChinaMaxNoMedia:
   - repo:LM-Firefly/Rules/master/Domestic-Services/CETV.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/SMG.list
   - repo:missuo/ASN-China/main/IP.China.list
-  exclude:
-  - file:source/overrides/China.remove.list
+  remove:
+  - override:China.remove.list
 ChinaMedia:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BiliBili.list
@@ -1511,8 +1511,8 @@ ChinaNoMedia:
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Region/China.list
   - repo:dler-io/Rules/main/Clash/Provider/Domestic.yaml
   - repo:zqzess/rule_for_quantumultX/master/QuantumultX/rules/Mainland.list
-  exclude:
-  - file:source/overrides/China.remove.list
+  remove:
+  - override:China.remove.list
 ChinaTelecom:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ChinaTelecom.list
@@ -1581,7 +1581,7 @@ Copilot:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Copilot/Copilot.list
   append:
-  - file:source/overrides/Copilot.append.list
+  - override:Copilot.append.list
 Crypto:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Crypto.yaml
@@ -1681,8 +1681,8 @@ Direct:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/WhiteList/WhiteList.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/UnBan.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/PublicDirectCDN.list
-  exclude:
-  - file:source/overrides/Direct.remove.list
+  remove:
+  - override:Direct.remove.list
 Discord:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Discord.list
@@ -2567,7 +2567,7 @@ OpenAI:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/OpenAi.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list
   append:
-  - file:source/overrides/OpenAI.append.list
+  - override:OpenAI.append.list
 Opera:
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Opera.list
@@ -3203,7 +3203,7 @@ WeChat:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Wechat.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Wechat.yaml
   append:
-  - file:source/overrides/WeChat.append.list
+  - override:WeChat.append.list
 WeTV:
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/WeTV.list

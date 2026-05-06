@@ -144,10 +144,16 @@ class RuleResolver:
 # ---------------------------------------------------------------------------
 
 def _resolve_entries(entries: list[str], repo_root: Path) -> frozenset[tuple[str, str]]:
-    """Resolve a list of inline rules or file: references into a frozenset of parsed rules."""
+    """Resolve a list of inline rules or file:/override: references into a frozenset of parsed rules."""
     rules: list[tuple[str, str]] = []
     for entry in entries:
-        if entry.startswith("file:"):
+        if entry.startswith("override:"):
+            path = repo_root / "source" / "overrides" / entry[9:]
+            if path.exists():
+                rules.extend(parse_lines(path.read_text()))
+            else:
+                log.warning("override file not found: %s", path)
+        elif entry.startswith("file:"):
             path = repo_root / entry[5:]
             if path.exists():
                 rules.extend(parse_lines(path.read_text()))
@@ -167,8 +173,8 @@ def load_all_sources(categories_file: Path) -> tuple[
     """
     Load source/categories.yaml and return:
       sources  — {cat: [url, ...]}
-      appends  — {cat: frozenset of rules}   from append: entries (inline or file:)
-      removes  — {cat: frozenset of rules}   from exclude: entries (inline or file:)
+      appends  — {cat: frozenset of rules}   from append: entries (inline or override:/file:)
+      removes  — {cat: frozenset of rules}   from remove: entries (inline or override:/file:)
     """
     repo_root = categories_file.parent.parent
     sources: dict[str, list[str]] = {}
@@ -188,7 +194,7 @@ def load_all_sources(categories_file: Path) -> tuple[
             rules = _resolve_entries(append_entries, repo_root)
             if rules:
                 appends[category] = rules
-        exclude_entries = entry.get("exclude", [])
+        exclude_entries = entry.get("remove", []) or entry.get("exclude", [])  # 'exclude' kept for compat
         if exclude_entries:
             rules = _resolve_entries(exclude_entries, repo_root)
             if rules:
