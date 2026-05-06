@@ -253,7 +253,6 @@ Alibaba:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Alibaba.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/Alibaba.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Alibaba.yaml
-  - https://ruleset.isagood.day/alibaba.conf
 All4:
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/All4.list
@@ -354,7 +353,7 @@ AppleHardware:
   - repo:LM-Firefly/Rules/master/Apple/AppleHardware.list
 AppleID:
   sources:
-  - https://gitlab.com/lodepuly/vpn_tool/raw/main/Tool/Loon/Rule/AppleID.list
+  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AppleID/AppleID.yaml
 AppleMail:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AppleMail/AppleMail.list
@@ -451,7 +450,6 @@ BiliBili:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BiliBili.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bilibili.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Bilibili.yaml
-  - https://ruleset.isagood.day/bilibili.conf
 BiliBiliIntl:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/BiliBiliIntl/BiliBiliIntl.list
@@ -459,7 +457,7 @@ Binance:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Binance.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Binance.yaml
-  - https://github.com/StricklandF/Filter/blob/main/Binance.list
+  - https://raw.githubusercontent.com/StricklandF/Filter/main/Binance.list
 Bing:
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Bing/Bing.list
@@ -900,8 +898,6 @@ ChinaMax:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BesTV.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/CETV.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/SMG.list
-  - https://ruleset.isagood.day/alibaba.conf
-  - https://ruleset.isagood.day/bilibili.conf
   - repo:missuo/ASN-China/main/IP.China.list
   exclude:
   - file:source/overrides/China.remove.list
@@ -1204,8 +1200,6 @@ ChinaMaxNoIP:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BesTV.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/CETV.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/SMG.list
-  - https://ruleset.isagood.day/alibaba.conf
-  - https://ruleset.isagood.day/bilibili.conf
   - repo:missuo/ASN-China/main/IP.China.list
   exclude:
   - file:source/overrides/China.remove.list
@@ -1508,8 +1502,6 @@ ChinaMaxNoMedia:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BesTV.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/CETV.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/SMG.list
-  - https://ruleset.isagood.day/alibaba.conf
-  - https://ruleset.isagood.day/bilibili.conf
   - repo:missuo/ASN-China/main/IP.China.list
   exclude:
   - file:source/overrides/China.remove.list
@@ -1522,7 +1514,6 @@ ChinaMedia:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bilibili.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Bilibili.yaml
   - repo:zqzess/rule_for_quantumultX/master/QuantumultX/rules/CMedia.list
-  - https://ruleset.isagood.day/bilibili.conf
 ChinaMobile:
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ChinaMobile.list
@@ -1994,7 +1985,6 @@ Global:
   - repo:Loyalsoldier/clash-rules/release/greatfire.txt
   - repo:Loyalsoldier/clash-rules/release/proxy.txt
   - repo:dler-io/Rules/main/Clash/Provider/Proxy.yaml
-  - https://ruleset.isagood.day/global_domain.conf
 GlobalMedia:
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
@@ -2824,7 +2814,7 @@ SMZDM:
   - repo:LM-Firefly/Rules/master/Domestic-Services/SMZDM.list
 STUN:
   sources:
-  - https://ruleset.isagood.day/stun.conf
+  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/STUN/STUN.yaml
 Salesforce:
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Salesforce.list
