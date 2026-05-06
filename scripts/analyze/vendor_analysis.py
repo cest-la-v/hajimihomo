@@ -65,11 +65,21 @@ class Rule(NamedTuple):
 
 def git_read(vendor_dir: Path, ref: str, path: str) -> str:
     """
-    Read a file from a local git repo. Tries {ref} then origin/{ref} then origin/HEAD.
-    Raises RuntimeError if none resolve — caller decides how to handle.
+    Read a file from a local vendor clone.
+
+    Fast path: read directly from the working tree (works for --depth=1 clones,
+    no subprocess needed). Fallback: git-show for edge cases.
+    Raises RuntimeError if the file cannot be found.
     """
     import urllib.parse
     path = urllib.parse.unquote(path)
+
+    # Fast path: filesystem read from working tree
+    file_path = vendor_dir / path
+    if file_path.exists():
+        return file_path.read_text(encoding="utf-8", errors="replace")
+
+    # Fallback: git-show (handles non-checked-out refs)
     for git_ref in (ref, f"origin/{ref}", "origin/HEAD"):
         r = subprocess.run(
             ["git", "show", f"{git_ref}:{path}"],

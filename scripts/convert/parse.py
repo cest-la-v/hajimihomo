@@ -151,19 +151,31 @@ def _repo_url_to_http(url: str) -> str:
 
 def _read_repo_local(url: str) -> str | None:
     """
-    Try to read a repo: URL from a local vendor clone via git-show.
+    Read a repo: URL from a local vendor clone.
+
+    Tries the filesystem (working tree) first — works for any --depth=1 clone.
+    Falls back to git-show for edge cases (e.g. non-default-branch clones).
     Returns file text on success, None if vendor not available.
     """
+    import urllib.parse
     # url format: repo:owner/repo/ref/path/to/file
     rest = url[5:]
     parts = rest.split("/", 3)
     if len(parts) < 4:
         return None
     owner, repo, ref, path = parts
+    # Decode %xx sequences — categories.yaml may have URL-encoded spaces/chars
+    path = urllib.parse.unquote(path)
     vendor_dir = _REPO_ROOT / "vendor" / owner / repo
     if not vendor_dir.exists():
         return None
-    # Try exact ref, then origin/ prefix, then origin/HEAD (handles main/master mismatch)
+
+    # Fast path: read from working tree directly (no subprocess needed)
+    file_path = vendor_dir / path
+    if file_path.exists():
+        return file_path.read_text(encoding="utf-8", errors="replace")
+
+    # Fallback: git-show (handles non-checked-out refs, symlinks, etc.)
     for git_ref in (ref, f"origin/{ref}", "origin/HEAD"):
         result = subprocess.run(
             ["git", "show", f"{git_ref}:{path}"],

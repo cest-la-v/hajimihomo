@@ -3,11 +3,14 @@
 vendor_sync.py — Clone or update all repos referenced by repo: sources in categories.yaml.
 
 For each unique owner/repo found, either:
-  - shallow-clone with --filter=blob:none (blobless) if not yet present, or
-  - git fetch the required refs if already cloned.
+  - shallow-clone (--depth=1 --single-branch) if not yet present, or
+  - git fetch --depth=1 the required ref if already cloned.
+
+Working tree is always checked out, so files can be read directly from the filesystem
+without git-show. Blobs are present for the current commit only (no history).
 
 Usage:
-    python3 scripts/vendor_sync.py [--dry-run] [--jobs N]
+    python3 scripts/vendor_sync.py [--dry-run] [--jobs N] [--reclone]
 """
 
 import argparse
@@ -41,71 +44,93 @@ def parse_repo_sources(cats_path: Path) -> dict[str, set[str]]:
     return repo_refs
 
 
-def sync_repo(owner_repo: str, refs: set[str], dry_run: bool) -> str:
+def _is_blobless(vendor_dir: Path) -> bool:
+    """Return True if the repo was cloned with --filter=blob:none."""
+    result = subprocess.run(
+        ["git", "-C", str(vendor_dir), "config", "remote.origin.partialclonefilter"],
+        capture_output=True, text=True,
+    )
+    return result.returncode == 0 and "blob:none" in result.stdout
+
+
+def sync_repo(owner_repo: str, refs: set[str], dry_run: bool, reclone: bool) -> str:
     vendor_dir = VENDOR / owner_repo
     gh_url = f"https://github.com/{owner_repo}.git"
 
-    # Each repo only needs one ref in practice. Clone the first ref directly
-    # with --filter=blob:none --single-branch so the clone is small and fast.
-    # Blobs are lazy-fetched on first 'git show' access; trees/commits are local.
+    # All repos use exactly one ref in practice — use it as the clone branch.
     primary_ref = sorted(refs)[0]
+
+    if vendor_dir.exists() and _is_blobless(vendor_dir):
+        if dry_run:
+            return f"[dry-run] would reclone {owner_repo} (blobless → shallow)"
+        # Reclone: blobless clones can't be read from the filesystem without
+        # network access. Remove and re-clone with --depth=1.
+        import shutil
+        shutil.rmtree(vendor_dir)
+        action = "recloned"
+    elif vendor_dir.exists() and not reclone:
+        action = "updated"
+    elif vendor_dir.exists():
+        if dry_run:
+            return f"[dry-run] would reclone {owner_repo}"
+        import shutil
+        shutil.rmtree(vendor_dir)
+        action = "recloned"
+    else:
+        action = "cloned"
 
     if not vendor_dir.exists():
         if dry_run:
             return f"[dry-run] would clone {gh_url} @ {primary_ref}"
         vendor_dir.parent.mkdir(parents=True, exist_ok=True)
         result = subprocess.run(
-            ["git", "clone", "--filter=blob:none", "--single-branch",
-             "--branch", primary_ref, "--depth=1", gh_url, str(vendor_dir)],
+            ["git", "clone", "--depth=1", "--single-branch",
+             "--branch", primary_ref, gh_url, str(vendor_dir)],
             capture_output=True, text=True,
         )
         if result.returncode != 0:
             # Branch may not exist by that name — fall back to default branch
             result = subprocess.run(
-                ["git", "clone", "--filter=blob:none", "--single-branch",
-                 "--depth=1", gh_url, str(vendor_dir)],
+                ["git", "clone", "--depth=1", "--single-branch",
+                 gh_url, str(vendor_dir)],
                 capture_output=True, text=True,
             )
             if result.returncode != 0:
                 return f"ERROR cloning {owner_repo}: {result.stderr.strip()}"
-        action_done = "cloned"
-    else:
-        action_done = "updated"
+        return f"{action} {owner_repo} ({primary_ref})"
 
-    # Fetch any additional refs (rare: most repos need exactly one)
-    fetch_errors = []
-    for ref in sorted(refs):
-        if dry_run:
-            continue
-        already = subprocess.run(
-            ["git", "-C", str(vendor_dir), "rev-parse", "--verify", f"origin/{ref}"],
+    # Already exists and not recloning — fetch latest and checkout correct branch.
+    if dry_run:
+        return f"[dry-run] would fetch {owner_repo} ({primary_ref})"
+    result = subprocess.run(
+        ["git", "-C", str(vendor_dir), "fetch", "--depth=1", "origin",
+         f"{primary_ref}:refs/remotes/origin/{primary_ref}"],
+        capture_output=True, text=True,
+    )
+    if result.returncode == 0:
+        # Switch (or reset) working tree to the target branch
+        subprocess.run(
+            ["git", "-C", str(vendor_dir), "checkout", "-f", "-B",
+             primary_ref, f"origin/{primary_ref}"],
             capture_output=True,
         )
-        if already.returncode == 0:
-            continue
-        result = subprocess.run(
-            ["git", "-C", str(vendor_dir), "fetch", "--filter=blob:none",
-             "--depth=1", "origin", ref],
-            capture_output=True, text=True,
+    else:
+        # Try via origin/HEAD (handles main/master mismatch)
+        head_ok = subprocess.run(
+            ["git", "-C", str(vendor_dir), "rev-parse", "--verify", "origin/HEAD"],
+            capture_output=True,
         )
-        if result.returncode != 0:
-            head_ok = subprocess.run(
-                ["git", "-C", str(vendor_dir), "rev-parse", "--verify", "origin/HEAD"],
-                capture_output=True,
-            )
-            if head_ok.returncode != 0:
-                fetch_errors.append(f"{ref}: {result.stderr.strip()[:80]}")
+        if head_ok.returncode != 0:
+            return f"fetch warning {owner_repo} ({primary_ref}): {result.stderr.strip()[:80]}"
 
-    refs_str = ", ".join(sorted(refs))
-    if fetch_errors:
-        return f"{action_done} {owner_repo} ({refs_str}) — fetch warnings: {'; '.join(fetch_errors)}"
-    return f"{action_done} {owner_repo} ({refs_str})"
+    return f"{action} {owner_repo} ({primary_ref})"
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Sync vendor repos for repo: sources")
     parser.add_argument("--dry-run", action="store_true", help="Show what would be done")
     parser.add_argument("--jobs", type=int, default=4, help="Parallel clone/fetch jobs")
+    parser.add_argument("--reclone", action="store_true", help="Force reclone all repos")
     args = parser.parse_args()
 
     repo_refs = parse_repo_sources(CATS)
@@ -119,7 +144,7 @@ def main() -> None:
 
     with ThreadPoolExecutor(max_workers=args.jobs) as pool:
         futures = {
-            pool.submit(sync_repo, owner_repo, refs, args.dry_run): owner_repo
+            pool.submit(sync_repo, owner_repo, refs, args.dry_run, args.reclone): owner_repo
             for owner_repo, refs in repo_refs.items()
         }
         for future in as_completed(futures):
