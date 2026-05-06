@@ -1,149 +1,196 @@
+version: 1
+
 '115':
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/115.list
 '12306':
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/12306.list
 1337x:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/1337x/1337x.yaml
 '17173':
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/17173.list
 '178':
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/178.list
 17zuoye:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/17zuoye.list
 2KGames:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/2KGames/2KGames.yaml
 '360':
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/360.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/360.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/Qihoo360.list
 36kr:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/36kr.list
 3Type:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/3Type/3Type.list
 3dm:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/3dm/3dm.yaml
 '4399':
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/4399.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/4399.list
 4Paradigm:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/4Paradigm/4Paradigm.yaml
 4chan:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/4chan/4chan.yaml
 51Job:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/51Job.list
 51nod:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/51nod/51nod.yaml
 '56':
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/56.list
 58TongCheng:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/58TongCheng.list
 6JianFang:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/6JianFang.list
 6park:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/6park/6park.yaml
 8btc:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/8btc.list
 9News:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/9News.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/9News.yaml
 9to5:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/9to5.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/9to5.yaml
 ABC:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ABC.list
 AFP:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/AFP.list
 ALJazeera:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/ALJazeera/ALJazeera.yaml
 AMD:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AMD/AMD.yaml
 AMP:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AMP/AMP.yaml
 AOL:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/AOL.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/AOL.yaml
 APKCombo:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/APKCombo/APKCombo.yaml
 ATTWatchTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/ATTWatchTV.list
 Abema:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Abema/Abema.yaml
 AbemaTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/AbemaTV.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/AbemaTV.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/AbemaTV.yaml
 AcFun:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/AcFun.list
 Accuweather:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Accuweather/Accuweather.yaml
 Acer:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Acer.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Acer.yaml
 Acplay:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Acplay/Acplay.yaml
 Actalis:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Actalis/Actalis.yaml
 AdGuardSDNSFilter:
+  type: unknown
   sources:
   - https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
 AddToAny:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AddToAny/AddToAny.yaml
 Addthis:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Addthis/Addthis.list
 Adidas:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Adidas.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Adidas.yaml
 Adobe:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Adobe.list
   - repo:LM-Firefly/Rules/master/PROXY/Adobe.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Adobe.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Adobe.yaml
 AdobeActivation:
+  type: mixed
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AdobeActivation/AdobeActivation.list
 Advertising:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/BanAD.list
   - repo:NobyDa/ND-AD/master/Surge/AD_Block.txt
@@ -164,6 +211,7 @@ Advertising:
   remove:
   - override:Advertising.remove.list
 AdvertisingLite:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/BanAD.list
   - repo:NobyDa/ND-AD/master/Surge/AD_Block.txt
@@ -173,9 +221,11 @@ AdvertisingLite:
   remove:
   - override:Advertising.remove.list
 AdvertisingMiTV:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AdvertisingMiTV/AdvertisingMiTV.list
 AdvertisingTest:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/BanAD.list
   - repo:NobyDa/ND-AD/master/Surge/AD_Block.txt
@@ -209,43 +259,55 @@ AdvertisingTest:
   - repo:LM-Firefly/Rules/master/Adblock/Adblock.list
   - repo:zqzess/rule_for_quantumultX/master/QuantumultX/rules/AdBlock.list
 Aerogard:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Aerogard/Aerogard.yaml
 Afdian:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Afdian/Afdian.yaml
 Agora:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Agora.list
 AiQiCha:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AiQiCha/AiQiCha.yaml
 AirChina:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AirChina/AirChina.yaml
 AirWick:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AirWick/AirWick.yaml
 Akamai:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Akamai.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Akamai.yaml
 Ali213:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Ali213/Ali213.yaml
 AliPay:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/AliPay.list
 Alibaba:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Alibaba.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/Alibaba.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Alibaba.yaml
 All4:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/All4.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/All4.list
 Amazon:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Amazon.list
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Services/Amazon.list
@@ -253,56 +315,73 @@ Amazon:
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Amazon.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Amazon.yaml
 AmazonCN:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AmazonCN/AmazonCN.list
 AmazonIP:
+  type: ip
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/AmazonIp.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/AmazonIp.yaml
 AmazonPrimeVideo:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/AmazonPrimeVideo.list
 AmazonTrust:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AmazonTrust/AmazonTrust.yaml
 Americasvoice:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Americasvoice.list
 AnTianKeJi:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/AnTianKeJi.list
 Anaconda:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Anaconda/Anaconda.list
 AnandTech:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AnandTech/AnandTech.yaml
 Android:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Android/Android.list
 Anime:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Anime/Anime.list
 Anjuke:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Anjuke.list
 Anthropic:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Anthropic/Anthropic.yaml
 Antutu:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Antutu/Antutu.yaml
 Apifox:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Apifox/Apifox.yaml
 Apkpure:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Apkpure.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Apkpure.yaml
 AppStore:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/AppStore/AppStore.list
 Apple:
+  type: mixed
   sources:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/AppStore/AppStore.list
   - repo:Loyalsoldier/surge-rules/release/ruleset/icloud.txt
@@ -327,161 +406,207 @@ Apple:
   - repo:666OS/rules/release/mihomo/Apple.txt
   - repo:666OS/rules/release/mihomo/AppleCN.txt
 AppleDaily:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AppleDaily/AppleDaily.yaml
 AppleDev:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Apple/AppleDev.list
 AppleFirmware:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Apple/AppleFirmware.list
 AppleHardware:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Apple/AppleHardware.list
 AppleID:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AppleID/AppleID.yaml
 AppleMail:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AppleMail/AppleMail.list
 AppleMedia:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Apple/AppleMedia.list
 AppleMusic:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/AppleMusic/AppleMusic.list
 AppleNews:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/AppleNews.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/AppleNews.yaml
 AppleProxy:
+  type: domain
   sources:
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/Basic/Apple-proxy.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/AppleBlock/AppleBlock.list
 AppleTV:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/AppleTV.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/AppleTV.yaml
 Arphic:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Arphic/Arphic.yaml
 Asahi:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Asahi/Asahi.yaml
 AsianMedia:
+  type: mixed
   sources:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/AsianMedia/AsianMedia.list
 Atlassian:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Atlassian.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Atlassian.yaml
 BBC:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/BBC.list
   - repo:LM-Firefly/Rules/master/Global-Services/BBC.list
 BMW:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/BMW.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/BMW.yaml
 BOC:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BOC.list
 BOCOM:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BOCOM.list
 Bahamut:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Bahamut.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bahamut.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Bahamut.yaml
 BaiDuTieBa:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/BaiDuTieBa/BaiDuTieBa.list
 BaiFenDian:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BaiFenDian.list
 BaiShanYunKeJi:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BaiShanYunKeJi.list
 Baidu:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Baidu.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/BaiDu.list
 BaoFengYingYin:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BaoFengYingYin.list
 BardAI:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/BardAI/BardAI.list
 Battle:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Battle/Battle.list
 BeStore:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BeStore.list
 Beats:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Apple/Beats.list
 BesTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BesTV.list
 Bestbuy:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Bestbuy.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Bestbuy.yaml
 BianFeng:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BianFeng.list
 BiliBili:
+  type: mixed
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BiliBili.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bilibili.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Bilibili.yaml
 BiliBiliIntl:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/BiliBiliIntl/BiliBiliIntl.list
 Binance:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Binance.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Binance.yaml
   - repo:StricklandF/Filter/main/Binance.list
 Bing:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Bing/Bing.list
 Blizzard:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Game/Blizzard.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Blizzard.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Blizzard.yaml
 BlockHttpDNS:
+  type: mixed
   sources:
   - repo:VirgilClyne/GetSomeFries/main/ruleset/HTTPDNS.Block.list
 Bloomberg:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Bloomberg.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Bloomberg.yaml
 Blued:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Blued.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Blued.yaml
 BoXun:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/BoXun.list
 Bootcss:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Bootcss.list
 BrightCove:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/BrightCove.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/BrightCove.yaml
 BritboxUK:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/BritboxUK/BritboxUK.list
 Buypass:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Buypass.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Buypass.yaml
 ByteDance:
+  type: mixed
   sources:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/ByteDance/ByteDance.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/ByteDance.list
@@ -489,79 +614,103 @@ ByteDance:
   - repo:dler-io/Rules/main/Clash/Provider/Douyin.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/ByteDance.yaml
 CAS:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/CAS.list
 CBS:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/CBS.list
 CCB:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/CCB.list
 CCTV:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/CCTV.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/CCTV.list
 CEB:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/CEB.list
 CETV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/CETV.list
 CGB:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/CGB.list
 CHT:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/CHT.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/CHT.yaml
 CIBN:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/CIBN.list
 CKJR:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/CKJR.list
 CMB:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/CNKI.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/CMB.list
 CNKI:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/CNKI.list
 CNN:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/CNN.list
 CNNIC:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/CNNIC.list
 CSDN:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/CSDN.list
 CWSeed:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/CWSeed.list
 CableTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/CableTV.list
 CaiNiao:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/CaiNiao.list
 CaiXinChuanMei:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/CaiXinChuanMei.list
 Cake:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Cake/Cake.list
 Camera360:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Camera360.list
 Canon:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Canon.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Canon.yaml
 ChengTongWangPan:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ChengTongWangPan.list
 China:
+  type: mixed
   sources:
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/Basic/CN.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/China/China.list
@@ -571,9 +720,11 @@ China:
   remove:
   - override:China.remove.list
 ChinaDNS:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/ChinaDNS.list
 ChinaIPs:
+  type: ip
   sources:
   - repo:Loyalsoldier/surge-rules/release/ruleset/cncidr.txt
   - repo:Hackl0us/GeoIP2-CN/release/CN-ip-cidr.txt
@@ -583,9 +734,11 @@ ChinaIPs:
   - repo:dler-io/Rules/main/Clash/Provider/Domestic%20IPs.yaml
   - repo:missuo/ASN-China/main/IP.China.list
 ChinaIPsBGP:
+  type: ip
   sources:
   - repo:misakaio/chnroutes2/master/chnroutes.txt
 ChinaMax:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/DiDi.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/DiDi.list
@@ -887,6 +1040,7 @@ ChinaMax:
   remove:
   - override:China.remove.list
 ChinaMaxNoIP:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMaxNoIP/ChinaMaxNoIP.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/DiDi.list
@@ -1189,6 +1343,7 @@ ChinaMaxNoIP:
   remove:
   - override:China.remove.list
 ChinaMaxNoMedia:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/DiDi.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/DiDi.list
@@ -1490,6 +1645,7 @@ ChinaMaxNoMedia:
   remove:
   - override:China.remove.list
 ChinaMedia:
+  type: mixed
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/BiliBili.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/CCTV.list
@@ -1499,12 +1655,15 @@ ChinaMedia:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Bilibili.yaml
   - repo:zqzess/rule_for_quantumultX/master/QuantumultX/rules/CMedia.list
 ChinaMobile:
+  type: mixed
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ChinaMobile.list
 ChinaNews:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ChinaNews.list
 ChinaNoMedia:
+  type: mixed
   sources:
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/Basic/CN.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/China/China.list
@@ -1514,9 +1673,11 @@ ChinaNoMedia:
   remove:
   - override:China.remove.list
 ChinaTelecom:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ChinaTelecom.list
 ChinaTest:
+  type: mixed
   sources:
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/Basic/CN.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/China/China.list
@@ -1525,158 +1686,202 @@ ChinaTest:
   - repo:dler-io/Rules/main/Clash/Provider/Domestic.yaml
   - repo:zqzess/rule_for_quantumultX/master/QuantumultX/rules/Mainland.list
 ChinaUnicom:
+  type: mixed
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ChinaUnicom.list
 Chromecast:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Chromecast/Chromecast.list
 ChuangKeTie:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ChuangKeTie.list
 ChunYou:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ChunYou.list
 Cisco:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Cisco.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Cisco.yaml
 Civitai:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Civitai/Civitai.list
 Classic:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Classic/Classic.list
 Claude:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.list
 Cloudflare:
+  type: mixed
   sources:
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Services/Cloudflare.list
   - repo:LM-Firefly/Rules/master/PROXY/Cloudflare.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Cloudflare.yaml
   - repo:Loyalsoldier/geoip/release/text/cloudflare.txt
 Clubhouse:
+  type: domain
   sources:
   - repo:tengyuankoo/qx/main/Clubhouse.list
 ClubhouseIP:
+  type: ip
   sources:
   - repo:tengyuankoo/qx/main/Clubhouse_IP.list
 Cnet:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Cnet/Cnet.list
 Collabora:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Collabora/Collabora.yaml
 Comodo:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Comodo.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Comodo.yaml
 Contentful:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Contentful/Contentful.yaml
 Coolapk:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Coolapk/Coolapk.yaml
 Copilot:
+  type: mixed
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Copilot/Copilot.list
   append:
   - override:Copilot.append.list
 Crypto:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Crypto.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Crypto.list
   - repo:666OS/rules/release/mihomo/Bybit.txt
   - repo:666OS/rules/release/mihomo/Crypto.txt
 Cryptocurrency:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Cryptocurrency/Cryptocurrency.list
 CyberTrust:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/CyberTrust/CyberTrust.yaml
 DAZN:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/DAZN.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/DAZN.list
 DMM:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/DMM.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Dmm.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/DMM.yaml
 DNS:
+  type: mixed
   sources:
   - repo:LM-Firefly/Rules/master/Special/DNS.list
 DaMai:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/DaMai.list
 Dailymail:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Dailymail.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Dailymail.yaml
 Dailymotion:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Dailymotion.list
 DanDanZan:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/DanDanZan.list
 Dandanplay:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Dandanplay.list
 DangDang:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/DangDang.list
 Dedao:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Dedao.list
 Deepin:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Deepin.list
 Deezer:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Deezer.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Deezer.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Deezer.yaml
 Dell:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Dell.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Dell.yaml
 Developer:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Developer.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/Developer/Developer.list
   - repo:LM-Firefly/Rules/master/Apple/AppleDev.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Developer.yaml
 DiDi:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/DiDi.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/DiDi.list
 DiLianWangLuo:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/DiLianWangLuo.list
 DiSiFanShi:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/DiSiFanShi.list
 DiabloIII:
+  type: ip
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/DiabloIII/DiabloIII.list
 DianCeWangKe:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/DianCeWangKe.list
 DigiCert:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/DigiCert.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/DigiCert.yaml
 DigitalOcean:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/DigitalOcean.yaml
   - repo:LM-Firefly/Rules/master/Domestic-Services/DigitalOcean.list
 DingTalk:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/DingTalk.list
 DingXiangYuan:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/DingXiangYuan.list
 Direct:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/WhiteList/WhiteList.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/UnBan.list
@@ -1684,47 +1889,58 @@ Direct:
   remove:
   - override:Direct.remove.list
 Discord:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Discord.list
   - repo:LM-Firefly/Rules/master/PROXY/Discord.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Discord.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Discord.yaml
 DiscoveryPlus:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/DiscoveryPlus.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/DiscoveryPlus.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/DiscoveryPlus.yaml
 Disney:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Disney.list
   - repo:666OS/rules/release/mihomo/Disney.txt
 Disqus:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Disqus.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Disqus.yaml
 Docker:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Docker.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Docker.yaml
 Domob:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Domob.list
 Dood:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Dood.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Dood.yaml
 DouBan:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/DouBan.list
 DouYin:
+  type: domain
   sources:
   - repo:dler-io/Rules/main/Clash/Provider/Douyin.yaml
 Douyu:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Douyu.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/DouYu.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Douyu.yaml
 Download:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Download.list
   - repo:LM-Firefly/Rules/master/Special/Download.list
@@ -1732,93 +1948,117 @@ Download:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Download.yaml
   - repo:666OS/rules/release/mihomo/Download.txt
 Dropbox:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Dropbox.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Dropbox.yaml
 DtDNS:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/DtDNS.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/DtDNS.yaml
 Dubox:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Dubox.list
   - repo:LM-Firefly/Rules/master/PROXY/Dubox.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Dubox.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Dubox.yaml
 Duckduckgo:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Duckduckgo.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Duckduckgo.yaml
 DuoWan:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/DuoWan.list
 Duolingo:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Duolingo/Duolingo.yaml
 DynDNS:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/DynDNS.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/DynDNS.yaml
 Dynu:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Dynu.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Dynu.yaml
 EA:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Game/EA.list
 EHGallery:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/EHGallery.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/EHGallery.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/EHGallery.yaml
 EastMoney:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/EastMoney.list
 EasyPrivacy:
+  type: unknown
   sources:
   - https://easylist-downloads.adblockplus.org/easyprivacy.txt
 Electron:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Electron/Electron.yaml
 Eleme:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Eleme.list
 Embl:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Embl.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Embl.yaml
 Emby:
+  type: mixed
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Emby/Emby.list
   - repo:666OS/rules/release/mihomo/Emby.txt
 Emojipedia:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Emojipedia.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Emojipedia.yaml
 EncoreTVB:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/EncoreTVB.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/EncoreTVB.yaml
 Entrust:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Entrust/Entrust.list
 Epic:
+  type: domain
   sources:
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Games/Epic.list
   - repo:LM-Firefly/Rules/master/Game/Epicgames.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Epic.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Epic.yaml
 Espn:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Espn/Espn.yaml
 FOXNOW:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/FoxNow.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/FoxNow.yaml
 FOXPlus:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/FOXPlus/FOXPlus.list
 Facebook:
+  type: mixed
   sources:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/Facebook/Facebook.list
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Services/SNS/Facebook.list
@@ -1828,53 +2068,69 @@ Facebook:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Facebook.yaml
   - repo:Loyalsoldier/geoip/release/text/facebook.txt
 FanFou:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/FanFou.list
 FangZhengDianZi:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/FangZhengDianZi.list
 Faronics:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Faronics.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Faronics.yaml
 FeiZhu:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/FeiZhu.list
 FengHuangWang:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/FengHuangWang.list
 FengXiaWangLuo:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/FengXiaWangLuo.list
 Figma:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Figma/Figma.yaml
 Fiio:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Fiio.list
 FindMy:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/FindMy/FindMy.list
 FitnessPlus:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/FitnessPlus/FitnessPlus.list
 FlipBoard:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/FlipBoard.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/FlipBoard.yaml
 Fox:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Fox.list
 FreeCodeCamp:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/FreeCodeCamp/FreeCodeCamp.yaml
 FuboTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/FuboTV.list
 Funshion:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Funshion.list
 Game:
+  type: domain
   sources:
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Games/GamesAll.list
   - repo:LM-Firefly/Rules/master/Game/Blizzard.list
@@ -1911,45 +2167,56 @@ Game:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Nintendo.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Nintendo.list
 GaoDe:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/GaoDe.list
 Garena:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Game/Garena.list
   - repo:LM-Firefly/Rules/master/PROXY/Garena.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Garena.yaml
 Geely:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Geely.list
 Gemini:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.list
 Gettyimages:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Gettyimages.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Gettyimages.yaml
 Gigabyte:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Gigabyte.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Gigabyte.yaml
 GitBook:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Gitbook.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Gitbook.yaml
 GitHub:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Github.list
   - repo:LM-Firefly/Rules/master/PROXY/Github.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Github.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Github.yaml
 GitLab:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Gitlab.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Gitlab.yaml
 Gitee:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Gitee/Gitee.yaml
 Global:
+  type: mixed
   sources:
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Region/Global.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/BlackList/BlackList.list
@@ -1965,6 +2232,7 @@ Global:
   - repo:Loyalsoldier/clash-rules/release/proxy.txt
   - repo:dler-io/Rules/main/Clash/Provider/Proxy.yaml
 GlobalMedia:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
   - repo:LM-Firefly/Rules/master/Global-Services/YouTube.list
@@ -1975,6 +2243,7 @@ GlobalMedia:
   - repo:zqzess/rule_for_quantumultX/master/QuantumultX/rules/GMedia.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/YouTubeMusic.yaml
 GlobalScholar:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Scholar.list
   - repo:LM-Firefly/Rules/master/PROXY/Scholar.list
@@ -1982,13 +2251,16 @@ GlobalScholar:
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Scholar.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Scholar.yaml
 GlobalSign:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Globalsign.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Globalsign.yaml
 Gog:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Game/Gog.list
 Google:
+  type: mixed
   sources:
   - repo:Loyalsoldier/surge-rules/release/ruleset/google.txt
   - repo:blackmatrix7/ios_rule_script/master/source/rule/Google/Google.list
@@ -2000,426 +2272,545 @@ Google:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Google.yaml
   - repo:666OS/rules/release/mihomo/Google.txt
 GoogleDrive:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/GoogleDrive/GoogleDrive.list
 GoogleEarth:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleEarth.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleEarth.yaml
 GoogleFCM:
+  type: mixed
   sources:
   - repo:dler-io/Rules/main/Clash/Provider/Google%20FCM.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleFCM.yaml
 GoogleSearch:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/GoogleSearch/GoogleSearch.list
 GoogleVoice:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/GoogleVoice/GoogleVoice.list
 GovCN:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Special/Government-CN.list
 Gucci:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Gucci.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Gucci.yaml
 GuiGuDongLi:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/GuiGuDongLi.list
 HBO:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/HBO.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/HBO.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/HBO.yaml
 HBOAsia:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/HBOAsia/HBOAsia.list
 HBOHK:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/HBO.list
 HBOUSA:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/HBO.list
 HKBN:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/HKBN.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/HKBN.yaml
 HKOpenTV:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/HKOpenTV/HKOpenTV.list
 HKedcity:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/HKedcity.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/HKedcity.yaml
 HP:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/HP.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/HP.yaml
 HWTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/HWTV.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/HWTV.list
 HaiNanHangKong:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/HaiNanHangKong.list
 HamiVideo:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/HamiVideo.list
 HanYi:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/HanYi.list
 HashiCorp:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/HashiCorp.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/HashiCorp.yaml
 Haveibeenpwned:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Haveibeenpwned/Haveibeenpwned.yaml
 HeMa:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/HeMa.list
 Hearthstone:
+  type: ip
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Hearthstone/Hearthstone.list
 HeroesoftheStorm:
+  type: ip
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/HeroesoftheStorm/HeroesoftheStorm.list
 Heroku:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Heroku/Heroku.yaml
 HibyMusic:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/HibyMusic.list
 Hijacking:
+  type: ip
   sources:
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Advertising/Hijacking.list
 Himalaya:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Ximalaya.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/XiMaLaYa.list
 Hkgolden:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Hkgolden/Hkgolden.list
 HoYoverse:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Game/HoYoverse.list
 Hpplay:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/hpplay.list
 HuYa:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/HuYa.list
 HuaShuTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/HuaShuTV.list
 HuanJu:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/HuanJu/HuanJu.list
 Huawei:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/HuaWei.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/HuaWei.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/HuaWei.yaml
 Huffpost:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Huffpost.list
 Hulu:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Hulu.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Hulu.list
 HuluJP:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Hulu.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/HuluJapan.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/HuluJapan.yaml
 HuluUSA:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Hulu.list
 HunanTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/HunanTV.list
 Hupu:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Hupu.list
 IBM:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/IBM.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/IBM.yaml
 ICBC:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ICBC.list
 IKEA:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/IKEA.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/IKEA.yaml
 IMDB:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/IMDB/IMDB.yaml
 IPTVMainland:
+  type: unknown
   sources:
   - repo:imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E5%9B%BD%E5%86%85%E7%94%B5%E8%A7%86%E5%8F%B02023.m3u8
   - repo:imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E8%BD%AE%E6%92%AD_%E5%8D%8E%E6%95%B0.%E9%BB%91%E8%8E%93.NewTV.SiTV.CIBN.m3u
   - repo:imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E9%87%8D%E5%BA%86%E5%B9%BF%E7%94%B5cqccn.m3u
 IPTVOther:
+  type: unknown
   sources:
   - repo:imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A82023.m3u
   - repo:imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E5%9B%BD%E5%A4%96%E7%94%B5%E8%A7%86%E5%8F%B02023.m3u8
 ITV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/ITV.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/ITV.list
 Identrust:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Identrust.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Identrust.yaml
 Imgur:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Imgur.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Imgur.yaml
 Instagram:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Instagram.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Instagram.yaml
 Intel:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Intel.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Intel.yaml
 Intercom:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Intercom.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Intercom.yaml
 JOOX:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/JOOX.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/JOOX.list
 Japonx:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Japonx.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Japonx.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Japonx.yaml
 Jetbrains:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Jetbrains.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Jetbrains.yaml
 Jfrog:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Jfrog.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Jfrog.yaml
 JiGuangTuiSong:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/JiGuangTuiSong.list
 JianGuoYun:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/JianGuoYun.list
 JianShu:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/JianShu.list
 JinJiangWenXue:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/JinJiangWenXue.list
 JingDong:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/JingDong.list
 Jquery:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Jquery.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Jquery.yaml
 Jsdelivr:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Jsdelivr.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Jsdelivr.yaml
 JueJin:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/JueJin.list
 Jwplayer:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Jwplayer.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Jwplayer.yaml
 KKBOX:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/KKBOX.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/KKBOX.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/KKBOX.yaml
 KKTV:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/KKTV.list
 KakaoTalk:
+  type: mixed
   sources:
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Services/SNS/KakaoTalk.list
   - repo:LM-Firefly/Rules/master/Global-Services/Kakao.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/KakaoTalk.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/KakaoTalk.yaml
 Kantv:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Kantv.list
 Keep:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Keep.list
 KingSmith:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/KingSmith.list
 Kingsoft:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Kingsoft.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Kingsoft.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Kingsoft.yaml
 KouDaiShiShang:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/KouDaiShiShang.list
 Ku6:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Ku6.list
 KuKeMusic:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/KuKeMusic.list
 KuaiDi100:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/KuaiDi100.list
 KuaiShou:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/KuaiShou.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Kuaishou.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Kuaishou.yaml
 KuangShi:
+  type: mixed
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/KuangShi.list
 KugouKuwo:
+  type: unknown
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Kugou%26Kuwo.list
 LG:
+  type: mixed
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/LG.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/LG.yaml
 Lan:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list
   - repo:Loyalsoldier/clash-rules/release/lancidr.txt
   - repo:Loyalsoldier/clash-rules/release/private.txt
   - repo:dler-io/Rules/main/Clash/Provider/LAN.yaml
 LanZouYun:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/LanZouYun.list
 LastFM:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/LastFM.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/LastFM.yaml
 LastPass:
+  type: domain
   sources:
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/App/tools/LastPass.list
 LeJu:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/LeJu.list
 LeTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/LeTV.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/LeTV.list
 Lenovo:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Lenovo.list
 LiTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/LiTV.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/LiTV.list
 LianMeng:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/LianMeng/LianMeng.list
 Limelight:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Limelight.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Limelight.yaml
 Line:
+  type: mixed
   sources:
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Services/SNS/Line.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Line.list
 LineTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/LineTV.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/LineTV.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/LineTV.yaml
 Linguee:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Linguee/Linguee.yaml
 LinkedIn:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/LinkedIn/LinkedIn.yaml
 Linux:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Linux/Linux.list
 LivePerson:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/LivePerson.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/LivePerson.yaml
 Logitech:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Logitech.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Logitech.yaml
 LondonReal:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/LondonReal.list
 LuDaShi:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/LuDaShi.list
 LvMiLianChuang:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/LvMiLianChuang.list
 MEGA:
+  type: mixed
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/MEGA.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/MEGA.yaml
 MIUIPrivacy:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/MIUIPrivacy.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/MIUIPrivacy.list
 MOMOShop:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/momoshop.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/momoshop.yaml
 MOOV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/MOOV.list
 Mail:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Mail/Mail.list
 Mailru:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Mailru.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Mailru.yaml
 Majsoul:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Majsoul/Majsoul.list
 Manorama:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Manorama.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Manorama.yaml
 Maocloud:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Maocloud.list
 Marketing:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Marketing.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Marketing.yaml
 McDonalds:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/McDonalds.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/McDonalds.yaml
 MeWatch:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/MeWatch.list
 MeiTu:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Meitu.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Meitu.yaml
 MeiTuan:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/MeiTuan.list
 MeiZu:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/MeiZu.list
 MiWu:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/MiWu.list
 Microsoft:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/OneDrive.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/OneDrive.list
@@ -2432,72 +2823,92 @@ Microsoft:
   - repo:zqzess/rule_for_quantumultX/master/QuantumultX/rules/Microsoft.list
   - repo:666OS/rules/release/mihomo/Microsoft.txt
 MicrosoftEdge:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/MicrosoftEdge/MicrosoftEdge.list
 Migu:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Migu.list
 MingLueZhaoHui:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/MingLueZhaoHui.list
 Mogujie:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Mogujie.list
 Mojitianqi:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Mojitianqi.list
 Movefree:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Movefree/Movefree.yaml
 Mozilla:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Mozilla.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Mozilla.yaml
 My5:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/My5.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/My5.list
 NBC:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/NBC.list
 NGA:
+  type: unknown
   sources:
   - repo:ameyukisora/Clash-Rule/master/provider/nga.yaml
 NGAA:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/NGAA.list
 NTPService:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Special/NTP-Service.list
 NYPost:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/NYPost.list
 NYTimes:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/NYTimes.list
 NaSDDNS:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/NaSDDNS.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/NaSDDNS.list
 Naver:
+  type: mixed
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Naver.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Naver.yaml
 NaverTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/NaverTV.list
 NetEase:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/NetEase.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/Netease.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/NetEase.yaml
 NetEaseMusic:
+  type: mixed
   sources:
   - repo:Mazetsz/ACL4SSR/master/Clash/NetEaseCloudMusic.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/NeteaseMusic.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/NetEaseMusic.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/NetEaseMusic.yaml
 Netflix:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list
   - repo:LM-Firefly/Rules/master/Global-Services/Netflix.list
@@ -2507,192 +2918,242 @@ Netflix:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/NetflixIP.yaml
   - repo:Loyalsoldier/geoip/release/text/netflix.txt
 Niconico:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Niconico.list
   - repo:LM-Firefly/Rules/master/Global-Services/Niconico.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Niconico.yaml
 Nike:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Nike.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Nike.yaml
 Nikkei:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Nikkei.list
 Nintendo:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Game/Nintendo.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Nintendo.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Nintendo.list
 NivodTV:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/NivodTV.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/NivodTV.list
 Notion:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Notion.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Notion.yaml
 NowE:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/NowE/NowE.list
 Npmjs:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Npmjs/Npmjs.yaml
 Nvidia:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Nvidia.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Nvidia.yaml
 OKX:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/OKX/OKX.yaml
 OP:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Game/OP.list
 OPPO:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/OPPO.list
 Olevod:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Olevod.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Olevod.list
 OneDrive:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/OneDrive.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/OneDrive.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/OneDrive.yaml
 OnePlus:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/OnePlus.list
 OpenAI:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/OpenAi.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list
   append:
   - override:OpenAI.append.list
 Opera:
+  type: mixed
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Opera.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Opera.yaml
 Oracle:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Oracle.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Oracle.yaml
 Oreilly:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Oreilly.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Oreilly.yaml
 Origin:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Origin.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Origin.list
 OuPeng:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/OuPeng.list
 Overcast:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Overcast/Overcast.list
 Overwatch:
+  type: ip
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Overwatch/Overwatch.list
 PBS:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/PBS.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/PBS.list
 PCCW:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/PCCW.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/PCCW.yaml
 PChome:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/PChome.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/PChome.yaml
 PChomeTW:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/PChome.list
 PPTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/PPTV.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/PPTVPPLive.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/PPTVPPLive.yaml
 PSBC:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/PSBC.list
 Pandora:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Pandora.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Pandora.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Pandora.yaml
 PandoraTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/PandoraTV.list
 ParamountPlus:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/ParamountPlus/ParamountPlus.list
 Patreon:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Patreon/Patreon.list
 PayPal:
+  type: domain
   sources:
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Services/Paypal.list
   - repo:LM-Firefly/Rules/master/PROXY/PayPal.list
   - repo:dler-io/Rules/main/Clash/Provider/PayPal.yaml
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/PayPal.yaml
 Peacock:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Peacock/Peacock.list
 Picacg:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Picacg/Picacg.yaml
 Picsee:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Picsee.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Picsee.yaml
 PikPak:
+  type: unknown
   sources:
   - repo:tugepaopao/Image-Storage/master/rule/QuantumultX/pikpak.list
 Pinduoduo:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/PDD.list
 PingAn:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/PingAn.list
 Pinterest:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Pinterest.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Pinterest.yaml
 Pixiv:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Pixiv.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Pixiv.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Pixiv.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Pixiv.yaml
 Pixnet:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Pixnet.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Pixnet.yaml
 PlayStation:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/PlayStation/PlayStation.list
   - repo:LM-Firefly/Rules/master/Game/PlayStation.list
 PotatoChat:
+  type: ip
   sources:
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Services/SNS/PotatoChat.list
 PrimeVideo:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/PrimeVideo/PrimeVideo.list
 Privacy:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/BanEasyPrivacy.list
 PrivateTracker:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/PrivateTracker.list
   - https://trackerslist.com/all.txt
   - repo:ngosang/trackerslist/master/trackers_all.txt
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/PrivateTracker.yaml
 Protonmail:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Protonmail.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Protonmail.yaml
 Proxy:
+  type: mixed
   sources:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/BlackList/BlackList.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list
@@ -2705,100 +3166,127 @@ Proxy:
   - repo:Loyalsoldier/clash-rules/release/greatfire.txt
   - repo:dler-io/Rules/main/Clash/Provider/Proxy.yaml
 ProxyLite:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/ProxyLite.list
   - repo:dler-io/Rules/main/Clash/Provider/Proxy.yaml
 Purikonejp:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Game/Purikonejp.list
 Python:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Python.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Python.yaml
 QiNiuYun:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/QiNiuYun.list
 QingCloud:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/QingCloud.list
 Qobuz:
+  type: mixed
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Qobuz.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Qobuz.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Qobuz.yaml
 Qualcomm:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Qualcomm.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Qualcomm.yaml
 QuickConnect:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/QuickConnect/QuickConnect.list
 Qyyjt:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Qyyjt/Qyyjt.yaml
 RTHK:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/RTHK.list
 Rakuten:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Rakuten.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Rakuten.yaml
 Rarbg:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Rarbg.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Rarbg.yaml
 Razer:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Razer.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Razer.yaml
 Reabble:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Reabble/Reabble.list
 Reddit:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Reddit.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Reddit.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Reddit.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Reddit.yaml
 RemoteDesktop:
+  type: unknown
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/RemoteDesktop.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/RemoteDesktop.yaml
 Riot:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Game/Riot.list
 Rockstar:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/Rockstar/Rockstar.list
   - repo:LM-Firefly/Rules/master/Game/Rockstar.list
 RuanMei:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/RuanMei.list
 SFExpress:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/SF-Express.list
 SMG:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/SMG.list
 SMZDM:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/SMZDM.list
 STUN:
+  type: mixed
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/STUN/STUN.yaml
 Salesforce:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Salesforce.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Salesforce.yaml
 Samsung:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Samsung.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Samsung.yaml
 Scaleflex:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Scaleflex.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Scaleflex.yaml
 Scholar:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Scholar.list
   - repo:LM-Firefly/Rules/master/PROXY/Scholar.list
@@ -2806,69 +3294,88 @@ Scholar:
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Scholar.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Scholar.yaml
 Sectigo:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Sectigo.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Sectigo.yaml
 ShangHaiJuXiao:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ShangHaiJuXiao.list
 Shanling:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Shanling.list
 Sharethis:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Sharethis/Sharethis.yaml
 ShenMa:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ShenMa.list
 ShiJiChaoXing:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ShiJiChaoXing.list
 ShiNongZhiKe:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ShiNongZhiKe.list
 Shopee:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Shopee.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Shopee.yaml
 Shopify:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Shopify.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Shopify.yaml
 Sina:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Sina.list
   - repo:blackmatrix7/ios_rule_script/master/source/rule/Weibo/Weibo.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/Sina.list
 Siri:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Siri/Siri.list
 SkyGO:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/SkyGO.list
 Slack:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Slack.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Slack.yaml
 SlideShare:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/SlideShare/SlideShare.yaml
 Sling:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Sling.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Sling.yaml
 SmarTone:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/SmarTone.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/SmarTone.yaml
 Snap:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Snap.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Snap.yaml
 Sohu:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Sohu.list
 Sony:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Sony.list
   - repo:LM-Firefly/Rules/master/Global-Services/Sony.list
@@ -2876,116 +3383,146 @@ Sony:
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Sony.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Sony.yaml
 SouFang:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/SouFang.list
 SoundCloud:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/SoundCloud.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/SoundCloud.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/SoundCloud.yaml
 SourceForge:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/SourceForge.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/SourceForge.yaml
 Spark:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Spark.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Spark.yaml
 Speedtest:
+  type: domain
   sources:
   - repo:dler-io/Rules/main/Clash/Provider/Speedtest.yaml
   - repo:666OS/rules/release/mihomo/Speedtest.txt
 Spotify:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Spotify.list
   - repo:LM-Firefly/Rules/master/Global-Services/Spotify.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Spotify.yaml
   - repo:666OS/rules/release/mihomo/Spotify.txt
 Stackexchange:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Stackexchange.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Stackexchange.yaml
 StarCraftII:
+  type: ip
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/StarCraftII/StarCraftII.list
 Starbucks:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Starbucks.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Starbucks.yaml
 Steam:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Steam.list
   - repo:LM-Firefly/Rules/master/Game/Steam.list
   - repo:dler-io/Rules/main/Clash/Provider/Steam.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Steam.yaml
 SteamCN:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/SteamCN.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/SteamCN.yaml
 Stripe:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Stripe/Stripe.list
 SuNing:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/SuNing.list
 SublimeText:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/SublimeText.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/SublimeText.yaml
 SuiShiChuanMei:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/SuiShiChuanMei.list
 Supercell:
+  type: mixed
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Supercell/Supercell.list
 Synology:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Synology/Synology.list
 SystemOTA:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/SystemOTA/SystemOTA.list
   - repo:LuzMasonj/Quantumult/master/QuantumultX/Filter/BlockiOSServices.conf
   - repo:666OS/rules/release/mihomo/SystemOTA.txt
 TCL:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/TCL.list
 TIDAL:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/TIDAL.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/TIDAL.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/TIDAL.yaml
 TVB:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/TVB.list
 TVer:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/TVER.list
 TaiKang:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/TaiKang.list
 TaiWanGood:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/TaiWanGood.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/TaiWanGood.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/TaiWanGood.yaml
 TaiheMusic:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/TaiheMusic.list
 TapTap:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/TapTap.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/TapTap.yaml
 TeamViewer:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/TeamViewer.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/TeamViewer.yaml
 Teambition:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Teambition.list
 Teams:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Teams/Teams.list
 Telegram:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Telegram.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Telegram.list
@@ -3000,54 +3537,69 @@ Telegram:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Telegram.yaml
   - repo:Loyalsoldier/geoip/release/text/telegram.txt
 TelegramNL:
+  type: ip
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/TelegramNL/TelegramNL.list
 TelegramSG:
+  type: ip
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/TelegramSG/TelegramSG.list
 TelegramUS:
+  type: ip
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/TelegramUS/TelegramUS.list
 Tencent:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Tencent.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/Tencent.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Tencent.yaml
 TencentVideo:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/TencentVideo.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/TencentVideo.yaml
 TeraBox:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/TeraBox.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/TeraBox.yaml
 Tesla:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Tesla.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Tesla.yaml
 TestFlight:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/TestFlight/TestFlight.list
 ThomsonReuters:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/ThomsonReuters.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/ThomsonReuters.yaml
 Threads:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Threads/Threads.yaml
 TianTianKanKan:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/TianTianKanKan.list
 TianWeiChengXin:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/TianWeiChengXin.list
 TianYaForum:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/TianYaForum.list
 TigerFintech:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/TigerFintech.list
 TikTok:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/TikTok.list
   - repo:LM-Firefly/Rules/master/Global-Services/TikTok.list
@@ -3055,28 +3607,35 @@ TikTok:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/TikTok.yaml
   - repo:666OS/rules/release/mihomo/TikTok.txt
 Tmdb:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Tmdb/Tmdb.yaml
 TongCheng:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/TongCheng.list
 TrustWave:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/TrustWave/TrustWave.yaml
 TruthSocial:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/TruthSocial/TruthSocial.list
 Tumblr:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Tumblr.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Tumblr.yaml
 Twitch:
+  type: mixed
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Twitch.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Twitch.yaml
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Twitch.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Twitch.yaml
 Twitter:
+  type: mixed
   sources:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/Twitter/Twitter.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Twitter.list
@@ -3086,368 +3645,475 @@ Twitter:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Twitter.yaml
   - repo:Loyalsoldier/geoip/release/text/twitter.txt
 U17:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/U17.list
 UBI:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Game/UBI.list
 UC:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/UC.list
 UCloud:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/UCloud.list
 UKMedia:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/UKMedia/UKMedia.list
 UPYun:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/UPYun.list
 USMedia:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/USMedia/USMedia.list
 Ubisoft:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Ubisoft/Ubisoft.yaml
 Ubuntu:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Ubuntu.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Ubuntu.yaml
 Udacity:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Udacity/Udacity.yaml
 UnionPay:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/UnionPay.list
 Unity:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Unity.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Unity.yaml
 VISA:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/VISA.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/VISA.yaml
 VK:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/VK.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/VK.yaml
 VOA:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/VOA.list
 Vancl:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Vancl.list
 Vercel:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Vercel.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Vercel.yaml
 Verisign:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Verisign.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Verisign.yaml
 Verizon:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Verizon.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Verizon.yaml
 VidolTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/VidolTV.list
 VikACG:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/VikACG.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/VikACG.yaml
 Viki:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Viki.list
 Vimeo:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Vimeo.list
 VipShop:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Vip.list
 ViuTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/ViuTV.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/ViuTV.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/ViuTV.yaml
 Vivo:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/Vivo.list
 Voxmedia:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/Voxmedia.list
 W3schools:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/W3schools/W3schools.yaml
 WIX:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/WIX.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/WIX.yaml
 WanKaHuanJu:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/WanKaHuanJu.list
 WanMeiShiJie:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/WanMeiShiJie.list
 Wanfang:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Wanfang/Wanfang.list
 WangSuKeJi:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/WangSuKeJi.list
 WangXinKeJi:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/WangXinKeJi.list
 WeChat:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Wechat.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Wechat.yaml
   append:
   - override:WeChat.append.list
 WeTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/WeTV.list
 WeType:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/WeType/WeType.list
 WeiZhiYunDong:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/WeiZhiYunDong.list
 Weibo:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/source/rule/Weibo/Weibo.list
 WenJuanXing:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/WenJuanXing.list
 Westerndigital:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Westerndigital.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Westerndigital.yaml
 Whatsapp:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Whatsapp.list
   - repo:Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/App/social/WhatsApp.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Whatsapp.yaml
 WiFiMaster:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/WiFiMaster.list
 Wikimedia:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Wikimedia.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Wikimedia.yaml
 Wikipedia:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Wikipedia.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Wikipedia.yaml
 WildRift:
+  type: unknown
   sources:
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Games/WildRift.list
 WoLai:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/WoLai.list
 Wordpress:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Wordpress.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Wordpress.yaml
 WorldofWarcraft:
+  type: ip
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/WorldofWarcraft/WorldofWarcraft.list
 Xbox:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Game/Xbox.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Xbox.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Xbox.yaml
 XiamiMusic:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/XiamiMusic.list
 XianYu:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/XianYu.list
 XiaoGouKeJi:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/XiaoGouKeJi.list
 XiaoHongShu:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/XiaoHongShu/XiaoHongShu.list
 XiaoMi:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/MI.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/Xiaomi.list
 XiaoYuanKeJi:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/XiaoYuanKeJi.list
 XieCheng:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/XieCheng.list
 XueErSi:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/XueErSi.list
 XueQiu:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/XueQiu.list
 Xunlei:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Xunlei.list
   - repo:LM-Firefly/Rules/master/Special/XunLei.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Xunlei.yaml
 YYeTs:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/YYeTs.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/YYeTs.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/YYeTs.yaml
 Yandex:
+  type: mixed
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Yandex.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Yandex.yaml
 YiChe:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/YiChe.list
 YiXiaKeJi:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/YiXiaKeJi.list
 YiZhiBo:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/YiZhiBo.list
 YouMengChuangXiang:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/YouMengChuangXiang.list
 YouTube:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
   - repo:LM-Firefly/Rules/master/Global-Services/YouTube.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/YouTube.yaml
 YouTubeMusic:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/YouTubeMusic.yaml
 YouZan:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/YouZan.list
 Youku:
+  type: mixed
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Youku.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/Youku%26Tudou.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Youku.yaml
 YuanFuDao:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/YuanFuDao.list
 YunFanJiaSu:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/YunFanJiaSu.list
 ZDNS:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ZDNS.list
 Zalo:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Zalo/Zalo.list
 Zee:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Zee.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Zee.yaml
 ZeeTV:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/ZeeTV.list
 Zendesk:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Zendesk.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Zendesk.yaml
 ZhangYue:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ZhangYue.list
 ZhiYinManKe:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ZhiYinManKe.list
 ZhiYunZhong:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ZhiYunZhong.list
 Zhihu:
+  type: mixed
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/Zhihu/Zhihu.list
 ZhihuAds:
+  type: mixed
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/ZhihuAds/ZhihuAds.list
 ZhongGuoShiHua:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ZhongGuoShiHua.list
 ZhongWeiShiJi:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ZhongWeiShiJi.list
 ZhongXingTongXun:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ZhongXingTongXun.list
 ZhongYuanYiShang:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ZhongYuanYiShang.list
 ZhuanZhuan:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ZhuanZhuan.list
 Zoho:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/Zoho.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/Zoho.yaml
 aiXcoder:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/aiXcoder/aiXcoder.yaml
 eBay:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/PROXY/eBay.list
   - repo:LM-Firefly/Rules/master/Clash-RuleSet-Classical/PROXY/eBay.yaml
 friDay:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/friDay.list
 iCloud:
+  type: domain
   sources:
   - repo:Loyalsoldier/surge-rules/release/ruleset/icloud.txt
   - repo:Loyalsoldier/clash-rules/release/icloud.txt
 iCloudPrivateRelay:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/iCloudPrivateRelay/iCloudPrivateRelay.yaml
 iFlytek:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/iFlytek.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Iflytek.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Iflytek.yaml
 iQIYI:
+  type: mixed
   sources:
   - repo:sve1r/Rules-For-Quantumult-X/develop/Rules/Media/Domestic/iQiyi.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/iQIYI.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Iqiyi.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Iqiyi.yaml
 iQIYIIntl:
+  type: mixed
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/iQIYI-Intl.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/IqiyiHMT.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/IqiyiHMT.yaml
 iTalkBB:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Global-Services/iTalkBB.list
 ifanr:
+  type: domain
   sources:
   - repo:LM-Firefly/Rules/master/Domestic-Services/ifanr.list
 myTVSUPER:
+  type: domain
   sources:
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/MyTVSuper.list
 zhanqi:
+  type: domain
   sources:
   - repo:blackmatrix7/ios_rule_script/master/rule/Clash/zhanqi/zhanqi.yaml
 Games:
+  type: domain
   sources:
   - repo:666OS/rules/release/mihomo/Games.txt
 NewsMedia:
+  type: domain
   sources:
   - repo:666OS/rules/release/mihomo/NewsMedia.txt
 SocialMedia:
+  type: mixed
   sources:
   - repo:666OS/rules/release/mihomo/SocialMedia.txt
 Streaming:
+  type: mixed
   sources:
   - repo:666OS/rules/release/mihomo/Streaming.txt
 Tracking:
+  type: domain
   sources:
   - repo:666OS/rules/release/mihomo/Tracking.txt
 Private:
+  type: mixed
   sources:
   - repo:666OS/rules/release/mihomo/Private.txt
 XPTV:
+  type: mixed
   sources:
   - repo:666OS/rules/release/mihomo/XPTV.txt

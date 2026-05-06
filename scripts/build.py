@@ -184,7 +184,10 @@ def load_all_sources(categories_file: Path) -> tuple[
     data = yaml.safe_load(categories_file.read_text()) or {}
     for raw_key, entry in data.items():
         category = str(raw_key)  # guard: YAML parses bare numbers as int
-        if not isinstance(entry, dict):
+        if category == "version" or not isinstance(entry, dict):
+            continue
+        if entry.get("disabled"):
+            log.debug("skip disabled category: %s", category)
             continue
         urls = entry.get("sources", [])
         if urls:

@@ -114,10 +114,13 @@ def main() -> None:
         if not sources:
             sources = fallback_source(cat)
         prev = existing.get(cat) or {}
+        meta = {k: prev[k] for k in ("type", "disabled") if k in prev}
         overrides = {k: prev[k] for k in ("append", "remove") if k in prev}
         if not sources and not overrides:
             continue  # skip empty entries
         lines.append(f"{yaml_key(cat)}:")
+        for key, val in meta.items():
+            lines.append(f"  {key}: {str(val).lower() if isinstance(val, bool) else val}")
         if sources:
             lines.append("  sources:")
             for url in sources:
@@ -134,11 +137,16 @@ def main() -> None:
     for cat, entry in existing.items():
         if cat not in bm7_cats and isinstance(entry, dict):
             lines.append(f"{yaml_key(cat)}:")
-            for key in ("sources", "append", "remove"):
-                if key in entry:
+            for key in ("type", "disabled", "sources", "append", "remove"):
+                if key not in entry:
+                    continue
+                val = entry[key]
+                if isinstance(val, list):
                     lines.append(f"  {key}:")
-                    for ref in entry[key]:
+                    for ref in val:
                         lines.append(f"    - {ref}")
+                else:
+                    lines.append(f"  {key}: {str(val).lower() if isinstance(val, bool) else val}")
             lines.append("")
 
     out_file.write_text("\n".join(lines))
