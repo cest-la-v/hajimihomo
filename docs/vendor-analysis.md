@@ -162,3 +162,63 @@ Edges where B covers ≥50% of A and ≥50 absolute rules.
 - `scomper/surge-list` → `LM-Firefly/Rules`: 61% (1,966/3,225 rules covered)
 - `scomper/surge-list` → `Hackl0us/SS-Rule-Snippet`: 50% (1,615/3,225 rules covered)
 - `sve1r/Rules-For-Quantumult-X` → `missuo/ASN-China`: 91% (11,147/12,233 rules covered)
+
+
+## Dependency Graph
+
+_Edge A → B means B covers ≥50% of A's rules (≥50 rules). Dropped/zero-rule repos excluded._
+
+```mermaid
+flowchart LR
+    666OS_rules["rules<br/>12,751 rules"]
+    ACL4SSR_ACL4SSR["ACL4SSR<br/>98,139 rules"]
+    Hackl0us_GeoIP2_CN["GeoIP2-CN<br/>7,055 rules"]
+    Hackl0us_SS_Rule_Snippet["SS-Rule-Snippet<br/>1,009 rules"]
+    LM_Firefly_Rules["Rules<br/>73,967 rules"]
+    Loyalsoldier_clash_rules["clash-rules<br/>209,642 rules"]
+    Loyalsoldier_geoip["geoip<br/>1,131 rules"]
+    Loyalsoldier_surge_rules["surge-rules<br/>302,650 rules"]
+    Mazetsz_ACL4SSR["ACL4SSR<br/>31 rules"]
+    NobyDa_ND_AD["ND-AD<br/>43,371 rules"]
+    StricklandF_Filter["Filter<br/>7 rules"]
+    VirgilClyne_GetSomeFries["GetSomeFries<br/>60 rules"]
+    dler_io_Rules["Rules<br/>10,733 rules"]
+    gaoyifan_china_operator_ip["china-operator-ip<br/>12,343 rules"]
+    geekdada_surge_list["surge-list<br/>178,368 rules"]
+    limbopro_Adblock4limbo["Adblock4limbo<br/>487 rules"]
+    mieqq_mieqq["mieqq<br/>10,192 rules"]
+    misakaio_chnroutes2["chnroutes2<br/>3,910 rules"]
+    missuo_ASN_China["ASN-China<br/>11,667 rules"]
+    sve1r_Rules_For_Quantumult_X["Rules-For-Quantumult-X<br/>12,233 rules"]
+    tengyuankoo_qx["qx<br/>105 rules"]
+    zqzess_rule_for_quantumultX["rule_for_quantumultX<br/>2,513 rules"]
+
+    ACL4SSR_ACL4SSR -->|65%| Loyalsoldier_clash_rules
+    ACL4SSR_ACL4SSR -->|66%| Loyalsoldier_surge_rules
+    ACL4SSR_ACL4SSR -->|60%| geekdada_surge_list
+    Hackl0us_GeoIP2_CN -->|88%| Loyalsoldier_clash_rules
+    Hackl0us_GeoIP2_CN -->|88%| Loyalsoldier_surge_rules
+    Hackl0us_GeoIP2_CN -->|58%| dler_io_Rules
+    Hackl0us_GeoIP2_CN -->|76%| missuo_ASN_China
+    Hackl0us_GeoIP2_CN -->|76%| sve1r_Rules_For_Quantumult_X
+    Hackl0us_SS_Rule_Snippet -->|66%| ACL4SSR_ACL4SSR
+    Hackl0us_SS_Rule_Snippet -->|65%| Loyalsoldier_surge_rules
+    Hackl0us_SS_Rule_Snippet -->|57%| NobyDa_ND_AD
+    Loyalsoldier_clash_rules -->|89%| Loyalsoldier_surge_rules
+    Loyalsoldier_clash_rules -->|78%| geekdada_surge_list
+    Loyalsoldier_surge_rules -->|62%| Loyalsoldier_clash_rules
+    Loyalsoldier_surge_rules -->|54%| geekdada_surge_list
+    geekdada_surge_list -->|96%| Loyalsoldier_clash_rules
+    geekdada_surge_list -->|97%| Loyalsoldier_surge_rules
+    limbopro_Adblock4limbo -->|51%| ACL4SSR_ACL4SSR
+    limbopro_Adblock4limbo -->|69%| LM_Firefly_Rules
+    limbopro_Adblock4limbo -->|77%| Loyalsoldier_surge_rules
+    limbopro_Adblock4limbo -->|51%| NobyDa_ND_AD
+    mieqq_mieqq -->|72%| Loyalsoldier_clash_rules
+    mieqq_mieqq -->|73%| Loyalsoldier_surge_rules
+    mieqq_mieqq -->|63%| NobyDa_ND_AD
+    mieqq_mieqq -->|86%| geekdada_surge_list
+    misakaio_chnroutes2 -->|92%| gaoyifan_china_operator_ip
+    missuo_ASN_China -->|95%| sve1r_Rules_For_Quantumult_X
+    sve1r_Rules_For_Quantumult_X -->|91%| missuo_ASN_China
+```

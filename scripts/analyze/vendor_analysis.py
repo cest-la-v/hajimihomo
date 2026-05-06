@@ -404,14 +404,19 @@ def short_name(full: str) -> str:
     return full.split("/")[-1]
 
 
-def write_dot(repos: list[RepoData], matrix: dict, edge_pct: float, edge_min: int,
-              out_path: Path) -> int:
-    lines = ["digraph vendor_deps {", '  rankdir=LR;', '  node [shape=box fontname="monospace" fontsize=10];']
-    edge_count = 0
+def _node_id(name: str) -> str:
+    return re.sub(r"[^a-zA-Z0-9]", "_", name)
+
+
+def write_mermaid(repos: list[RepoData], matrix: dict, edge_pct: float, edge_min: int,
+                  out_path: Path) -> int:
+    lines = ["```mermaid", "flowchart LR"]
     for a in repos:
         na = len(a.rules)
-        label = f"{short_name(a.name)}\\n{na:,} rules"
-        lines.append(f'  "{a.name}" [label="{label}"];')
+        label = f"{short_name(a.name)}<br/>{na:,} rules"
+        lines.append(f'    {_node_id(a.name)}["{label}"]')
+    lines.append("")
+    edge_count = 0
     for a in repos:
         na = len(a.rules)
         if na == 0:
@@ -423,9 +428,9 @@ def write_dot(repos: list[RepoData], matrix: dict, edge_pct: float, edge_min: in
             covered = int(frac * na)
             if frac >= edge_pct / 100 and covered >= edge_min:
                 pct = int(frac * 100)
-                lines.append(f'  "{a.name}" -> "{b.name}" [label="{pct}%" weight={pct}];')
+                lines.append(f"    {_node_id(a.name)} -->|{pct}%| {_node_id(b.name)}")
                 edge_count += 1
-    lines.append("}")
+    lines.append("```")
     out_path.write_text("\n".join(lines))
     return edge_count
 
@@ -679,20 +684,15 @@ def main() -> None:
         curation[rd.name] = curation_score(rd, global_counts)
 
     # --- Outputs ---
-    report_path = out_dir / "vendor_analysis.md"
-    dot_path    = out_dir / "vendor_graph.dot"
+    report_path   = out_dir / "vendor_analysis.md"
+    mermaid_path  = out_dir / "vendor_graph.md"
 
     write_report(repos, matrix, curation, args.edge_pct, args.edge_min, report_path)
-    edge_count = write_dot(repos, matrix, args.edge_pct, args.edge_min, dot_path)
+    edge_count = write_mermaid(repos, matrix, args.edge_pct, args.edge_min, mermaid_path)
 
     print(f"\nOutputs written to {out_dir}/")
     print(f"  vendor_analysis.md  — full report")
-    print(f"  vendor_graph.dot    — {edge_count} dependency edges "
-          f"(threshold: ≥{int(args.edge_pct)}%, ≥{args.edge_min} rules)")
-    print()
-    print("To render the graph (requires graphviz):")
-    print(f"  dot -Tsvg {dot_path} -o {out_dir}/vendor_graph.svg")
-    print(f"  dot -Tpng {dot_path} -o {out_dir}/vendor_graph.png")
+    print(f"  vendor_graph.md     — {edge_count} dependency edges (Mermaid, renders on GitHub)")
 
 
 if __name__ == "__main__":
