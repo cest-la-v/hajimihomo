@@ -174,9 +174,12 @@ def parse_rules(raw: str) -> list[Rule]:
             in_payload = False
         if line.startswith("- "):
             line = line[2:]
-        # Loyalsoldier YAML style '+.domain'
+        # '+.domain' (quoted, Loyalsoldier style) or +.domain (unquoted, sub-store style)
         if line.startswith("'+.") and line.endswith("'"):
             rules.append(Rule("DOMAIN-SUFFIX", line[3:-1].lower()))
+            continue
+        if line.startswith("+.") and _DOMAIN_RE.match(line[2:]):
+            rules.append(Rule("DOMAIN-SUFFIX", line[2:].lower()))
             continue
         if line.startswith("'") and line.endswith("'"):
             line = line[1:-1]
