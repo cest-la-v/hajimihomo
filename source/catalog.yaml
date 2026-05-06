@@ -4,13 +4,14 @@
 # Each group is designed to map directly to a policy group in mihomo/sing-box.
 #
 # Group composition fields:
-#   members:      list of bm7 category names to union into this group
+#   members:      list of category names to union into this group
 #   members_ref:  list of other catalog group IDs to union (for meta groups)
-#   excludes:     list of bm7 category names to subtract from the result
+#   excludes:     list of category names to subtract from the result
 #   excludes_ref: list of other catalog group IDs to subtract from the result
 #
-# members/excludes operate at the bm7 layer — RuleResolver applies their
-# includes/excludes from relationships.yaml before the set operation.
+# members/excludes operate at the category layer — each named category is
+# resolved to its raw rule set (sources + appends − removes) and then
+# unioned or subtracted. Composition is expressed explicitly here.
 # members_ref/excludes_ref operate at the catalog layer — the referenced
 # group is fully resolved first, then unioned or subtracted.
 #
@@ -36,14 +37,17 @@ groups:
     name: "Ads & Tracking"
     description: >
       Comprehensive ad-block: ad networks, tracking pixels, analytics scripts,
-      hijacking domains, and privacy trackers. Uses blackmatrix7's Advertising
-      category which already absorbs AdvertisingLite, Hijacking, and Privacy
-      and strips Direct-access domains.
+      hijacking domains, and privacy trackers.
     default_action: REJECT
     region: any
     tags: [block, security, ads]
     members:
-      - Advertising        # absorbs: AdvertisingLite, Hijacking, Privacy; strips: Direct
+      - Advertising
+      - AdvertisingLite
+      - Hijacking
+      - Privacy
+    excludes:
+      - Direct
 
   block/ads-lite:
     name: "Ads Lite"
@@ -54,7 +58,10 @@ groups:
     region: any
     tags: [block, security, ads]
     members:
-      - AdvertisingLite    # strips: Hijacking, Privacy
+      - AdvertisingLite
+    excludes:
+      - Hijacking
+      - Privacy
 
   block/tracking:
     name: "Privacy & Telemetry"
@@ -81,20 +88,21 @@ groups:
       All Chinese domestic domains: major platforms (Baidu, Alibaba, WeChat,
       Weibo, Tencent, iQiYI, Youku, NetEase, BiliBili), e-commerce (JD,
       Pinduoduo, Meituan), banking (BOC, ICBC, CCB), telecoms, government,
-      and 200+ more services. Uses ChinaMaxNoIP which absorbs the full
-      catalogue of Chinese service categories (without IP ranges).
+      and 200+ more services. Uses BM7's pre-built ChinaMaxNoIP aggregate
+      (without IP ranges) as a single authoritative source, supplemented by
+      per-service categories for multi-repo coverage.
       Route DIRECT for China-based users; overseas Chinese may prefer a
       CN-exit proxy node instead.
     default_action: DIRECT
     region: cn
     tags: [direct, cn, domestic]
     members:
-      - ChinaMaxNoIP       # absorbs 240+ CN service categories; excludes IP ranges
+      - ChinaMaxNoIP
 
   direct/cn-ips:
     name: "China IP Ranges"
     description: >
-      Chinese IP address space (APNIC + BGP aggregated). Apply with
+      Chinese IP address space (APNIC + BGP aggregated + ASN-derived). Apply with
       no-resolve since these match by IP after DNS resolves.
     default_action: DIRECT
     region: cn
@@ -102,6 +110,7 @@ groups:
     members:
       - ChinaIPs
       - ChinaIPsBGP
+      - ChinaASN
 
   direct/cn-no-media:
     name: "China Domestic (no media)"
@@ -134,7 +143,13 @@ groups:
     region: any
     tags: [proxy, google]
     members:
-      - Google             # bm7 Google already excludes YouTube/YouTubeMusic
+      - Google
+      - GoogleDrive
+      - GoogleSearch
+      - GoogleVoice
+    excludes:
+      - YouTube
+      - YouTubeMusic
 
   proxy/youtube:
     name: "YouTube"
@@ -153,14 +168,27 @@ groups:
     description: >
       App Store, iCloud, TestFlight, Apple TV+, Apple Music, Apple News,
       Find My, Fitness+, Siri, iCloud Private Relay, and hardware/firmware
-      update servers. Absorbs 15 Apple sub-categories.
+      update servers.
     default_action: PROXY
     region: any
     tags: [proxy, apple]
     members:
-      - Apple              # absorbs: AppStore, AppleFirmware, AppleHardware, AppleMail,
-                           #   AppleMedia, AppleMusic, AppleNews, AppleProxy, AppleTV,
-                           #   FindMy, FitnessPlus, Siri, TestFlight, iCloud, iCloudPrivateRelay
+      - Apple
+      - AppStore
+      - AppleFirmware
+      - AppleHardware
+      - AppleMail
+      - AppleMedia
+      - AppleMusic
+      - AppleNews
+      - AppleProxy
+      - AppleTV
+      - FindMy
+      - FitnessPlus
+      - Siri
+      - TestFlight
+      - iCloud
+      - iCloudPrivateRelay
 
   proxy/microsoft:
     name: "Microsoft"
@@ -171,7 +199,12 @@ groups:
     region: any
     tags: [proxy, microsoft]
     members:
-      - Microsoft          # bm7 Microsoft excludes GitHub
+      - Microsoft
+      - MicrosoftEdge
+      - OneDrive
+      - Teams
+    excludes:
+      - GitHub
 
   proxy/amazon:
     name: "Amazon"
@@ -195,7 +228,10 @@ groups:
     region: any
     tags: [proxy, messaging]
     members:
-      - Telegram           # absorbs: TelegramNL, TelegramSG, TelegramUS
+      - Telegram
+      - TelegramNL
+      - TelegramSG
+      - TelegramUS
 
   proxy/twitter:
     name: "Twitter / X"
@@ -270,7 +306,7 @@ groups:
     name: "Social Media"
     description: >
       Facebook, Instagram, Reddit, Discord, LinkedIn, TikTok (international),
-      ByteDance (international services), Line, Tumblr, Pinterest.
+      DouYin (Chinese TikTok), ByteDance, Line, Tumblr, Pinterest.
       Twitter has its own group (proxy/twitter); Telegram has its own group.
     default_action: PROXY
     region: any
@@ -282,7 +318,8 @@ groups:
       - Discord
       - LinkedIn
       - TikTok
-      - ByteDance          # international ByteDance endpoints (distinct from DouYin domestic)
+      - DouYin
+      - ByteDance
       - Line
       - Tumblr
       - Pinterest
@@ -310,16 +347,38 @@ groups:
     name: "Gaming Platforms"
     description: >
       Steam (global), PlayStation Network, Nintendo, Xbox, Epic Games, Blizzard
-      (including Battle.net, WoW, Hearthstone, Overwatch, Diablo, StarCraft),
-      EA, Riot, Ubisoft, Rockstar, and more. Absorbs 25+ gaming sub-categories.
+      (Battle.net, WoW, Hearthstone, Overwatch, Diablo, StarCraft), EA, Riot,
+      Ubisoft, Rockstar, and more.
     default_action: PROXY
     region: any
     tags: [proxy, gaming]
     members:
-      - Game               # absorbs: Battle, Blizzard, Classic, DiabloIII, EA, Epic, Garena,
-                           #   Gog, Hearthstone, HeroesoftheStorm, Nintendo, Overwatch,
-                           #   PlayStation, Purikonejp, Riot, Rockstar, StarCraftII, Steam,
-                           #   SteamCN, Supercell, UBI, WildRift, WorldofWarcraft, Xbox
+      - Game
+      - Battle
+      - Blizzard
+      - Classic
+      - DiabloIII
+      - EA
+      - Epic
+      - Garena
+      - Gog
+      - Hearthstone
+      - HeroesoftheStorm
+      - Nintendo
+      - OP
+      - Overwatch
+      - PlayStation
+      - Purikonejp
+      - Riot
+      - Rockstar
+      - StarCraftII
+      - Steam
+      - SteamCN
+      - Supercell
+      - UBI
+      - WildRift
+      - WorldofWarcraft
+      - Xbox
 
   # --- Developer Tools ---
 
@@ -329,7 +388,7 @@ groups:
       GitHub, GitLab, Docker Hub, npm registry, Cloudflare (workers, pages, DNS),
       Vercel, DigitalOcean, Heroku, JFrog Artifactory, Akamai CDN, Adobe Creative
       Cloud, Atlassian (Jira, Confluence, Bitbucket), Figma, HashiCorp, Notion,
-      Slack, and generic developer service endpoints.
+      Slack, Apple Developer, and generic developer service endpoints.
     default_action: PROXY
     region: any
     tags: [proxy, dev]
@@ -344,6 +403,7 @@ groups:
       - Npmjs
       - Jfrog
       - Developer
+      - AppleDev
       - Akamai
       - Adobe
       - Atlassian

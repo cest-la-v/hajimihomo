@@ -888,6 +888,7 @@ ChinaMax:
   - file:source/overrides/China.remove.list
 ChinaMaxNoIP:
   sources:
+  - repo:blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMaxNoIP/ChinaMaxNoIP.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/DiDi.list
   - repo:LM-Firefly/Rules/master/Domestic-Services/DiDi.list
   - repo:ACL4SSR/ACL4SSR/master/Clash/Ruleset/Meitu.list

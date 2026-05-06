@@ -4,12 +4,13 @@ hajimihomo build orchestrator.
 
 Two build targets:
 
-1. Atomic categories — source/categories.yaml (all bm7 categories in one file)
-   Resolved with sub-rule includes/excludes from source/relationships.yaml.
+1. Atomic categories — source/categories.yaml (all categories in one file)
+   Each category is resolved to its raw rule set (sources + appends − removes).
 
 2. Catalog groups    — source/catalog.yaml (semantic bundles for policy groups)
-   Each group unions effective_rules of its bm7 members: or other groups
-   in members_ref:. IDs use slashes (proxy/google) → flat filenames (proxy-google).
+   Each group unions effective_rules of its members: or other groups
+   in members_ref:. Composition (includes, excludes) is expressed directly
+   in catalog.yaml. IDs use slashes (proxy/google) → flat filenames (proxy-google).
 
 Output per name (Tier 1 always; splits only for classical-behavior categories):
   dist/mihomo/<name>.yaml              — Tier 1: all-in-one (all rule types)
@@ -84,14 +85,11 @@ log = logging.getLogger("build")
 
 class RuleResolver:
     """
-    Resolves the effective rule set for a category by recursively expanding
-    includes and subtracting excludes, matching the blackmatrix7 RULE GENERATOR.
+    Resolves the effective rule set for a category.
 
     effective(cat) = parse(direct_sources(cat))
-                     ∪ effective(included)   for each included sub-category
-                     - effective(excluded)   for each excluded category
-                     ∪ appends[cat]          our custom additions (survive exclusion)
-                     - removes[cat]          our explicit removals (always win)
+                     ∪ appends[cat]   our custom additions
+                     - removes[cat]   our explicit removals (always win)
 
     Results are memoized; thread-safe for parallel builds (last-write-wins on
     cache is safe because results are deterministic).
@@ -100,14 +98,10 @@ class RuleResolver:
     def __init__(
         self,
         sources: dict[str, list[str]],
-        includes: dict[str, list[str]],
-        excludes: dict[str, list[str]],
         appends: dict[str, frozenset[tuple[str, str]]] | None = None,
         removes: dict[str, frozenset[tuple[str, str]]] | None = None,
     ) -> None:
         self._sources = sources
-        self._includes = includes
-        self._excludes = excludes
         self._appends = appends or {}
         self._removes = removes or {}
         self._cache: dict[str, frozenset[tuple[str, str]]] = {}
@@ -118,18 +112,11 @@ class RuleResolver:
         category: str,
         _stack: frozenset[str] = frozenset(),
     ) -> frozenset[tuple[str, str]]:
-        """Return the fully resolved (includes absorbed, excludes stripped) rule set."""
-        # Fast path: already computed
+        """Return the fully resolved rule set for a category."""
         with self._lock:
             if category in self._cache:
                 return self._cache[category]
 
-        # Cycle guard (should not happen in practice)
-        if category in _stack:
-            log.warning("Cycle detected resolving %s (stack: %s) — skipping", category, _stack)
-            return frozenset()
-
-        new_stack = _stack | {category}
         rules: set[tuple[str, str]] = set()
 
         # 1. Direct sources for this category
@@ -140,18 +127,10 @@ class RuleResolver:
             except RuntimeError as e:
                 log.warning("  %s: skip source — %s", category, e)
 
-        # 2. Absorb included sub-categories
-        for inc in self._includes.get(category, []):
-            rules.update(self.effective_rules(inc, new_stack))
-
-        # 3. Subtract excluded categories
-        for exc in self._excludes.get(category, []):
-            rules -= self.effective_rules(exc, new_stack)
-
-        # 4. Our custom additions (survive category-level exclusion)
+        # 2. Our custom additions
         rules |= self._appends.get(category, frozenset())
 
-        # 5. Our explicit removals (always win, applied last)
+        # 3. Our explicit removals (always win, applied last)
         rules -= self._removes.get(category, frozenset())
 
         result = frozenset(rules)
@@ -218,16 +197,6 @@ def load_all_sources(categories_file: Path) -> tuple[
     return sources, appends, removes
 
 
-def load_relationships(source_dir: Path) -> tuple[dict, dict]:
-    """Return (includes_map, excludes_map) from relationships.yaml."""
-    rel_path = source_dir / "relationships.yaml"
-    if not rel_path.exists():
-        log.warning("relationships.yaml not found at %s — no includes/excludes applied", rel_path)
-        return {}, {}
-    data = yaml.safe_load(rel_path.read_text()) or {}
-    return data.get("includes", {}), data.get("excludes", {})
-
-
 def load_catalog(catalog_path: Path) -> dict:
     """Return the raw catalog data from source/catalog.yaml."""
     if not catalog_path.exists():
@@ -247,11 +216,11 @@ def resolve_catalog_group(
     Supported catalog.yaml fields:
       members:      list of bm7 category names → unioned via RuleResolver
       members_ref:  list of other catalog group IDs → unioned recursively
-      excludes:     list of bm7 category names → subtracted from result
+      excludes:     list of category names → subtracted from result
       excludes_ref: list of other catalog group IDs → subtracted recursively
 
-    This mirrors the same include/exclude semantics as relationships.yaml
-    but expressed directly in catalog YAML for catalog-level composition.
+    Composition (includes, excludes of constituent categories) is expressed
+    directly in catalog.yaml members/excludes lists.
     """
     if group_id in _group_stack:
         log.warning("Cycle in catalog groups: %s in %s — skipping", group_id, _group_stack)
@@ -380,7 +349,7 @@ def main() -> None:
                         help="build all atomics AND all catalog groups (default CI mode)")
     parser.add_argument("--jobs", type=int, default=8, help="parallel workers (default: 8)")
     parser.add_argument("--dry-run", action="store_true", help="parse only, no file output")
-    parser.add_argument("--source-dir", default="source", help="path to source dir (contains categories.yaml and relationships.yaml)")
+    parser.add_argument("--source-dir", default="source", help="path to source dir (contains categories.yaml and catalog.yaml)")
     parser.add_argument("--dist-dir", default="dist", help="output directory")
     parser.add_argument("-v", "--verbose", action="store_true")
     args = parser.parse_args()
@@ -395,10 +364,9 @@ def main() -> None:
     dist = repo_root / args.dist_dir
 
     all_sources, appends, removes = load_all_sources(source_dir / "categories.yaml")
-    includes_map, excludes_map = load_relationships(source_dir)
     catalog = load_catalog(repo_root / "source" / "catalog.yaml")
 
-    resolver = RuleResolver(all_sources, includes_map, excludes_map, appends, removes)
+    resolver = RuleResolver(all_sources, appends, removes)
 
     # All discovered categories: union of sources, appends, removes keys
     all_categories = set(all_sources) | set(appends) | set(removes)
