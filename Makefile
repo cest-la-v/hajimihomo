@@ -1,8 +1,8 @@
-.PHONY: help build build-groups build-dry validate extract extract-check dev web-build web-dev web-install vendor-sync vendor-coverage profile
+.PHONY: help build build-groups build-dry validate extract extract-check dev web-build web-dev web-install vendor-sync vendor-coverage profile cli-build
 
 GROUPS ?= proxy/telegram,block/ads,direct/cn
 JOBS   ?= 8
-PRESET ?= full
+PRESET ?= standard
 
 help:
 	@echo "Ruleset builder:"
@@ -24,9 +24,10 @@ help:
 	@echo "  make dev             dev server (CDN rulesets)"
 	@echo "  make dev-local       dev server using local dist/ rulesets"
 	@echo ""
-	@echo "Profile builder (YAML):"
-	@echo "  make profile                    build profile (default: full preset)"
-	@echo "  make profile PRESET=standard    build with a specific preset"
+	@echo "Profile builder (CLI):"
+	@echo "  make cli-build       compile Bun CLI binary → bin/hajimihomo"
+	@echo "  make profile                    build profile (default: standard preset)"
+	@echo "  make profile PRESET=full        build with a specific preset"
 
 build:
 	python3 scripts/build.py --with-groups --jobs $(JOBS)
@@ -64,8 +65,11 @@ web-install:
 web-build: web-install
 	cd web && bun run build.ts
 
-profile:        ## Build mihomo profile (PRESET=full|standard|simple|minimal)
-	.venv/bin/python3 scripts/build_profile.py --preset $(PRESET) --user profiles/user.yaml
+cli-build: web-install   ## Compile Bun CLI binary → bin/hajimihomo
+	cd web && bun build --compile cli.ts --outfile ../bin/hajimihomo
+
+profile: web-install    ## Generate profile (PRESET=mini|lite|standard|full)
+	bun run web/cli.ts --preset $(PRESET)
 
 dev: web-install
 	cd web && bun run dev.ts

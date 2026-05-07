@@ -6,3 +6,4 @@ scripts/analyze/output/
 scripts/validate/coverage-report.md
 profiles/output/
 source/hosts/.cache.json
+bin/
