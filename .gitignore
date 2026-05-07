@@ -4,3 +4,5 @@ __pycache__/
 dist/
 scripts/analyze/output/
 scripts/validate/coverage-report.md
+profiles/output/
+source/hosts/.cache.json

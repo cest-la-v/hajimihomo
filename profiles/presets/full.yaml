@@ -1,6 +1,13 @@
 # full preset — comprehensive rule set
 name: full
 description: "Full rules: ads, privacy, streaming, social, gaming, dev tools"
+target: mihomo        # mihomo | mihomo-smart (vernesong fork, enables smart groups)
+topology: full        # full | standard | minimal
+features:
+  ads_block: true
+  tracking_block: true
+  quic_block: true
+  load_balance: true
 
 groups:
   - block/ads

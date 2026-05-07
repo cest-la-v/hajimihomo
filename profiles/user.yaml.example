@@ -1,0 +1,26 @@
+# User configuration for the profile builder
+# Copy this file to profiles/user.yaml and fill in your subscriptions.
+
+# ── proxy subscriptions ───────────────────────────────────────────────────────
+proxy_providers:
+  - name: "主力机场"
+    url: "https://your-airport.com/subscribe?token=xxx"
+    prefix: "[主] "
+  # - name: "备用机场"
+  #   url: "https://backup.com/subscribe?token=yyy"
+  #   prefix: "[备] "
+
+# ── preset customization ──────────────────────────────────────────────────────
+# target: mihomo         # mihomo (default) | mihomo-smart (vernesong fork)
+# topology: standard     # full | standard | minimal (inherits from preset)
+
+# extra_groups: []       # add catalog groups on top of preset
+# skip_groups: []        # remove catalog groups from preset
+
+# region_excludes: ""    # regex appended to region filter negations
+#                        # e.g. "5x|10x|GB" to exclude bulk-relay nodes
+
+# ── hosts block ───────────────────────────────────────────────────────────────
+hosts_enabled: false     # set true to resolve polluted domains via DoH
+# hosts_include: []      # opt-in specific domains (empty = all enabled ones)
+# hosts_exclude: []      # always skip these domains

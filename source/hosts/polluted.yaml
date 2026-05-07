@@ -1,0 +1,57 @@
+# DNS-polluted domains — real IPs fetched via DoH cross-validation
+# enabled: true  → included in hosts block by default
+# enabled: false → only included if listed in user.yaml hosts_include
+#
+# Run: python3 scripts/build_hosts.py  to refresh cached IPs
+
+- domain: github.com
+  enabled: true
+  category: github
+  notes: "Frequently poisoned by GFW"
+
+- domain: api.github.com
+  enabled: true
+  category: github
+
+- domain: raw.githubusercontent.com
+  enabled: true
+  category: github
+
+- domain: codeload.github.com
+  enabled: true
+  category: github
+
+- domain: objects.githubusercontent.com
+  enabled: true
+  category: github
+
+- domain: github.githubassets.com
+  enabled: true
+  category: github
+
+- domain: avatars.githubusercontent.com
+  enabled: true
+  category: github
+
+- domain: api.telegram.org
+  enabled: true
+  category: telegram
+  notes: "Telegram API — sometimes poisoned"
+
+- domain: twitter.com
+  enabled: false
+  category: twitter
+  notes: "Disabled by default — use proxy rule instead"
+
+- domain: x.com
+  enabled: false
+  category: twitter
+
+- domain: google.com
+  enabled: false
+  category: google
+  notes: "Disabled by default — use proxy rule instead"
+
+- domain: googleapis.com
+  enabled: false
+  category: google

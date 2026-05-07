@@ -1,0 +1,24 @@
+# standard preset — everyday use
+name: standard
+description: "Standard rules: ads, tracking, China direct, core proxy services"
+target: mihomo
+topology: standard
+features:
+  ads_block: true
+  tracking_block: true
+  quic_block: true
+  load_balance: false
+
+groups:
+  - block/ads
+  - block/tracking
+  - direct/cn
+  - direct/cn-ips
+  - proxy/apple
+  - proxy/google
+  - proxy/youtube
+  - proxy/telegram
+  - proxy/twitter
+  - proxy/ai
+  - proxy/social
+  - proxy/dev

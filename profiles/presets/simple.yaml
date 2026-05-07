@@ -1,6 +1,6 @@
-# minimal preset — essential groups only
-name: minimal
-description: "Core rules: ad block, China direct, key proxy services"
+# simple preset — beginner-friendly
+name: simple
+description: "Simple rules: ad block, China direct, essential proxy services"
 target: mihomo
 topology: minimal
 features:
@@ -14,6 +14,6 @@ groups:
   - direct/cn
   - proxy/apple
   - proxy/google
-  - proxy/youtube
   - proxy/telegram
-  - proxy/dev
+  - proxy/ai
+  - proxy/social

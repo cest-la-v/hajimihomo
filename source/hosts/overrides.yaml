@@ -1,0 +1,5 @@
+# Manually verified stable IPs — these override DoH query results.
+# Format: domain: ip  or  domain: [ip1, ip2]
+# Use for IPs confirmed reachable from China via external tools (e.g. ipcheck.ing)
+
+# github.com: 140.82.114.4  # example — uncomment and pin if DoH results are unstable
