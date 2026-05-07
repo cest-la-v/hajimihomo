@@ -57,6 +57,9 @@ source/
 
 profiles/
   presets/          # 1-mini / 2-lite / 3-standard / 4-full preset definitions
+  defaults/
+    mihomo.yaml     # editable base config (core, DNS, sniffer, TUN) — imported by ProfileBuilder
+    singbox.json    # sing-box base config (future wiring)
   user.yaml.example # copy to profiles/user.yaml and fill in subscriptions
 
 scripts/
@@ -192,7 +195,7 @@ The UI runs at `http://localhost:5173` in dev mode. Key behavior:
 - **Preset selector**: loads `presets.json` (generated from `profiles/presets/*.yaml` at build time); auto-applies topology, features, and group selection
 - **Output**: for mihomo targets, generates a complete standalone YAML (DNS, sniffer, TUN, YAML anchors, proxy groups, rules); for sing-box, generates a route fragment
 
-When modifying the profile generation logic, all logic lives in `web/src/ProfileBuilder.js` — the `buildFullProfile()` function at the bottom of that file. The Bun CLI (`web/cli.ts`) calls it directly.
+When modifying the profile generation logic, all logic lives in `web/src/ProfileBuilder.js` — the `buildFullProfile()` function at the bottom of that file. The Bun CLI (`web/cli.ts`) calls it directly. Static config defaults (DNS, sniffer, TUN, core settings) live in `profiles/defaults/mihomo.yaml` and are imported as text at build time.
 
 Rule-provider URLs in generated profiles use jsDelivr CDN (`@ruleset` branch) for YAML split files, and `releases/latest/download/` for binary `.mrs` files (require CI release to exist).
 
