@@ -23,14 +23,10 @@ Two deliverables:
 ### Python (rule builder)
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install pyyaml jinja2 ruamel.yaml requests
+pip install pyyaml   # system Python 3.12+, only dep needed
 ```
 
-> The venv is required for `make profile`. The rule builder (`make build`) uses the system Python and only needs `pyyaml`.
-
-### Bun (web profile builder)
+### Bun (web profile builder + CLI)
 
 ```bash
 make web-install   # cd web && bun install
@@ -60,26 +56,23 @@ source/
     overrides.yaml  # manually pinned IPs (take priority over DoH results)
 
 profiles/
-  presets/          # full / standard / simple / minimal preset definitions
-  templates/
-    mihomo.yaml.j2  # Jinja2 template for complete mihomo profiles (CLI builder)
+  presets/          # 1-mini / 2-lite / 3-standard / 4-full preset definitions
   user.yaml.example # copy to profiles/user.yaml and fill in subscriptions
 
 scripts/
   build.py              # main rule-set builder
   validate.py           # source YAML validation
   extract_sources.py    # re-extracts sources from blackmatrix7 vendor
-  gen_rules.py          # rule-providers + rules block generator (used by profile builder)
-  gen_proxy_groups.py   # proxy-groups generator (used by profile builder)
-  build_profile.py      # CLI profile builder (outputs profiles/output/<preset>.yaml)
   build_hosts.py        # DoH cross-validation hosts block builder
   vendor_sync.py        # vendor repo cloner/updater
   stats.py              # build stats and diff report
 
 web/
   src/
-    ProfileBuilder.js   # core profile generation logic (runs in browser)
+    ProfileBuilder.js   # core profile generation logic (runs in browser + CLI)
     main.js             # UI wiring
+  cli.ts                # Bun CLI entry point → make profile
+  hosts.ts              # DoH host resolution (used by CLI)
   index.html            # app shell
   build.ts              # Bun build script → web/dist/
   dev.ts                # Bun dev server (port 5173)
@@ -126,14 +119,14 @@ make web-build      # production build → web/dist/
 
 The dev server hot-reloads on JS/HTML changes. `RULESET_DIR=../dist` env var (set by `make dev-local`) makes the server proxy ruleset requests to local build output.
 
-### Profile builder (CLI — secondary)
+### Profile builder (CLI)
 
 ```bash
 cp profiles/user.yaml.example profiles/user.yaml
 # edit profiles/user.yaml to add subscription URLs
-make profile                         # builds full preset → profiles/output/full.yaml
-make profile PRESET=standard         # specific preset
-.venv/bin/python3 scripts/build_profile.py --preset minimal --output profiles/output/
+make profile                         # builds standard preset → profiles/output/standard.yaml
+make profile PRESET=full             # specific preset
+./bin/hajimihomo --preset mini       # compiled binary (make cli-build first)
 ```
 
 ---
@@ -199,7 +192,7 @@ The UI runs at `http://localhost:5173` in dev mode. Key behavior:
 - **Preset selector**: loads `presets.json` (generated from `profiles/presets/*.yaml` at build time); auto-applies topology, features, and group selection
 - **Output**: for mihomo targets, generates a complete standalone YAML (DNS, sniffer, TUN, YAML anchors, proxy groups, rules); for sing-box, generates a route fragment
 
-When modifying the profile generation logic, all browser-side logic lives in `web/src/ProfileBuilder.js` — the `buildFullProfile()` function at the bottom of that file. The Jinja2 template at `profiles/templates/mihomo.yaml.j2` is the CLI equivalent and should be kept in sync.
+When modifying the profile generation logic, all logic lives in `web/src/ProfileBuilder.js` — the `buildFullProfile()` function at the bottom of that file. The Bun CLI (`web/cli.ts`) calls it directly.
 
 Rule-provider URLs in generated profiles use jsDelivr CDN (`@ruleset` branch) for YAML split files, and `releases/latest/download/` for binary `.mrs` files (require CI release to exist).
 
@@ -219,7 +212,7 @@ All CI targets `dev` branch. Workflows:
 | `pages.yml` | push to `dev` (web/) | Build web app, deploy to `gh-pages` |
 | `validate.yml` | PR to `dev` (source/) | Run `scripts/validate.py` |
 
-The CI Python environment uses Python 3.12 with only `pyyaml` installed (no venv). Scripts run under CI must not import `jinja2`, `ruamel.yaml`, or `requests` — those are venv-only for local profile builder use.
+The CI Python environment uses Python 3.12 with only `pyyaml` installed. Scripts run under CI must not import `jinja2`, `ruamel.yaml`, or `requests`.
 
 ---
 
@@ -229,7 +222,7 @@ The CI Python environment uses Python 3.12 with only `pyyaml` installed (no venv
 - **Dist file stems**: slashes replaced with dashes — `proxy-apple.domain.yaml`, `proxy-apple.ip.yaml`
 - **Rule-provider keys** in generated profiles: same as dist stem (e.g. `proxy-apple`, `proxy-apple-ip`)
 - **Category names**: PascalCase matching blackmatrix7 naming — `Apple`, `GoogleDrive`, `AdvertisingLite`
-- **Preset files**: lowercase — `full.yaml`, `standard.yaml`, `simple.yaml`, `minimal.yaml`
+- **Preset files**: numbered prefix for sort order — `1-mini.yaml`, `2-lite.yaml`, `3-standard.yaml`, `4-full.yaml`
 
 ---
 
@@ -238,11 +231,11 @@ The CI Python environment uses Python 3.12 with only `pyyaml` installed (no venv
 - **`dist/` is gitignored** — never commit build output. CDN branches (`ruleset`, `release`) are push-only from CI.
 - **`vendor/` is gitignored** — run `make vendor-sync` to populate it locally.
 - **`profiles/output/` is gitignored** — CLI profile builder output stays local.
-- **YAML anchor syntax**: the Jinja2 template and generated profiles use top-level dummy keys (`p:`, `g:`, `f:`) as anchor holders. mihomo ignores unknown top-level keys, so anchors defined there are valid and available throughout the document.
-- **Rule ordering is critical**: in generated profiles, `direct/cn` domain rules MUST precede proxy service domain rules. Changing rule order in `gen_rules.py` or `ProfileBuilder.js` can cause CN traffic to leak through proxy.
+- **YAML anchor syntax**: generated profiles use top-level dummy keys (`p:`, `g:`, `f:`) as anchor holders. mihomo ignores unknown top-level keys, so anchors defined there are valid and available throughout the document.
+- **Rule ordering is critical**: in generated profiles, `direct/cn` domain rules MUST precede proxy service domain rules. Changing rule order in `ProfileBuilder.js` can cause CN traffic to leak through proxy.
 - **Block groups use named selects, not direct REJECT**: rules never hardcode `REJECT` as a target. Instead, `block/ads` → `🚫 广告拦截` group (select: [REJECT, DIRECT, 默认代理]), etc. This allows dashboard-level toggle between blocking and bypassing without editing YAML.
 - **`smart` group type** is NOT in official MetaCubeX/mihomo — it exists only in the `vernesong/mihomo` fork. The `mihomo-smart` kernel option in the web UI generates profiles that require this fork.
-- **CI vs local Python**: CI uses system Python 3.12 + pyyaml only. Local profile builder uses `.venv/` with additional deps. Never add `jinja2`/`ruamel.yaml`/`requests` imports to `scripts/build.py`, `validate.py`, or other CI-run scripts.
+- **CI Python scripts**: CI uses system Python 3.12 + pyyaml only. Never add `jinja2`/`ruamel.yaml`/`requests` imports to `scripts/build.py`, `validate.py`, or other CI-run scripts.
 - **Unquoted colon-space in YAML strings** is parsed as a nested mapping. Region filter regexes and other strings containing `: ` must be single-quoted in generated YAML output.
 
 ---
