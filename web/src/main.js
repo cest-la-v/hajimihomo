@@ -21,6 +21,23 @@ app.innerHTML = `
     </select>
   </div>
 
+  <div class="section" id="geodata-section">
+    <label>地理数据源</label>
+    <select id="geodata">
+      <option value="metacubex">MetaCubeX（轻量）— meta-rules-dat</option>
+      <option value="dustinwin">DustinWin（完整）— ruleset_geodata</option>
+    </select>
+  </div>
+
+  <div class="section" id="format-section">
+    <label>规则集格式</label>
+    <select id="format">
+      <option value="yaml-split" selected>YAML 分离 — 域名/IP 分离，性能最优（推荐）</option>
+      <option value="yaml-classical">YAML 经典 — 合并单文件，兼容性最佳</option>
+      <option value="binary">Binary .mrs — 需要 CI 发布后使用</option>
+    </select>
+  </div>
+
   <div class="section" id="tier-section" style="display:none">
     <label>规则集格式（sing-box）</label>
     <select id="tier">
@@ -53,6 +70,8 @@ app.innerHTML = `
       <label class="cat-item"><input type="checkbox" id="feat-tracking"> 追踪拦截</label>
       <label class="cat-item"><input type="checkbox" id="feat-quic"> 屏蔽 QUIC</label>
       <label class="cat-item" id="feat-lb-wrap"><input type="checkbox" id="feat-lb"> 负载均衡（高级拓扑）</label>
+      <label class="cat-item"><input type="checkbox" id="feat-tun"> TUN 模式</label>
+      <label class="cat-item"><input type="checkbox" id="feat-dashboard"> 控制面板（:9090）</label>
     </div>
   </div>
 
@@ -149,6 +168,8 @@ function updateCatCount() {
 document.getElementById('kernel').addEventListener('change', e => {
   const isSingbox  = e.target.value === 'singbox'
   document.getElementById('topology-section').style.display = isSingbox ? 'none' : ''
+  document.getElementById('geodata-section').style.display  = isSingbox ? 'none' : ''
+  document.getElementById('format-section').style.display   = isSingbox ? 'none' : ''
   document.getElementById('tier-section').style.display     = isSingbox ? '' : 'none'
   document.getElementById('region-section').style.display   = isSingbox ? 'none' : ''
 })
@@ -166,6 +187,8 @@ document.getElementById('generate').addEventListener('click', () => {
   const kernel   = document.getElementById('kernel').value
   const topology = document.getElementById('topology').value
   const tier     = parseInt(document.getElementById('tier').value, 10)
+  const geodata  = document.getElementById('geodata').value
+  const format   = document.getElementById('format').value
   const preset   = document.getElementById('preset').value
   const groupIds = preset === 'custom' ? [...selectedGroups] : [...(new Set(presets[preset]?.groups || []))]
   const subs     = document.getElementById('subs').value.trim().split('\n').filter(Boolean)
@@ -175,6 +198,8 @@ document.getElementById('generate').addEventListener('click', () => {
     tracking_block:  document.getElementById('feat-tracking').checked,
     quic_block:      document.getElementById('feat-quic').checked,
     load_balance:    document.getElementById('feat-lb').checked,
+    tun_enable:      document.getElementById('feat-tun').checked,
+    dashboard:       document.getElementById('feat-dashboard').checked,
   }
 
   let output
@@ -183,7 +208,7 @@ document.getElementById('generate').addEventListener('click', () => {
   } else {
     const target = kernel  // 'mihomo' or 'mihomo-smart'
     output = buildFullProfile(subs, groupIds, catalog || { items: {} }, {
-      topology, target, features, regionExcludes,
+      topology, target, features, regionExcludes, geodata, format,
     })
   }
 

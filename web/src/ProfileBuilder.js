@@ -233,6 +233,21 @@ export function buildMihomoGroups(subUrls, groupIds, catalog, { tier = 1 } = {})
 
 const RELEASES_BASE = `https://github.com/${REPO}/releases/latest/download`
 
+const GEODATA_SOURCES = {
+  metacubex: {
+    geosite: 'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat',
+    geoip:   'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat',
+    mmdb:    'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb',
+    asn:     'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb',
+  },
+  dustinwin: {
+    geosite: 'https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-geodata/geosite.dat',
+    geoip:   'https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-geodata/geoip.metadb',
+    mmdb:    'https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-geodata/Country.mmdb',
+    asn:     'https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-geodata/Country-ASN.mmdb',
+  },
+}
+
 const SERVICE_MAP = {
   'block/ads':          ['🚫 广告拦截',   []],
   'block/ads-lite':     ['🚫 广告(轻)',   []],
@@ -262,16 +277,40 @@ const SERVICE_MAP = {
 
 const _REGIONS = [
   { name: '香港', pattern: '港|🇭🇰|HK|Hong Kong|HKG' },
+  { name: '台湾', pattern: '台|台湾|🇹🇼|TW|TPE|TSA' },
   { name: '狮城', pattern: '坡|新加坡|🇸🇬|SG|Sing|SIN|XSP' },
   { name: '日本', pattern: '日本|日|🇯🇵|JP|Japan|NRT|HND|KIX' },
   { name: '韩国', pattern: '韩|韩国|🇰🇷|KR|Korea|ICN' },
   { name: '美国', pattern: '美|美国|🇺🇸|US|USA|LAX|SJC|JFK|ORD' },
-  { name: '台湾', pattern: '台|台湾|🇹🇼|TW|TPE|TSA' },
   { name: '欧盟', pattern: '英|法|德|荷|瑞|🇬🇧|🇫🇷|🇩🇪|🇳🇱|🇸🇪|CDG|FRA|AMS|LHR' },
 ]
 const _FALLBACK_REGIONS = ['香港', '狮城', '日本', '美国']
 const _DIRECT_GROUPS = new Set(['direct/cn', 'direct/cn-ips', 'direct/cn-no-media', 'meta/cn'])
 const _REJECT_GROUPS = new Set(['block/ads', 'block/ads-lite', 'block/tracking', 'meta/block'])
+
+const ICON_BASE = 'https://github.com/Koolson/Qure/raw/master/IconSet/Color'
+const REGION_ICONS = {
+  '香港': 'Hong_Kong.png',
+  '台湾': 'Taiwan.png',
+  '狮城': 'Singapore.png',
+  '日本': 'Japan.png',
+  '韩国': 'Korea.png',
+  '美国': 'United_States.png',
+  '欧盟': 'European_Union.png',
+}
+const SERVICE_ICONS = {
+  'proxy/google':    'Google.png',
+  'proxy/youtube':   'YouTube.png',
+  'proxy/apple':     'Apple.png',
+  'proxy/microsoft': 'Microsoft.png',
+  'proxy/amazon':    'Amazon.png',
+  'proxy/telegram':  'Telegram.png',
+  'proxy/twitter':   'Twitter.png',
+  'proxy/netflix':   'Netflix.png',
+  'proxy/streaming': 'Streaming.png',
+  'proxy/ai':        'AI.png',
+  'proxy/gaming':    'Gaming.png',
+}
 
 function _slug2(gid) { return gid.replace(/\//g, '-') }
 function _autoType(target) { return target === 'mihomo-smart' ? 'smart' : 'url-test' }
@@ -287,49 +326,69 @@ function _buildProxyGroups(groupIds, { topology, target, features, regionExclude
     ? ['    url: https://www.google.com/generate_204', '    interval: 200']
     : ['    uselightgbm: true']
   const regionNames = _REGIONS.map(r => r.name)
+  const rejectGroups  = groupIds.filter(g => _REJECT_GROUPS.has(g))
   const serviceGroups = groupIds.filter(g => !_DIRECT_GROUPS.has(g) && !_REJECT_GROUPS.has(g))
-  const hasAds = features?.ads_block && groupIds.includes('block/ads')
 
-  // infrastructure
+  // ── infrastructure ──────────────────────────────────────────────────────────
   if (topology === 'global') {
-    lines.push("  - name: '默认代理'", "    type: select", "    proxies:", "      - '全部'", "      - '直接连接'")
+    lines.push(
+      "  - name: '默认代理'", "    type: select", "    proxies:",
+      "      - '全部'", "      - '直接连接'", `    icon: ${ICON_BASE}/Proxy.png`)
   } else {
     const mainProxies = ['故障转移', ...regionNames, '全部', '直接连接']
     lines.push("  - name: '默认代理'", "    type: select", "    proxies:")
     mainProxies.forEach(p => lines.push(`      - '${p}'`))
+    lines.push(`    icon: ${ICON_BASE}/Proxy.png`)
     const fbCandidates = _FALLBACK_REGIONS.filter(r => regionNames.includes(r))
-    lines.push("  - name: '故障转移'", "    type: fallback",
+    lines.push(
+      "  - name: '故障转移'", "    type: fallback",
       "    url: https://www.google.com/generate_204", "    interval: 200", "    lazy: true",
       "    proxies:")
     fbCandidates.forEach(p => lines.push(`      - '${p}'`))
+    lines.push(`    icon: ${ICON_BASE}/Available.png`)
   }
-  lines.push("  - name: '直接连接'", "    type: select", "    proxies:", "      - DIRECT", "      - '默认代理'")
-  if (hasAds)
-    lines.push("  - name: '广告拦截'", "    type: select", "    proxies:", "      - REJECT", "      - DIRECT", "      - '默认代理'")
+  lines.push(
+    "  - name: '直接连接'", "    type: select", "    proxies:",
+    "      - DIRECT", "      - '默认代理'", `    icon: ${ICON_BASE}/Direct.png`)
 
-  // region groups
+  // ── block groups (named select — never hardcode REJECT in rules) ────────────
+  for (const gid of rejectGroups) {
+    const name = (SERVICE_MAP[gid] || [`🚫 ${gid.split('/')[1]}`])[0]
+    lines.push(`  - name: '${name}'`, "    type: select", "    proxies:",
+      "      - REJECT", "      - DIRECT", "      - '默认代理'")
+  }
+  if (features?.quic_block)
+    lines.push("  - name: '🛡️ 协议拦截'", "    type: select", "    proxies:",
+      "      - REJECT", "      - DIRECT", "      - '默认代理'")
+
+  // ── region groups ───────────────────────────────────────────────────────────
   if (topology !== 'global') {
     for (const r of _REGIONS) {
       const filter = _regionFilter(r.pattern, regionExcludes)
       if (topology === 'advanced' && features?.load_balance) {
-        lines.push(`  - name: '${r.name}-LBH'`, "    type: load-balance",
+        lines.push(
+          `  - name: '${r.name}-LBH'`, "    type: load-balance",
           "    strategy: consistent-hashing", "    url: https://www.google.com/generate_204",
           "    interval: 200", "    lazy: true", "    hidden: true",
           "    include-all: true", `    filter: ${filter}`)
-        lines.push(`  - name: '${r.name}-LBR'`, "    type: load-balance",
+        lines.push(
+          `  - name: '${r.name}-LBR'`, "    type: load-balance",
           "    strategy: round-robin", "    url: https://www.google.com/generate_204",
           "    interval: 200", "    lazy: true", "    hidden: true",
           "    include-all: true", `    filter: ${filter}`)
       }
-      lines.push(`  - name: '${r.name}'`, `    type: ${autoType}`,
-        ...autoUrlLines, "    lazy: true", "    include-all: true", `    filter: ${filter}`)
+      lines.push(
+        `  - name: '${r.name}'`, `    type: ${autoType}`,
+        ...autoUrlLines, "    lazy: true", "    include-all: true", `    filter: ${filter}`,
+        ...(REGION_ICONS[r.name] ? [`    icon: ${ICON_BASE}/${REGION_ICONS[r.name]}`] : []))
     }
   }
   // global auto (hidden)
-  lines.push("  - name: '全部'", `    type: ${autoType}`,
+  lines.push(
+    "  - name: '全部'", `    type: ${autoType}`,
     ...autoUrlLines, "    lazy: true", "    hidden: true", "    include-all: true")
 
-  // per-service groups
+  // ── per-service groups ──────────────────────────────────────────────────────
   const effectiveMap = {}
   for (const gid of serviceGroups) {
     const entry = SERVICE_MAP[gid]
@@ -346,8 +405,11 @@ function _buildProxyGroups(groupIds, { topology, target, features, regionExclude
     effectiveMap[gid] = [displayName, candidates]
     lines.push(`  - name: '${displayName}'`, "    type: select", "    proxies:")
     candidates.forEach(c => lines.push(`      - '${c}'`))
+    if (SERVICE_ICONS[gid]) lines.push(`    icon: ${ICON_BASE}/${SERVICE_ICONS[gid]}`)
   }
-  lines.push("  - name: '漏网之鱼'", "    type: select", "    proxies:", "      - '默认代理'", "      - '直接连接'")
+  lines.push(
+    "  - name: '漏网之鱼'", "    type: select", "    proxies:",
+    "      - '默认代理'", "      - '直接连接'", `    icon: ${ICON_BASE}/Proxy.png`)
   return { proxyGroupsYaml: lines.join('\n'), effectiveMap }
 }
 
@@ -360,37 +422,88 @@ function _needsIpProvider2(gid, catalog) {
   return splits.includes('ip') || splits.includes('ip-resolve')
 }
 
-function _buildRuleProviders2(groupIds, catalog) {
+function _buildRuleProvidersForFormat(groupIds, catalog, format = 'yaml-split') {
   const lines = []
+  const RULESET_CDN = `${CDN_BASE}@ruleset/mihomo`
+
   for (const gid of groupIds) {
     const s = _slug2(gid)
-    lines.push(`  ${s}:`, `    type: http`, `    behavior: domain`,
-      `    url: '${RELEASES_BASE}/${s}.domain.yaml'`,
-      `    path: './ruleset/${s}.domain.yaml'`, `    interval: 86400`, `    format: yaml`)
-    if (_needsIpProvider2(gid, catalog)) {
-      lines.push(`  ${s}-ip:`, `    type: http`, `    behavior: ipcidr`,
-        `    url: '${RELEASES_BASE}/${s}.ip.yaml'`,
-        `    path: './ruleset/${s}.ip.yaml'`, `    interval: 86400`, `    format: yaml`)
+
+    if (format === 'yaml-classical') {
+      lines.push(`  ${s}:`, `    type: http`, `    behavior: classical`,
+        `    url: '${RULESET_CDN}/${s}.yaml'`,
+        `    path: './ruleset/${s}.yaml'`, `    interval: 86400`, `    format: yaml`)
+    } else if (format === 'binary') {
+      if (gid !== 'direct/cn-ips') {
+        lines.push(`  ${s}:`, `    type: http`, `    behavior: domain`,
+          `    url: '${RELEASES_BASE}/${s}.domain.mrs'`,
+          `    path: './ruleset/${s}.domain.mrs'`, `    interval: 86400`, `    format: mrs`)
+      }
+      if (_needsIpProvider2(gid, catalog)) {
+        lines.push(`  ${s}-ip:`, `    type: http`, `    behavior: ipcidr`,
+          `    url: '${RELEASES_BASE}/${s}.ip.mrs'`,
+          `    path: './ruleset/${s}.ip.mrs'`, `    interval: 86400`, `    format: mrs`)
+      }
+    } else {
+      // yaml-split (default)
+      if (gid !== 'direct/cn-ips') {
+        lines.push(`  ${s}:`, `    type: http`, `    behavior: domain`,
+          `    url: '${RULESET_CDN}/${s}.domain.yaml'`,
+          `    path: './ruleset/${s}.domain.yaml'`, `    interval: 86400`, `    format: yaml`)
+      }
+      if (_needsIpProvider2(gid, catalog)) {
+        lines.push(`  ${s}-ip:`, `    type: http`, `    behavior: ipcidr`,
+          `    url: '${RULESET_CDN}/${s}.ip.yaml'`,
+          `    path: './ruleset/${s}.ip.yaml'`, `    interval: 86400`, `    format: yaml`)
+      }
     }
   }
   return lines.join('\n')
 }
 
-function _buildRules2(groupIds, catalog, effectiveMap, features) {
+function _buildRules2(groupIds, catalog, effectiveMap, features, format = 'yaml-split') {
   const lines = []
-  if (features?.quic_block) lines.push("  - AND,[[NETWORK,UDP],[DST-PORT,443]],REJECT")
-  for (const gid of groupIds) if (_REJECT_GROUPS.has(gid)) lines.push(`  - RULE-SET,${_slug2(gid)},REJECT`)
-  for (const gid of groupIds) if (_DIRECT_GROUPS.has(gid) && gid !== 'direct/cn-ips') lines.push(`  - RULE-SET,${_slug2(gid)},DIRECT`)
+  const isSplit = format !== 'yaml-classical'
+
+  if (features?.quic_block)
+    lines.push("  - AND,((DST-PORT,443),(NETWORK,UDP),(NOT,((GEOIP,CN)))),🛡️ 协议拦截")
+
+  // block groups → named proxy group (never hardcode REJECT)
+  for (const gid of groupIds)
+    if (_REJECT_GROUPS.has(gid)) {
+      const name = (SERVICE_MAP[gid] || [`🚫 ${gid.split('/')[1]}`])[0]
+      lines.push(`  - RULE-SET,${_slug2(gid)},${name}`)
+    }
+
+  // direct domain groups (cn-ips handled separately — IP only)
+  for (const gid of groupIds)
+    if (_DIRECT_GROUPS.has(gid) && gid !== 'direct/cn-ips')
+      lines.push(`  - RULE-SET,${_slug2(gid)},DIRECT`)
+
+  // service groups
   for (const gid of groupIds) {
     if (_DIRECT_GROUPS.has(gid) || _REJECT_GROUPS.has(gid)) continue
     lines.push(`  - RULE-SET,${_slug2(gid)},${(effectiveMap[gid] || [_slug2(gid)])[0]}`)
   }
-  for (const gid of groupIds) if (gid === 'direct/cn-ips') lines.push(`  - RULE-SET,${_slug2(gid)}-ip,DIRECT,no-resolve`)
-  for (const gid of groupIds) {
-    if (_DIRECT_GROUPS.has(gid) || _REJECT_GROUPS.has(gid)) continue
-    if (_needsIpProvider2(gid, catalog)) lines.push(`  - RULE-SET,${_slug2(gid)}-ip,${(effectiveMap[gid] || [_slug2(gid)])[0]},no-resolve`)
+
+  // IP rules (split formats only — separate -ip provider; classical has IP in main file)
+  if (isSplit) {
+    for (const gid of groupIds)
+      if (gid === 'direct/cn-ips')
+        lines.push(`  - RULE-SET,${_slug2(gid)}-ip,DIRECT,no-resolve`)
+    for (const gid of groupIds) {
+      if (_DIRECT_GROUPS.has(gid) || _REJECT_GROUPS.has(gid)) continue
+      if (_needsIpProvider2(gid, catalog))
+        lines.push(`  - RULE-SET,${_slug2(gid)}-ip,${(effectiveMap[gid] || [_slug2(gid)])[0]},no-resolve`)
+    }
+  } else {
+    // classical: cn-ips IP rules are in the single file; no-resolve still applies
+    for (const gid of groupIds)
+      if (gid === 'direct/cn-ips')
+        lines.push(`  - RULE-SET,${_slug2(gid)},DIRECT,no-resolve`)
   }
-  lines.push("  - MATCH,默认代理")
+
+  lines.push("  - MATCH,漏网之鱼")
   return lines.join('\n')
 }
 
@@ -406,23 +519,34 @@ function _proxyProviders2(subUrls) {
   ].join('\n')).join('\n')
 }
 
-const _core = (target) => [
+const _core = (target, features = {}) => [
   "mixed-port: 7890", "allow-lan: false", "bind-address: '*'", "mode: rule",
   "log-level: warning", "ipv6: true", "unified-delay: true", "tcp-concurrent: true",
   "find-process-mode: strict", "global-client-fingerprint: chrome", "global-ua: mihomo",
   "keep-alive-idle: 600", "keep-alive-interval: 60", "etag-support: true",
+  ...(features.dashboard ? [
+    "external-controller: :9090",
+    "external-ui: ui",
+    "external-ui-url: 'https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip'",
+    "secret: ''",
+  ] : []),
   ...(target === 'mihomo-smart' ? [
     "lgbm-auto-update: true", "lgbm-update-interval: 24",
     "lgbm-url: 'https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin'",
   ] : []),
 ].join('\n')
 
-const _geodata = () => [
-  "geodata-mode: true", "geo-auto-update: true", "geo-update-interval: 168",
-  "geox-url:",
-  `  geoip: '${RELEASES_BASE}/geoip.mmdb'`,
-  `  geosite: '${RELEASES_BASE}/geosite.dat'`,
-].join('\n')
+const _geodata = (geodata = 'metacubex') => {
+  const urls = GEODATA_SOURCES[geodata] || GEODATA_SOURCES.metacubex
+  return [
+    "geodata-mode: true", "geo-auto-update: true", "geo-update-interval: 168",
+    "geox-url:",
+    `  geoip: '${urls.geoip}'`,
+    `  geosite: '${urls.geosite}'`,
+    `  mmdb: '${urls.mmdb}'`,
+    `  asn: '${urls.asn}'`,
+  ].join('\n')
+}
 
 const _profile = (target) => [
   "profile:", "  store-selected: true", "  store-fake-ip: true",
@@ -433,8 +557,16 @@ const _dns = () => [
   "dns:", "  enable: true", "  ipv6: true", "  listen: 0.0.0.0:1053",
   "  enhanced-mode: fake-ip", "  fake-ip-range: 198.18.0.1/16",
   "  fake-ip-range6: 3fff::/20", "  fake-ip-filter-mode: blacklist",
-  "  fake-ip-filter:", "    - '*.lan'", "    - '*.local'", "    - '*.localhost'",
-  "    - '+.stun.*.*'", "    - '+.stun.*.*.*'", "    - 'time.*.com'", "    - '+.ntp.org.cn'",
+  "  fake-ip-filter:",
+  "    - '*.lan'", "    - '*.local'", "    - '*.localhost'", "    - '*.home.arpa'",
+  "    - '+.stun.*.*'", "    - '+.stun.*.*.*'", "    - '+.stun.*.*.*.*'",
+  "    - 'time.*.com'", "    - 'time.*.gov'", "    - 'time.*.apple.com'",
+  "    - '+.ntp.org.cn'", "    - '+.time.edu.cn'", "    - 'ntp.ubuntu.com'",
+  "    - 'time.cloudflare.com'", "    - '+.pool.ntp.org'",
+  "    - '+.msftconnecttest.com'", "    - '+.msftncsi.com'",
+  "    - '+.push.apple.com'", "    - 'swcd.*.apple.com'", "    - 'mesu.apple.com'",
+  "    - '+.miwifi.com'", "    - '+.docker.io'",
+  "    - '+.xbox.com'", "    - '+.xboxlive.com'",
   "  cache-algorithm: arc", "  respect-rules: false",
   "  default-nameserver:", "    - 223.5.5.5", "    - 119.29.29.29",
   "  nameserver:", "    - https://doh.pub/dns-query", "    - https://dns.alidns.com/dns-query",
@@ -448,11 +580,15 @@ const _sniffer = () => [
   "sniffer:", "  enable: true", "  sniff:",
   "    HTTP:", "      ports: [80, 8080-8880]", "      override-destination: true",
   "    TLS:", "      ports: [443, 8443]",
-  "    QUIC:", "      ports: [443]",
+  "    QUIC:", "      ports: [443, 8443]",
   "  skip-domain:", "    - 'Mijia Cloud'", "    - '+.push.apple.com'",
 ].join('\n')
 
-const _tun = () => [
+const _tun = (tun_enable = false) => tun_enable ? [
+  "tun:", "  enable: true", "  stack: mixed",
+  "  auto-route: true", "  auto-redirect: true", "  auto-detect-interface: true",
+  "  dns-hijack:", "    - any:53",
+].join('\n') : [
   "# tun:", "#   enable: false", "#   stack: mixed",
   "#   auto-route: true", "#   auto-redirect: true", "#   auto-detect-interface: true",
   "#   dns-hijack:", "#     - any:53",
@@ -494,11 +630,18 @@ const _anchors = () => [
  * @returns {string} complete YAML profile
  */
 export function buildFullProfile(subUrls, groupIds, catalog, opts = {}) {
-  const { topology = 'regional', target = 'mihomo', features = {}, regionExcludes = '' } = opts
+  const {
+    topology = 'regional',
+    target = 'mihomo',
+    features = {},
+    regionExcludes = '',
+    geodata = 'metacubex',
+    format = 'yaml-split',
+  } = opts
 
   const { proxyGroupsYaml, effectiveMap } = _buildProxyGroups(groupIds, { topology, target, features, regionExcludes })
-  const ruleProvidersYaml  = _buildRuleProviders2(groupIds, catalog)
-  const rulesYaml          = _buildRules2(groupIds, catalog, effectiveMap, features)
+  const ruleProvidersYaml  = _buildRuleProvidersForFormat(groupIds, catalog, format)
+  const rulesYaml          = _buildRules2(groupIds, catalog, effectiveMap, features, format)
   const proxyProvidersYaml = _proxyProviders2(subUrls)
 
   const header = target === 'mihomo-smart'
@@ -507,8 +650,8 @@ export function buildFullProfile(subUrls, groupIds, catalog, opts = {}) {
 
   return [
     `${header}# topology: ${topology}  target: ${target}  groups: ${groupIds.length}`,
-    "", _core(target), "", _geodata(), "", _profile(target), "", _dns(), "",
-    _sniffer(), "", _tun(), "", _anchors(),
+    "", _core(target, features), "", _geodata(geodata), "", _profile(target), "", _dns(), "",
+    _sniffer(), "", _tun(features.tun_enable), "", _anchors(),
     "", "# ── proxy providers ──────────────────────────────────────────────────────────",
     "proxy-providers:", proxyProvidersYaml,
     "", "# ── proxy groups ─────────────────────────────────────────────────────────────",
