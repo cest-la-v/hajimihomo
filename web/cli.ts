@@ -132,11 +132,34 @@ async function runWizard(userPath: string): Promise<string[]> {
   if (subUrls.length > 0) {
     const ans = (await ask(`\n  Save to ${userPath}? [Y/n] `)).trim().toLowerCase()
     if (!ans || ans === 'y') {
-      const config = {
-        proxy_providers: subUrls.map((url, i) => ({ name: `Airport ${i + 1}`, url })),
-      }
+      const providerLines = subUrls.map((url, i) =>
+        `  - name: "Airport ${i + 1}"\n    url: "${url}"`
+      ).join('\n')
+      const content = `\
+# hajimihomo user configuration
+# Edit this file to customize your profile.
+
+# ── proxy subscriptions ───────────────────────────────────────────────────────
+proxy_providers:
+${providerLines}
+
+# ── preset customization ──────────────────────────────────────────────────────
+# target: mihomo         # mihomo (default) | mihomo-smart (vernesong fork)
+# topology: regional     # global | regional | advanced (inherits from preset)
+
+# extra_groups: []       # add catalog groups on top of preset
+# skip_groups: []        # remove catalog groups from preset
+
+# region_excludes: ""    # regex appended to region filter negations
+#                        # e.g. "5x|10x|GB" to exclude bulk-relay nodes
+
+# ── hosts block ───────────────────────────────────────────────────────────────
+hosts_enabled: false     # set true to resolve polluted domains via DoH
+# hosts_include: []      # opt-in specific domains (empty = all polluted ones)
+# hosts_exclude: []      # always skip these domains
+`
       mkdirSync(dirname(resolve(userPath)), { recursive: true })
-      writeFileSync(userPath, yaml.dump(config, { lineWidth: -1 }))
+      writeFileSync(userPath, content)
       console.log(`  ✓ Saved to ${userPath}\n`)
     }
   } else {

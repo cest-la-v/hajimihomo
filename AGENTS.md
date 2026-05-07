@@ -60,7 +60,6 @@ profiles/
   defaults/
     mihomo.yaml     # editable base config (core, DNS, sniffer, TUN) — imported by ProfileBuilder
     singbox.json    # sing-box base config (future wiring)
-  user.yaml.example # copy to profiles/user.yaml and fill in subscriptions
 
 scripts/
   build.py              # main rule-set builder
@@ -125,12 +124,15 @@ The dev server hot-reloads on JS/HTML changes. `RULESET_DIR=../dist` env var (se
 ### Profile builder (CLI)
 
 ```bash
-cp profiles/user.yaml.example profiles/user.yaml
-# edit profiles/user.yaml to add subscription URLs
 make profile                         # builds standard preset → dist/profiles/standard.yaml
-make profile PRESET=full             # specific preset
+make profile PRESET=full             # specific preset (mini|lite|standard|full)
 ./bin/hajimihomo --preset mini       # compiled binary (make cli-build first)
+./bin/hajimihomo --sub https://airport.com/sub?token=xxx  # one-off with subscription URL
 ```
+
+On first run without `profiles/user.yaml`, an interactive wizard collects subscription URLs
+and optionally saves a self-documenting `profiles/user.yaml` (with all advanced options
+commented out). Subsequent runs load the file silently.
 
 ---
 
