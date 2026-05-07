@@ -2,7 +2,7 @@
 name: full
 description: 'Full: 13 services including streaming + social, regional url-test.'
 target: mihomo
-topology: standard
+topology: regional
 features:
   ads_block: true
   tracking_block: true

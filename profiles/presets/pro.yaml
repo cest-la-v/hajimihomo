@@ -2,7 +2,7 @@
 name: pro
 description: 'Pro: all 19 catalog groups, full LB topology.'
 target: mihomo        # mihomo | mihomo-smart (vernesong fork, enables smart groups)
-topology: full        # full | standard | minimal
+topology: advanced
 features:
   ads_block: true
   tracking_block: true

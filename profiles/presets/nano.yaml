@@ -2,7 +2,7 @@
 name: nano
 description: 'Nano: ads blocked + CN direct only. No per-service routing.'
 target: mihomo
-topology: minimal
+topology: global
 features:
   ads_block: true
   tracking_block: false

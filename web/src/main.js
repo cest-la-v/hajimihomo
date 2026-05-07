@@ -13,11 +13,11 @@ app.innerHTML = `
   </div>
 
   <div class="section" id="topology-section">
-    <label>代理分组拓扑</label>
+    <label>分组结构</label>
     <select id="topology">
-      <option value="full">full — 完整（LB + url-test 各区域，~60+ 分组）</option>
-      <option value="standard" selected>standard — 标准（url-test 各区域，~25 分组）</option>
-      <option value="minimal">minimal — 简单（全局 url-test，~12 分组）</option>
+      <option value="global">全局 — 单一代理池，无区域分组</option>
+      <option value="regional" selected>分区 — 各地区独立测速（推荐）</option>
+      <option value="advanced">高级 — 分区 + 负载均衡</option>
     </select>
   </div>
 
@@ -52,7 +52,7 @@ app.innerHTML = `
       <label class="cat-item"><input type="checkbox" id="feat-ads" checked> 广告拦截</label>
       <label class="cat-item"><input type="checkbox" id="feat-tracking"> 追踪拦截</label>
       <label class="cat-item"><input type="checkbox" id="feat-quic"> 屏蔽 QUIC</label>
-      <label class="cat-item" id="feat-lb-wrap"><input type="checkbox" id="feat-lb"> 负载均衡（full 拓扑）</label>
+      <label class="cat-item" id="feat-lb-wrap"><input type="checkbox" id="feat-lb"> 负载均衡（高级拓扑）</label>
     </div>
   </div>
 
@@ -154,7 +154,7 @@ document.getElementById('kernel').addEventListener('change', e => {
 })
 
 document.getElementById('topology').addEventListener('change', e => {
-  const showLB = e.target.value === 'full'
+  const showLB = e.target.value === 'advanced'
   document.getElementById('feat-lb-wrap').style.opacity = showLB ? '1' : '0.4'
 })
 

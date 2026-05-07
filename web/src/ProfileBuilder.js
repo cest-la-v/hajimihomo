@@ -291,7 +291,7 @@ function _buildProxyGroups(groupIds, { topology, target, features, regionExclude
   const hasAds = features?.ads_block && groupIds.includes('block/ads')
 
   // infrastructure
-  if (topology === 'minimal') {
+  if (topology === 'global') {
     lines.push("  - name: '默认代理'", "    type: select", "    proxies:", "      - '全部'", "      - '直接连接'")
   } else {
     const mainProxies = ['故障转移', ...regionNames, '全部', '直接连接']
@@ -308,10 +308,10 @@ function _buildProxyGroups(groupIds, { topology, target, features, regionExclude
     lines.push("  - name: '广告拦截'", "    type: select", "    proxies:", "      - REJECT", "      - DIRECT", "      - '默认代理'")
 
   // region groups
-  if (topology !== 'minimal') {
+  if (topology !== 'global') {
     for (const r of _REGIONS) {
       const filter = _regionFilter(r.pattern, regionExcludes)
-      if (topology === 'full' && features?.load_balance) {
+      if (topology === 'advanced' && features?.load_balance) {
         lines.push(`  - name: '${r.name}-LBH'`, "    type: load-balance",
           "    strategy: consistent-hashing", "    url: https://www.google.com/generate_204",
           "    interval: 200", "    lazy: true", "    hidden: true",
@@ -336,7 +336,7 @@ function _buildProxyGroups(groupIds, { topology, target, features, regionExclude
     const displayName = entry ? entry[0] : `🌐 ${gid.split('/')[1]}`
     const preferred   = entry ? entry[1] : []
     let candidates
-    if (topology !== 'minimal') {
+    if (topology !== 'global') {
       candidates = preferred.filter(p => regionNames.includes(p) || p === '默认代理' || p === '直接连接')
       if (!candidates.length) candidates = ['默认代理', '直接连接']
       if (!candidates.includes('默认代理')) candidates.push('默认代理')
@@ -487,14 +487,14 @@ const _anchors = () => [
  * @param {string[]} groupIds      — selected catalog group IDs
  * @param {Object}   catalog       — from loadCatalog()
  * @param {Object}   opts
- * @param {string}   opts.topology — 'full' | 'standard' | 'minimal'
+ * @param {string}   opts.topology — 'advanced' | 'regional' | 'global'
  * @param {string}   opts.target   — 'mihomo' | 'mihomo-smart'
  * @param {Object}   opts.features — { ads_block, quic_block, load_balance, ... }
  * @param {string}   opts.regionExcludes — regex negated in region filters
  * @returns {string} complete YAML profile
  */
 export function buildFullProfile(subUrls, groupIds, catalog, opts = {}) {
-  const { topology = 'standard', target = 'mihomo', features = {}, regionExcludes = '' } = opts
+  const { topology = 'regional', target = 'mihomo', features = {}, regionExcludes = '' } = opts
 
   const { proxyGroupsYaml, effectiveMap } = _buildProxyGroups(groupIds, { topology, target, features, regionExcludes })
   const ruleProvidersYaml  = _buildRuleProviders2(groupIds, catalog)
