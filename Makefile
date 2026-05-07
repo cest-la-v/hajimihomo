@@ -78,4 +78,4 @@ dev-local: web-install
 	cd web && RULESET_DIR=../dist bun run dev.ts
 
 clean:   ## Remove build artifacts (bin/, web/dist/, bun compile cache)
-	rm -rf bin/ web/dist/ web/.*.bun-build profiles/output/
+	rm -rf bin/ web/dist/ web/.*.bun-build dist/profiles/

@@ -127,7 +127,7 @@ The dev server hot-reloads on JS/HTML changes. `RULESET_DIR=../dist` env var (se
 ```bash
 cp profiles/user.yaml.example profiles/user.yaml
 # edit profiles/user.yaml to add subscription URLs
-make profile                         # builds standard preset → profiles/output/standard.yaml
+make profile                         # builds standard preset → dist/profiles/standard.yaml
 make profile PRESET=full             # specific preset
 ./bin/hajimihomo --preset mini       # compiled binary (make cli-build first)
 ```
@@ -231,9 +231,8 @@ The CI Python environment uses Python 3.12 with only `pyyaml` installed. Scripts
 
 ## Common Gotchas
 
-- **`dist/` is gitignored** — never commit build output. CDN branches (`ruleset`, `release`) are push-only from CI.
-- **`vendor/` is gitignored** — run `make vendor-sync` to populate it locally.
-- **`profiles/output/` is gitignored** — CLI profile builder output stays local.
+- **`dist/` is gitignored** — never commit build output (rulesets, profiles, web app). CDN branches (`ruleset`, `release`) are push-only from CI.- **`vendor/` is gitignored** — run `make vendor-sync` to populate it locally.
+- **`dist/profiles/` is gitignored** (under `dist/`) — CLI profile builder output stays local.
 - **YAML anchor syntax**: generated profiles use top-level dummy keys (`p:`, `g:`, `f:`) as anchor holders. mihomo ignores unknown top-level keys, so anchors defined there are valid and available throughout the document.
 - **Rule ordering is critical**: in generated profiles, `direct/cn` domain rules MUST precede proxy service domain rules. Changing rule order in `ProfileBuilder.js` can cause CN traffic to leak through proxy.
 - **Block groups use named selects, not direct REJECT**: rules never hardcode `REJECT` as a target. Instead, `block/ads` → `🚫 广告拦截` group (select: [REJECT, DIRECT, 默认代理]), etc. This allows dashboard-level toggle between blocking and bypassing without editing YAML.

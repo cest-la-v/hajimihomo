@@ -6,7 +6,7 @@
  *   --preset   mini|lite|standard|full         (default: standard)
  *   --sub      https://airport.com/sub?tok=xxx  (repeatable; overrides user.yaml subs)
  *   --user     path/to/user.yaml               (default: profiles/user.yaml)
- *   --output   path/to/output/dir              (default: profiles/output)
+ *   --output   path/to/output/dir              (default: dist/profiles)
  *   --catalog  path/to/rulesets.json           (default: dist/rulesets.json)
  *   --format   yaml-split|yaml-classical|binary (default: yaml-split)
  *   --geodata  metacubex|dustinwin             (default: metacubex)
@@ -24,7 +24,7 @@ import { buildHostsBlock } from './hosts.js'
 
 const PRESET_DIR = 'profiles/presets'
 const DEFAULT_USER = 'profiles/user.yaml'
-const DEFAULT_OUTPUT = 'profiles/output'
+const DEFAULT_OUTPUT = 'dist/profiles'
 const DEFAULT_CATALOG = 'dist/rulesets.json'
 
 // ── arg parsing ──────────────────────────────────────────────────────────────
@@ -66,7 +66,7 @@ Options:
   --preset    mini|lite|standard|full            (default: standard)
   --sub       subscription URL                   (repeatable; overrides user.yaml subs)
   --user      path/to/user.yaml                  (default: profiles/user.yaml)
-  --output    output directory                   (default: profiles/output)
+  --output    output directory                   (default: dist/profiles)
   --catalog   path/to/rulesets.json              (default: dist/rulesets.json)
   --format    yaml-split|yaml-classical|binary   (default: yaml-split)
   --geodata   metacubex|dustinwin                (default: metacubex)
