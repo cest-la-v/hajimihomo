@@ -32,8 +32,17 @@ geodata-mode: true
 geo-auto-update: true
 geo-update-interval: 168
 geox-url:
-  geoip: "https://github.com/cest-la-v/hajimihomo/releases/latest/download/geoip.mmdb"
-  geosite: "https://github.com/cest-la-v/hajimihomo/releases/latest/download/geosite.dat"
+{% if geodata == 'dustinwin' %}
+  geoip: 'https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-geodata/geoip.metadb'
+  geosite: 'https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-geodata/geosite.dat'
+  mmdb: 'https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-geodata/Country.mmdb'
+  asn: 'https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-geodata/Country-ASN.mmdb'
+{% else %}
+  geoip: 'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat'
+  geosite: 'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat'
+  mmdb: 'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb'
+  asn: 'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb'
+{% endif %}
 
 # ── profile ───────────────────────────────────────────────────────────────────
 profile:
@@ -56,13 +65,27 @@ dns:
     - '*.lan'
     - '*.local'
     - '*.localhost'
+    - '*.home.arpa'
     - '+.stun.*.*'
     - '+.stun.*.*.*'
+    - '+.stun.*.*.*.*'
     - 'time.*.com'
     - 'time.*.gov'
-    - 'time.*.edu.cn'
+    - 'time.*.apple.com'
     - '+.ntp.org.cn'
-    - 'ntp.*.com'
+    - '+.time.edu.cn'
+    - 'ntp.ubuntu.com'
+    - 'time.cloudflare.com'
+    - '+.pool.ntp.org'
+    - '+.msftconnecttest.com'
+    - '+.msftncsi.com'
+    - '+.push.apple.com'
+    - 'swcd.*.apple.com'
+    - 'mesu.apple.com'
+    - '+.miwifi.com'
+    - '+.docker.io'
+    - '+.xbox.com'
+    - '+.xboxlive.com'
   cache-algorithm: arc
   respect-rules: false
   default-nameserver:
@@ -107,7 +130,7 @@ sniffer:
     TLS:
       ports: [443, 8443]
     QUIC:
-      ports: [443]
+      ports: [443, 8443]
   skip-domain:
     - 'Mijia Cloud'
     - '+.push.apple.com'

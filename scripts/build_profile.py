@@ -3,17 +3,15 @@
 build_profile.py — generate a complete, standalone mihomo profile YAML.
 
 Usage:
-  python3 scripts/build_profile.py [--preset full|standard|simple|minimal]
+  python3 scripts/build_profile.py [--preset mini|lite|standard|full]
                                    [--user profiles/user.yaml]
                                    [--output profiles/output/]
 
 The generated profile is ready to use with mihomo after adding proxy
 subscription URLs in profiles/user.yaml.
 
-Rule-provider URLs reference GitHub releases (releases/latest/download/).
-These only resolve after the CI release workflow (R7) runs. The YAML
-structure is valid regardless — mihomo will use the ruleset cache if it
-exists, or fail to fetch until the release is published.
+Rule-provider URLs reference the jsDelivr CDN (@ruleset branch).
+These resolve once CI has published the ruleset branch.
 """
 from __future__ import annotations
 
@@ -46,7 +44,8 @@ def load_preset(name: str) -> dict:
     data = yaml.safe_load(path.read_text())
     # Defaults for older presets without full schema
     data.setdefault("target", "mihomo")
-    data.setdefault("topology", "standard")
+    data.setdefault("topology", "regional")
+    data.setdefault("geodata", "metacubex")
     data.setdefault("features", {})
     data["features"].setdefault("ads_block", True)
     data["features"].setdefault("tracking_block", False)
@@ -86,6 +85,7 @@ def merge_config(preset: dict, user: dict) -> dict:
     cfg["hosts_include"]    = user.get("hosts_include", [])
     cfg["hosts_exclude"]    = user.get("hosts_exclude", [])
     cfg["proxy_providers"]  = user.get("proxy_providers", [])
+    cfg["geodata"]          = user.get("geodata", preset.get("geodata", "metacubex"))
     return cfg
 
 
@@ -163,9 +163,14 @@ def build_profile(preset_name: str, user_path: Path | None, output_dir: Path) ->
     topology = cfg["topology"]
     features = cfg["features"]
     groups   = cfg["groups"]
+    geodata  = cfg.get("geodata", "metacubex")
 
     if target == "sing-box":
         sys.exit("[error] sing-box output is not supported in P1 — planned for P2.")
+
+    # Backward-compat: old topology names (pre-rename)
+    _TOPOLOGY_ALIASES = {"minimal": "global", "standard": "regional", "full": "advanced"}
+    topology = _TOPOLOGY_ALIASES.get(topology, topology)
 
     exclude_filter = cfg.get("region_excludes", "")
 
@@ -211,6 +216,7 @@ def build_profile(preset_name: str, user_path: Path | None, output_dir: Path) ->
         target=target,
         topology=topology,
         features=features,
+        geodata=geodata,
         exclude_filter=exclude_filter,
         proxy_providers=proxy_providers_yaml,
         proxy_groups=proxy_groups_yaml,
@@ -236,7 +242,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--preset", default="full",
-        help="Preset name (full|standard|simple|minimal, default: full)",
+        help="Preset name (mini|lite|standard|full, default: full)",
     )
     parser.add_argument(
         "--user", default=None,

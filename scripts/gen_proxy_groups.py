@@ -3,9 +3,9 @@
 gen_proxy_groups.py — generate proxy-groups block for a mihomo profile.
 
 Topologies:
-  full     — Select → Fallback → LB-hash (hidden) + LB-rr (hidden) + url-test per region
-  standard — Select → Fallback → url-test per region + per-service selects
-  minimal  — Select (global url-test) + per-service selects pointing at 默认代理 only
+  advanced — Select → Fallback → LB-hash (hidden) + LB-rr (hidden) + url-test per region
+  regional — Select → Fallback → url-test per region + per-service selects
+  global   — Select (global url-test) + per-service selects pointing at 默认代理 only
 
 smart groups: when target == 'mihomo-smart', url-test → smart (vernesong fork required)
 """
@@ -151,34 +151,34 @@ def build(
     # Which service groups are selected (not infra)
     service_groups = [g for g in group_ids if g not in _INFRA_GROUPS]
 
-    # Build effective region list — may be pruned later but we define all 7 for now
-    # (actual pruning happens at runtime when subscription filters leave a region empty;
-    #  the generator always emits all regions, and the user can see which are empty)
+    # Build effective region list
     region_names = [r[0] for r in REGIONS]
     fallback_candidates = [r for r in FALLBACK_REGIONS if r in region_names]
 
     # ── infrastructure groups ─────────────────────────────────────────────────
-    has_ads = features.get("ads_block") and "block/ads" in group_ids
-    has_tracking = features.get("tracking_block") and "block/tracking" in group_ids
-
-    if topology in ("full", "standard"):
+    if topology in ("advanced", "regional"):
         main_proxies = ["故障转移"] + region_names + ["全部", "直接连接"]
         out += _select("默认代理", main_proxies)
         out += _fallback("故障转移", fallback_candidates)
     else:
-        # minimal: no regional groups — direct url-test global only
+        # global: no regional groups — direct url-test global only
         main_proxies = ["全部", "直接连接"]
         out += _select("默认代理", main_proxies)
 
     out += _select("直接连接", ["DIRECT", "默认代理"])
 
-    if has_ads:
-        out += _select("广告拦截", ["REJECT", "DIRECT", "默认代理"])
+    # Named select groups for each reject category (never hardcode REJECT in rules)
+    for gid in group_ids:
+        if gid in _REJECT_GROUPS:
+            display = SERVICE_MAP.get(gid, (f"🚫 {gid.split('/')[-1]}", []))[0]
+            out += _select(display, ["REJECT", "DIRECT", "默认代理"])
+    if features.get("quic_block"):
+        out += _select("🛡️ 协议拦截", ["REJECT", "DIRECT", "默认代理"])
 
     # ── region groups ─────────────────────────────────────────────────────────
-    if topology in ("full", "standard"):
+    if topology in ("advanced", "regional"):
         for region_name, _filter_key, filter_anchor in REGIONS:
-            if topology == "full" and features.get("load_balance"):
+            if topology == "advanced" and features.get("load_balance"):
                 # hidden LB-hash sibling
                 lbh = {
                     "name": f"{region_name}-LBH",
@@ -238,7 +238,7 @@ def build(
             display = "🌐 " + gid.split("/")[-1].title()
             preferred = []
 
-        if topology in ("full", "standard"):
+        if topology in ("advanced", "regional"):
             # filter preferred to only regions that exist + always include 默认代理/直接连接
             candidates = [p for p in preferred if p in region_names or p in ("默认代理", "直接连接")]
             if not candidates:
@@ -254,6 +254,12 @@ def build(
 
     # ── catch-all ─────────────────────────────────────────────────────────────
     out += _select("漏网之鱼", ["默认代理", "直接连接"])
+
+    # Include reject groups in effective_service_map so gen_rules can resolve targets
+    for gid in group_ids:
+        if gid in _REJECT_GROUPS:
+            display = SERVICE_MAP.get(gid, (f"🚫 {gid.split('/')[-1]}", []))[0]
+            effective_service_map[gid] = (display, ["REJECT", "DIRECT", "默认代理"])
 
     return "\n".join(out), effective_service_map
 

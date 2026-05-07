@@ -15,7 +15,7 @@ import yaml
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SOURCE_DIR = REPO_ROOT / "source"
-DIST_BASE_URL = "https://github.com/cest-la-v/hajimihomo/releases/latest/download"
+DIST_BASE_URL = "https://cdn.jsdelivr.net/gh/cest-la-v/hajimihomo@ruleset/mihomo"
 
 # Groups that are pure-DIRECT (never get a proxy target)
 DIRECT_GROUPS = {"direct/cn", "direct/cn-ips", "direct/cn-no-media"}
@@ -63,16 +63,17 @@ def gen_rule_providers(
     lines: list[str] = []
     for gid in group_ids:
         s = slug(gid)
-        # domain provider
-        lines += [
-            f"  {s}:",
-            f"    type: http",
-            f"    behavior: domain",
-            f"    url: '{DIST_BASE_URL}/{s}.domain.yaml'",
-            f"    path: './ruleset/{s}.domain.yaml'",
-            f"    interval: 86400",
-            f"    format: yaml",
-        ]
+        # domain provider (skip for IP-only groups)
+        if gid != "direct/cn-ips":
+            lines += [
+                f"  {s}:",
+                f"    type: http",
+                f"    behavior: domain",
+                f"    url: '{DIST_BASE_URL}/{s}.domain.yaml'",
+                f"    path: './ruleset/{s}.domain.yaml'",
+                f"    interval: 86400",
+                f"    format: yaml",
+            ]
         if _needs_ip_provider(gid, catalog, cat_types):
             lines += [
                 f"  {s}-ip:",
@@ -96,14 +97,15 @@ def gen_rules(
 ) -> str:
     lines: list[str] = []
 
-    # 1. QUIC block
+    # 1. QUIC block — compound AND rule, points to named group (not hardcoded REJECT)
     if features.get("quic_block"):
-        lines.append("  - AND,[[NETWORK,UDP],[DST-PORT,443]],REJECT")
+        lines.append("  - AND,((DST-PORT,443),(NETWORK,UDP),(NOT,((GEOIP,CN)))),🛡️ 协议拦截")
 
-    # 2. Reject groups (ads/tracking)
+    # 2. Reject groups → named proxy group (display name from service_map)
     for gid in group_ids:
         if gid in REJECT_GROUPS:
-            lines.append(f"  - RULE-SET,{slug(gid)},REJECT")
+            display_name = service_map.get(gid, (slug(gid), []))[0]
+            lines.append(f"  - RULE-SET,{slug(gid)},{display_name}")
 
     # 3. Direct CN domain rules (must precede proxy service rules)
     for gid in group_ids:
@@ -132,8 +134,8 @@ def gen_rules(
             display_name = service_map.get(gid, (slug(gid), []))[0]
             lines.append(f"  - RULE-SET,{slug(gid)}-ip,{display_name},no-resolve")
 
-    # 7. Catch-all
-    lines.append("  - MATCH,默认代理")
+    # 7. Catch-all → 漏网之鱼 (user-configurable catch-all group)
+    lines.append("  - MATCH,漏网之鱼")
 
     return "\n".join(lines)
 
