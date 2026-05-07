@@ -1,18 +1,28 @@
-import { loadCatalog, loadPresets, getGroups, buildMihomoGroups, buildSingboxRuleSets } from './ProfileBuilder.js'
+import { loadCatalog, loadPresets, getGroups, buildSingboxRuleSets, buildFullProfile } from './ProfileBuilder.js'
 
 const app = document.getElementById('app')
 
 app.innerHTML = `
   <div class="section">
-    <label>内核</label>
+    <label>内核 / 输出格式</label>
     <select id="kernel">
-      <option value="mihomo">mihomo (Clash Meta)</option>
-      <option value="singbox">sing-box</option>
+      <option value="mihomo">mihomo (Clash Meta) — 完整配置</option>
+      <option value="mihomo-smart">mihomo-smart (vernesong fork) — 完整配置 + smart 分组</option>
+      <option value="singbox">sing-box — 路由规则片段</option>
     </select>
   </div>
 
-  <div class="section">
-    <label>规则集格式</label>
+  <div class="section" id="topology-section">
+    <label>代理分组拓扑</label>
+    <select id="topology">
+      <option value="full">full — 完整（LB + url-test 各区域，~60+ 分组）</option>
+      <option value="standard" selected>standard — 标准（url-test 各区域，~25 分组）</option>
+      <option value="minimal">minimal — 简单（全局 url-test，~12 分组）</option>
+    </select>
+  </div>
+
+  <div class="section" id="tier-section" style="display:none">
+    <label>规则集格式（sing-box）</label>
     <select id="tier">
       <option value="1">Tier 1 — 经典合并（兼容性最佳）</option>
       <option value="2">Tier 2 — 分离格式（域名/IP 分离，性能最优）</option>
@@ -22,18 +32,31 @@ app.innerHTML = `
   <div class="section">
     <label>预设</label>
     <select id="preset">
-      <option value="minimal">minimal — 核心规则（广告屏蔽 + 常用代理）</option>
-      <option value="full">full — 完整规则（流媒体 + 社交 + 游戏 + 开发工具）</option>
       <option value="custom">自定义</option>
     </select>
   </div>
 
   <div class="section">
     <label>订阅链接（每行一个）</label>
-    <textarea id="subs" placeholder="https://your-subscription-url/..."></textarea>
+    <textarea id="subs" placeholder="https://your-subscription-url/...&#10;https://backup-subscription-url/..."></textarea>
   </div>
 
-  <div class="section" id="cat-section" style="display:none">
+  <div class="section" id="region-section">
+    <label>排除节点关键词（正则，留空不排除）</label>
+    <input id="region-excludes" type="text" placeholder="例: 5x|10x|0.5x" />
+  </div>
+
+  <div class="section">
+    <label>功能开关</label>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.4rem">
+      <label class="cat-item"><input type="checkbox" id="feat-ads" checked> 广告拦截</label>
+      <label class="cat-item"><input type="checkbox" id="feat-tracking"> 追踪拦截</label>
+      <label class="cat-item"><input type="checkbox" id="feat-quic"> 屏蔽 QUIC</label>
+      <label class="cat-item" id="feat-lb-wrap"><input type="checkbox" id="feat-lb"> 负载均衡（full 拓扑）</label>
+    </div>
+  </div>
+
+  <div class="section" id="cat-section">
     <label>规则集 <span id="cat-count" style="color:#8b949e"></span></label>
     <div class="categories-grid" id="cat-grid"></div>
   </div>
@@ -41,6 +64,7 @@ app.innerHTML = `
   <div style="margin-top:1.5rem">
     <button class="btn" id="generate">生成配置</button>
     <button class="btn btn-secondary" id="copy">复制</button>
+    <button class="btn btn-secondary" id="download">下载 .yaml</button>
   </div>
 
   <div id="output" class="output-block" style="display:none"></div>
@@ -52,29 +76,59 @@ let selectedGroups = new Set()
 
 async function init() {
   const [catalogResult, presetsResult] = await Promise.allSettled([loadCatalog(), loadPresets()])
-  catalog = catalogResult.status === 'fulfilled' ? catalogResult.value : { items: {} }
-  presets = presetsResult.status === 'fulfilled' ? presetsResult.value : {}
-  if (catalogResult.status === 'rejected') console.warn('Could not load catalog:', catalogResult.reason)
-  if (presetsResult.status === 'rejected')  console.warn('Could not load presets:', presetsResult.reason)
-  selectedGroups = new Set((presets.minimal || { groups: [] }).groups)
+  catalog  = catalogResult.status  === 'fulfilled' ? catalogResult.value  : { items: {} }
+  presets  = presetsResult.status  === 'fulfilled' ? presetsResult.value  : {}
+
+  // Populate preset selector
+  const presetEl = document.getElementById('preset')
+  for (const [name, data] of Object.entries(presets)) {
+    const opt = document.createElement('option')
+    opt.value = name
+    opt.textContent = `${name} — ${data.description || ''}`
+    presetEl.appendChild(opt)
+  }
+
+  // Default to 'standard' if available
+  if (presets.standard) {
+    presetEl.value = 'standard'
+    applyPreset('standard')
+  }
+
   populateCatalogGrid(catalog)
+}
+
+function applyPreset(name) {
+  const data = presets[name]
+  if (!data) return
+  selectedGroups = new Set(data.groups || [])
+
+  // Sync topology and features from preset
+  if (data.topology) document.getElementById('topology').value = data.topology
+  if (data.features) {
+    document.getElementById('feat-ads').checked      = !!data.features.ads_block
+    document.getElementById('feat-tracking').checked = !!data.features.tracking_block
+    document.getElementById('feat-quic').checked     = !!data.features.quic_block
+    document.getElementById('feat-lb').checked       = !!data.features.load_balance
+  }
+
+  // Sync checkboxes
+  document.querySelectorAll('#cat-grid input[type="checkbox"]').forEach(cb => {
+    cb.checked = selectedGroups.has(cb.value)
+  })
+  updateCatCount()
 }
 
 function populateCatalogGrid(catalog) {
   const grid = document.getElementById('cat-grid')
   grid.innerHTML = ''
-  const groups = getGroups(catalog)
-  for (const group of groups) {
-    const actionBadge = group.defaultAction === 'REJECT'
-      ? '<span class="tag block">block</span>'
-      : group.defaultAction === 'DIRECT'
-        ? '<span class="tag direct">direct</span>'
-        : '<span class="tag proxy">proxy</span>'
+  for (const group of getGroups(catalog)) {
+    const action = group.defaultAction === 'REJECT' ? 'block'
+                 : group.defaultAction === 'DIRECT' ? 'direct' : 'proxy'
     const item = document.createElement('label')
     item.className = 'cat-item'
     item.innerHTML = `
       <input type="checkbox" value="${group.id}" ${selectedGroups.has(group.id) ? 'checked' : ''}>
-      <span>${group.name}${actionBadge}</span>
+      <span>${group.id}<span class="tag ${action}">${action}</span></span>
     `
     item.querySelector('input').addEventListener('change', e => {
       if (e.target.checked) selectedGroups.add(group.id)
@@ -90,110 +144,85 @@ function updateCatCount() {
   document.getElementById('cat-count').textContent = `(${selectedGroups.size} 已选)`
 }
 
+// ── event listeners ───────────────────────────────────────────────────────────
+
+document.getElementById('kernel').addEventListener('change', e => {
+  const isSingbox  = e.target.value === 'singbox'
+  document.getElementById('topology-section').style.display = isSingbox ? 'none' : ''
+  document.getElementById('tier-section').style.display     = isSingbox ? '' : 'none'
+  document.getElementById('region-section').style.display   = isSingbox ? 'none' : ''
+})
+
+document.getElementById('topology').addEventListener('change', e => {
+  const showLB = e.target.value === 'full'
+  document.getElementById('feat-lb-wrap').style.opacity = showLB ? '1' : '0.4'
+})
+
 document.getElementById('preset').addEventListener('change', e => {
-  const val = e.target.value
-  const isCustom = val === 'custom'
-  document.getElementById('cat-section').style.display = isCustom ? '' : 'none'
-  if (!isCustom) {
-    selectedGroups = new Set((presets[val] || { groups: [] }).groups)
-    document.querySelectorAll('#cat-grid input[type="checkbox"]').forEach(cb => {
-      cb.checked = selectedGroups.has(cb.value)
-    })
-    updateCatCount()
-  }
+  if (e.target.value !== 'custom') applyPreset(e.target.value)
 })
 
 document.getElementById('generate').addEventListener('click', () => {
-  const kernel = document.getElementById('kernel').value
-  const tier   = parseInt(document.getElementById('tier').value, 10)
-  const preset = document.getElementById('preset').value
-  const groupIds = preset === 'custom' ? [...selectedGroups] : ((presets[preset] || { groups: [] }).groups)
-  const subs = document.getElementById('subs').value.trim().split('\n').filter(Boolean)
-
-  if (subs.length === 0) {
-    alert('请至少输入一个订阅链接')
-    return
+  const kernel   = document.getElementById('kernel').value
+  const topology = document.getElementById('topology').value
+  const tier     = parseInt(document.getElementById('tier').value, 10)
+  const preset   = document.getElementById('preset').value
+  const groupIds = preset === 'custom' ? [...selectedGroups] : [...(new Set(presets[preset]?.groups || []))]
+  const subs     = document.getElementById('subs').value.trim().split('\n').filter(Boolean)
+  const regionExcludes = document.getElementById('region-excludes').value.trim()
+  const features = {
+    ads_block:       document.getElementById('feat-ads').checked,
+    tracking_block:  document.getElementById('feat-tracking').checked,
+    quic_block:      document.getElementById('feat-quic').checked,
+    load_balance:    document.getElementById('feat-lb').checked,
   }
 
-  const output = kernel === 'mihomo'
-    ? generateMihomo(groupIds, subs, tier)
-    : generateSingbox(groupIds, subs, tier)
+  let output
+  if (kernel === 'singbox') {
+    output = generateSingbox(groupIds, subs, tier)
+  } else {
+    const target = kernel  // 'mihomo' or 'mihomo-smart'
+    output = buildFullProfile(subs, groupIds, catalog || { items: {} }, {
+      topology, target, features, regionExcludes,
+    })
+  }
 
   const el = document.getElementById('output')
   el.textContent = output
   el.style.display = 'block'
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' })
 })
 
 document.getElementById('copy').addEventListener('click', () => {
   const text = document.getElementById('output').textContent
-  if (text) navigator.clipboard.writeText(text).then(() => alert('已复制'))
+  if (text) navigator.clipboard.writeText(text).then(() => alert('已复制到剪贴板'))
 })
 
-function generateMihomo(groupIds, subs, tier) {
-  const { proxyProviders, groups, providers, rules } =
-    buildMihomoGroups(subs, groupIds, catalog || { items: {} }, { tier })
+document.getElementById('download').addEventListener('click', () => {
+  const text = document.getElementById('output').textContent
+  if (!text) return
+  const preset = document.getElementById('preset').value
+  const kernel = document.getElementById('kernel').value
+  const ext    = kernel === 'singbox' ? 'json' : 'yaml'
+  const a = document.createElement('a')
+  a.href = URL.createObjectURL(new Blob([text], { type: 'text/plain' }))
+  a.download = `${preset}-${kernel}.${ext}`
+  a.click()
+})
 
-  const lines = [
-    '# generated by hajimihomo profile builder',
-    `# tier: ${tier}  groups: ${groupIds.length}`,
-    '',
-    'proxy-providers:',
-    ...Object.entries(proxyProviders).flatMap(([k, v]) => [
-      `  ${k}:`,
-      `    type: ${v.type}`,
-      `    url: "${v.url}"`,
-      `    interval: ${v.interval}`,
-      `    health-check:`,
-      `      enable: ${v.health_check.enable}`,
-      `      url: "${v.health_check.url}"`,
-      `      interval: ${v.health_check.interval}`,
-    ]),
-    '',
-    'proxy-groups:',
-    ...groups.flatMap(g => {
-      const out = [`  - name: ${g.name}`, `    type: ${g.type}`]
-      if (g.use)      out.push(`    use: [${g.use.join(', ')}]`)
-      if (g.proxies)  out.push(`    proxies: [${g.proxies.join(', ')}]`)
-      if (g.url)      out.push(`    url: "${g.url}"`, `    interval: ${g.interval}`)
-      if (g.tolerance) out.push(`    tolerance: ${g.tolerance}`)
-      return out
-    }),
-    '',
-    'rule-providers:',
-    ...Object.entries(providers).flatMap(([k, v]) => [
-      `  ${k}:`,
-      `    type: ${v.type}`,
-      `    behavior: ${v.behavior}`,
-      `    url: "${v.url}"`,
-      `    path: "${v.path}"`,
-      `    interval: ${v.interval}`,
-    ]),
-    '',
-    'rules:',
-    ...rules.map(r => `  - ${r}`),
-    '  - GEOIP,CN,DIRECT',
-    '  - MATCH,PROXY',
-  ]
-  return lines.join('\n')
-}
+// ── sing-box output (fragment only) ──────────────────────────────────────────
 
 function generateSingbox(groupIds, subs, tier) {
-  // sing-box output is a route/rule_set fragment.
-  // Subscription-based outbounds must be imported separately via the kernel.
-  const { ruleSets, routeRules } =
-    buildSingboxRuleSets(groupIds, catalog || { items: {} }, { tier })
-
+  const { ruleSets, routeRules } = buildSingboxRuleSets(groupIds, catalog || { items: {} }, { tier })
   const outbounds = [
-    { tag: 'proxy',   type: 'selector', outbounds: ['auto', 'direct'] },
-    { tag: 'auto',    type: 'urltest',  outbounds: ['direct'],
-      url: 'https://cp.cloudflare.com', interval: '5m' },
-    { tag: 'direct',  type: 'direct' },
-    { tag: 'block',   type: 'block' },
-    { tag: 'dns-out', type: 'dns' },
+    { tag: 'proxy',  type: 'selector', outbounds: ['auto', 'direct'] },
+    { tag: 'auto',   type: 'urltest',  outbounds: ['direct'], url: 'https://cp.cloudflare.com', interval: '5m' },
+    { tag: 'direct', type: 'direct' },
+    { tag: 'block',  type: 'block' },
+    { tag: 'dns-out',type: 'dns' },
   ]
-
   const config = {
-    '$comment': `generated by hajimihomo profile builder — tier ${tier}`,
+    '$comment': `hajimihomo profile builder — sing-box fragment — tier ${tier}`,
     outbounds,
     route: {
       rule_set: ruleSets,

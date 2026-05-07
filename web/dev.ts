@@ -11,7 +11,13 @@ const presets = {};
 for (const file of (await readdir(presetsDir)).filter(f => f.endsWith(".yaml")).sort()) {
   const data = parseYaml(await readFile(resolve(presetsDir, file), "utf8")) || {};
   const name = data.name || file.replace(".yaml", "");
-  presets[name] = { description: data.description || "", groups: data.groups || [] };
+  presets[name] = {
+    description: data.description || "",
+    target:      data.target      || "mihomo",
+    topology:    data.topology    || "standard",
+    features:    data.features    || {},
+    groups:      data.groups      || [],
+  };
 }
 const presetsJson = JSON.stringify(presets, null, 2);
 
