@@ -1,4 +1,4 @@
-.PHONY: help build build-groups build-dry validate extract extract-check dev web-build web-dev web-install vendor-sync vendor-coverage profile cli-build
+.PHONY: help build build-groups build-dry validate extract extract-check dev web-build web-dev web-install vendor-sync vendor-coverage profile cli-build clean
 
 GROUPS ?= proxy/telegram,block/ads,direct/cn
 JOBS   ?= 8
@@ -66,7 +66,7 @@ web-build: web-install
 	cd web && bun run build.ts
 
 cli-build: web-install   ## Compile Bun CLI binary → bin/hajimihomo
-	cd web && bun build --compile cli.ts --outfile ../bin/hajimihomo
+	bun build --compile web/cli.ts --outfile bin/hajimihomo
 
 profile: web-install    ## Generate profile (PRESET=mini|lite|standard|full)
 	bun run web/cli.ts --preset $(PRESET)
@@ -76,3 +76,6 @@ dev: web-install
 
 dev-local: web-install
 	cd web && RULESET_DIR=../dist bun run dev.ts
+
+clean:   ## Remove build artifacts (bin/, web/dist/, bun compile cache)
+	rm -rf bin/ web/dist/ web/.*.bun-build profiles/output/
