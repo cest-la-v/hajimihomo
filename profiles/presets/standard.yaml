@@ -1,6 +1,6 @@
-# standard preset — everyday use
+# standard preset — everyday: full services with regional url-test
 name: standard
-description: "Standard rules: ads, tracking, China direct, core proxy services"
+description: "Everyday: all key services + streaming + social. Regional auto-test groups."
 target: mihomo
 topology: standard
 features:
@@ -13,12 +13,13 @@ groups:
   - block/ads
   - block/tracking
   - direct/cn
-  - direct/cn-ips
   - proxy/apple
   - proxy/google
+  - proxy/microsoft
   - proxy/youtube
   - proxy/telegram
   - proxy/twitter
-  - proxy/ai
+  - proxy/netflix
+  - proxy/streaming
   - proxy/social
-  - proxy/dev
+  - proxy/ai

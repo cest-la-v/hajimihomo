@@ -1,6 +1,6 @@
-# minimal preset — essential groups only
+# minimal preset — light: CN/ads split only, no per-service routing
 name: minimal
-description: "Core rules: ad block, China direct, key proxy services"
+description: "Light rules: ads blocked, China goes direct, everything else proxied. No per-service routing."
 target: mihomo
 topology: minimal
 features:
@@ -12,8 +12,3 @@ features:
 groups:
   - block/ads
   - direct/cn
-  - proxy/apple
-  - proxy/google
-  - proxy/youtube
-  - proxy/telegram
-  - proxy/dev

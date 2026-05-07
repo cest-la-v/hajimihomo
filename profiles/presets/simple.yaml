@@ -1,6 +1,6 @@
-# simple preset — beginner-friendly
+# simple preset — lite: essential services with single global url-test
 name: simple
-description: "Simple rules: ad block, China direct, essential proxy services"
+description: "Essential services: Apple, Google, Microsoft, YouTube, Telegram, AI. Single global auto-test."
 target: mihomo
 topology: minimal
 features:
@@ -14,6 +14,7 @@ groups:
   - direct/cn
   - proxy/apple
   - proxy/google
+  - proxy/microsoft
+  - proxy/youtube
   - proxy/telegram
   - proxy/ai
-  - proxy/social
