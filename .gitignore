@@ -7,3 +7,4 @@ scripts/validate/coverage-report.md
 profiles/output/
 source/hosts/.cache.json
 bin/
+*.bun-build
