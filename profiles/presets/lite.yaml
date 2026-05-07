@@ -1,6 +1,6 @@
 # simple preset — lite: essential services with single global url-test
-name: simple
-description: "Essential services: Apple, Google, Microsoft, YouTube, Telegram, AI. Single global auto-test."
+name: lite
+description: 'Lite: 8 essential services with single global url-test.'
 target: mihomo
 topology: minimal
 features:

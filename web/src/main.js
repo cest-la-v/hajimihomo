@@ -88,10 +88,10 @@ async function init() {
     presetEl.appendChild(opt)
   }
 
-  // Default to 'standard' if available
-  if (presets.standard) {
-    presetEl.value = 'standard'
-    applyPreset('standard')
+  // Default to 'full' if available
+  if (presets.full) {
+    presetEl.value = 'full'
+    applyPreset('full')
   }
 
   populateCatalogGrid(catalog)

@@ -1,0 +1,31 @@
+# full preset — comprehensive rule set
+name: pro
+description: 'Pro: all 19 catalog groups, full LB topology.'
+target: mihomo        # mihomo | mihomo-smart (vernesong fork, enables smart groups)
+topology: full        # full | standard | minimal
+features:
+  ads_block: true
+  tracking_block: true
+  quic_block: true
+  load_balance: true
+
+groups:
+  - block/ads
+  - block/tracking
+  - direct/cn
+  - direct/cn-ips
+  - proxy/apple
+  - proxy/google
+  - proxy/youtube
+  - proxy/microsoft
+  - proxy/amazon
+  - proxy/telegram
+  - proxy/twitter
+  - proxy/netflix
+  - proxy/streaming
+  - proxy/social
+  - proxy/ai
+  - proxy/gaming
+  - proxy/dev
+  - proxy/finance
+  - proxy/news
