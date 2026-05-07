@@ -5,8 +5,8 @@
 **hajimihomo** is a mihomo/Clash Meta ruleset build system. It aggregates proxy routing rules from multiple upstream sources (primarily [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)), resolves them into clean rule sets, and publishes them to CDN branches for use in proxy clients.
 
 Two deliverables:
-1. **Rule sets** — built by `scripts/build.py`, published to `dist/` and CDN branches in YAML (mihomo), JSON (sing-box), and binary `.mrs`/`.srs` formats.
-2. **Interactive profile builder** — a static web app (`web/`) deployed to GitHub Pages that lets users generate complete, standalone mihomo or sing-box config files.
+1. **Rule sets** — built by `scripts/build.py`, published to `dist/` and CDN branches. Each group produces multiple output files per format tier (see [Source Structure](#source-structure)).
+2. **Interactive profile builder** — a static web app (`web/`) deployed to GitHub Pages that lets users generate complete, standalone mihomo config files.
 
 **Key technologies:** Python 3 · PyYAML · Bun · JavaScript (ES modules) · GitHub Actions · jsDelivr CDN
 
@@ -101,6 +101,21 @@ make validate                        # validate source/categories.yaml + catalog
 
 Output lands in `dist/mihomo/` and `dist/singbox/`.
 
+**Dist output format tiers** — for each catalog group, `build.py` emits:
+
+| File | Behavior | Content | Used for |
+|------|----------|---------|---------|
+| `<slug>.yaml` | classical | All rule types | Tier 1: broadest compat, one file |
+| `<slug>.domain.yaml` | domain | DOMAIN + DOMAIN-SUFFIX only | Tier 2 split |
+| `<slug>.ip.yaml` | ipcidr | IP-CIDR (with no-resolve) | Tier 2 split |
+| `<slug>.ip-resolve.yaml` | ipcidr | IP-CIDR (without no-resolve) | Tier 2: load LAST globally |
+| `<slug>.residual.yaml` | classical | DOMAIN-KEYWORD, DOMAIN-REGEX, IP-ASN | Tier 2 split |
+| `<slug>.process.yaml` | classical | PROCESS-NAME only | Tier 2 split |
+
+Binary versions (`.mrs` for mihomo, `.srs` for sing-box) are compiled by CI and published to GitHub Releases (`release` branch). Do NOT mix Tier-1 and Tier-2 files for the same group — rules would evaluate twice.
+
+`rulesets.json` (published to `ruleset/mihomo/` branch) is the inventory of all available split files, keyed by group slug. The web profile builder fetches this at runtime to know which splits exist.
+
 ### Profile builder (web — primary)
 
 ```bash
@@ -179,12 +194,18 @@ The UI runs at `http://localhost:5173` in dev mode. Key behavior:
 
 - **Kernel selector**: `mihomo` / `mihomo-smart` (vernesong fork, enables `smart` group type) / `sing-box` (route fragment only)
 - **Topology**: `full` (LB + url-test per region, ~60 groups) / `standard` (~25) / `minimal` (~12)
+- **Geodata source**: `MetaCubeX (lite)` / `DustinWin (full)` — controls the `geox-url:` block. We do **not** publish our own geoip/geosite; always use a third-party source.
+- **Ruleset format**: `Classic YAML` / `Split YAML` (default) / `Binary .mrs` — controls which dist file tier rule-providers reference. Binary requires CI releases to be published first.
 - **Preset selector**: loads `presets.json` (generated from `profiles/presets/*.yaml` at build time); auto-applies topology, features, and group selection
 - **Output**: for mihomo targets, generates a complete standalone YAML (DNS, sniffer, TUN, YAML anchors, proxy groups, rules); for sing-box, generates a route fragment
 
 When modifying the profile generation logic, all browser-side logic lives in `web/src/ProfileBuilder.js` — the `buildFullProfile()` function at the bottom of that file. The Jinja2 template at `profiles/templates/mihomo.yaml.j2` is the CLI equivalent and should be kept in sync.
 
-Rule-provider URLs in generated profiles reference `releases/latest/download/` — these only resolve after the CI release workflow publishes binaries.
+Rule-provider URLs in generated profiles use jsDelivr CDN (`@ruleset` branch) for YAML split files, and `releases/latest/download/` for binary `.mrs` files (require CI release to exist).
+
+**`geox-url` must point at a third-party geodata source** — we never publish `geoip.mmdb` or `geosite.dat`. Two supported sources (see P2b in plan):
+- MetaCubeX/meta-rules-dat: `releases/download/latest/geosite.dat`, `geoip-lite.dat`, `country-lite.mmdb`, `GeoLite2-ASN.mmdb`
+- DustinWin/ruleset_geodata: `releases/download/mihomo-geodata/geosite.dat`, `geoip.metadb`, `Country.mmdb`, `Country-ASN.mmdb`
 
 ---
 
@@ -219,6 +240,7 @@ The CI Python environment uses Python 3.12 with only `pyyaml` installed (no venv
 - **`profiles/output/` is gitignored** — CLI profile builder output stays local.
 - **YAML anchor syntax**: the Jinja2 template and generated profiles use top-level dummy keys (`p:`, `g:`, `f:`) as anchor holders. mihomo ignores unknown top-level keys, so anchors defined there are valid and available throughout the document.
 - **Rule ordering is critical**: in generated profiles, `direct/cn` domain rules MUST precede proxy service domain rules. Changing rule order in `gen_rules.py` or `ProfileBuilder.js` can cause CN traffic to leak through proxy.
+- **Block groups use named selects, not direct REJECT**: rules never hardcode `REJECT` as a target. Instead, `block/ads` → `🚫 广告拦截` group (select: [REJECT, DIRECT, 默认代理]), etc. This allows dashboard-level toggle between blocking and bypassing without editing YAML.
 - **`smart` group type** is NOT in official MetaCubeX/mihomo — it exists only in the `vernesong/mihomo` fork. The `mihomo-smart` kernel option in the web UI generates profiles that require this fork.
 - **CI vs local Python**: CI uses system Python 3.12 + pyyaml only. Local profile builder uses `.venv/` with additional deps. Never add `jinja2`/`ruamel.yaml`/`requests` imports to `scripts/build.py`, `validate.py`, or other CI-run scripts.
 - **Unquoted colon-space in YAML strings** is parsed as a nested mapping. Region filter regexes and other strings containing `: ` must be single-quoted in generated YAML output.
