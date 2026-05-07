@@ -1,0 +1,104 @@
+# hajimihomo — mihomo base configuration defaults
+# Reference: https://wiki.metacubex.one/en_US/config/
+#
+# Imported by ProfileBuilder at build time (inlined into JS bundle).
+# Dynamic sections — geox-url, proxy-providers, proxy-groups, rule-providers,
+# rules — are generated and merged by ProfileBuilder.
+# Conditional keys — external-controller, lgbm-* — are injected based on features.
+
+mixed-port: 7890
+allow-lan: false
+bind-address: '*'
+mode: rule
+log-level: warning
+ipv6: true
+unified-delay: true
+tcp-concurrent: true
+find-process-mode: strict
+global-client-fingerprint: chrome
+global-ua: mihomo
+keep-alive-idle: 600
+keep-alive-interval: 60
+etag-support: true
+
+geodata-mode: true
+geo-auto-update: true
+geo-update-interval: 168  # hours (weekly); geox-url set by ProfileBuilder
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+dns:
+  enable: true
+  ipv6: true
+  listen: 0.0.0.0:1053
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-range6: 3fff::/20
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter:
+    - '*.lan'
+    - '*.local'
+    - '*.localhost'
+    - '*.home.arpa'
+    - '+.stun.*.*'
+    - '+.stun.*.*.*'
+    - '+.stun.*.*.*.*'
+    - 'time.*.com'
+    - 'time.*.gov'
+    - 'time.*.apple.com'
+    - '+.ntp.org.cn'
+    - '+.time.edu.cn'
+    - 'ntp.ubuntu.com'
+    - 'time.cloudflare.com'
+    - '+.pool.ntp.org'
+    - '+.msftconnecttest.com'
+    - '+.msftncsi.com'
+    - '+.push.apple.com'
+    - 'swcd.*.apple.com'
+    - 'mesu.apple.com'
+    - '+.miwifi.com'
+    - '+.docker.io'
+    - '+.xbox.com'
+    - '+.xboxlive.com'
+  cache-algorithm: arc
+  respect-rules: false
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  fallback:
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+    - https://9.9.9.9/dns-query
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain:
+    - 'Mijia Cloud'
+    - '+.push.apple.com'
+
+tun:
+  enable: false
+  stack: mixed
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  dns-hijack:
+    - any:53

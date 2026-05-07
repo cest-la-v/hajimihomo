@@ -19,6 +19,7 @@
  */
 
 import yaml from 'js-yaml'
+import mihomoDefaultsText from '../../profiles/defaults/mihomo.yaml' with { type: 'text' }
 
 const REPO = 'cest-la-v/hajimihomo'
 const CDN_BASE = `https://cdn.jsdelivr.net/gh/${REPO}`
@@ -532,136 +533,48 @@ function _proxyProviders2(subUrls) {
   return providers
 }
 
-const _core = (target, features = {}) => {
-  const parts = [
-`mixed-port: 7890
-allow-lan: false
-bind-address: '*'
-mode: rule
-log-level: warning
-ipv6: true
-unified-delay: true
-tcp-concurrent: true
-find-process-mode: strict
-global-client-fingerprint: chrome
-global-ua: mihomo
-keep-alive-idle: 600
-keep-alive-interval: 60
-etag-support: true`]
-  if (features.dashboard) parts.push(
-`external-controller: ':9090'
-external-ui: ui
-external-ui-url: 'https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip'
-secret: ''`)
-  if (target === 'mihomo-smart') parts.push(
-`lgbm-auto-update: true
-lgbm-update-interval: 24
-lgbm-url: 'https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin'`)
-  return parts.join('\n')
+const _CORE_KEYS = [
+  'mixed-port', 'allow-lan', 'bind-address', 'mode', 'log-level',
+  'ipv6', 'unified-delay', 'tcp-concurrent', 'find-process-mode',
+  'global-client-fingerprint', 'global-ua', 'keep-alive-idle', 'keep-alive-interval',
+  'etag-support',
+  // conditionally present (dashboard feature):
+  'external-controller', 'external-ui', 'external-ui-url', 'secret',
+  // conditionally present (mihomo-smart target):
+  'lgbm-auto-update', 'lgbm-update-interval', 'lgbm-url',
+]
+const _GEODATA_KEYS = ['geodata-mode', 'geo-auto-update', 'geo-update-interval', 'geox-url']
+
+function _pick(obj, keys) {
+  return Object.fromEntries(keys.filter(k => k in obj).map(k => [k, obj[k]]))
 }
 
-const _geodata = (geodata = 'metacubex') => {
+function _buildStaticBase(target, features, geodata) {
+  const base = yaml.load(mihomoDefaultsText)
+
   const u = GEODATA_SOURCES[geodata] || GEODATA_SOURCES.metacubex
-  return `\
-geodata-mode: true
-geo-auto-update: true
-geo-update-interval: 168
-geox-url:
-  geoip: '${u.geoip}'
-  geosite: '${u.geosite}'
-  mmdb: '${u.mmdb}'
-  asn: '${u.asn}'`
+  base['geox-url'] = { geoip: u.geoip, geosite: u.geosite, mmdb: u.mmdb, asn: u.asn }
+
+  if (features.dashboard) {
+    base['external-controller'] = ':9090'
+    base['external-ui'] = 'ui'
+    base['external-ui-url'] = 'https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip'
+    base['secret'] = ''
+  }
+
+  if (target === 'mihomo-smart') {
+    base['lgbm-auto-update'] = true
+    base['lgbm-update-interval'] = 24
+    base['lgbm-url'] = 'https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin'
+    base.profile['smart-collector-size'] = 1024
+  }
+
+  if (features.tun_enable) {
+    base.tun.enable = true
+  }
+
+  return base
 }
-
-const _profile = (target) =>
-`profile:
-  store-selected: true
-  store-fake-ip: true${target === 'mihomo-smart' ? '\n  smart-collector-size: 1024' : ''}`
-
-const _dns = () =>
-`dns:
-  enable: true
-  ipv6: true
-  listen: 0.0.0.0:1053
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  fake-ip-range6: 3fff::/20
-  fake-ip-filter-mode: blacklist
-  fake-ip-filter:
-    - '*.lan'
-    - '*.local'
-    - '*.localhost'
-    - '*.home.arpa'
-    - '+.stun.*.*'
-    - '+.stun.*.*.*'
-    - '+.stun.*.*.*.*'
-    - 'time.*.com'
-    - 'time.*.gov'
-    - 'time.*.apple.com'
-    - '+.ntp.org.cn'
-    - '+.time.edu.cn'
-    - 'ntp.ubuntu.com'
-    - 'time.cloudflare.com'
-    - '+.pool.ntp.org'
-    - '+.msftconnecttest.com'
-    - '+.msftncsi.com'
-    - '+.push.apple.com'
-    - 'swcd.*.apple.com'
-    - 'mesu.apple.com'
-    - '+.miwifi.com'
-    - '+.docker.io'
-    - '+.xbox.com'
-    - '+.xboxlive.com'
-  cache-algorithm: arc
-  respect-rules: false
-  default-nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
-  nameserver:
-    - https://doh.pub/dns-query
-    - https://dns.alidns.com/dns-query
-  fallback:
-    - https://1.1.1.1/dns-query
-    - https://8.8.8.8/dns-query
-    - https://9.9.9.9/dns-query
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
-    ipcidr:
-      - 240.0.0.0/4`
-
-const _sniffer = () =>
-`sniffer:
-  enable: true
-  sniff:
-    HTTP:
-      ports: [80, 8080-8880]
-      override-destination: true
-    TLS:
-      ports: [443, 8443]
-    QUIC:
-      ports: [443, 8443]
-  skip-domain:
-    - 'Mijia Cloud'
-    - '+.push.apple.com'`
-
-const _tun = (tun_enable = false) => tun_enable
-  ? `tun:
-  enable: true
-  stack: mixed
-  auto-route: true
-  auto-redirect: true
-  auto-detect-interface: true
-  dns-hijack:
-    - any:53`
-  : `# tun:
-#   enable: false
-#   stack: mixed
-#   auto-route: true
-#   auto-redirect: true
-#   auto-detect-interface: true
-#   dns-hijack:
-#     - any:53`
 
 /**
  * Build a complete standalone mihomo YAML profile.
@@ -695,14 +608,16 @@ export function buildFullProfile(subUrls, groupIds, catalog, opts = {}) {
     ? '# ⚠️  Requires vernesong/mihomo fork — https://github.com/vernesong/mihomo'
     : '# generated by hajimihomo · https://github.com/cest-la-v/hajimihomo'
 
+  const base = _buildStaticBase(target, features, geodata)
+
   const sections = [
     `${header}\n# topology: ${topology}  target: ${target}  groups: ${groupIds.length}`,
-    _core(target, features),
-    _geodata(geodata),
-    _profile(target),
-    _dns(),
-    _sniffer(),
-    _tun(features.tun_enable),
+    _dump(_pick(base, _CORE_KEYS)),
+    _dump(_pick(base, _GEODATA_KEYS)),
+    _dump({ profile: base.profile }),
+    _dump({ dns: base.dns }),
+    _dump({ sniffer: base.sniffer }),
+    _dump({ tun: base.tun }),
     `# ── proxy providers ──────────────────────────────────────────────────────────\n` +
       (subUrls.length
         ? _dump({ 'proxy-providers': proxyProviders })
