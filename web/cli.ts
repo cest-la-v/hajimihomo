@@ -3,20 +3,21 @@
  * hajimihomo CLI — generate a complete mihomo profile from preset + user config.
  *
  * Usage: hajimihomo [options]
- *   --preset   mini|lite|standard|full    (default: standard)
- *   --user     path/to/user.yaml          (default: profiles/user.yaml)
- *   --output   path/to/output/dir         (default: profiles/output)
- *   --catalog  path/to/rulesets.json      (default: dist/mihomo/rulesets.json)
- *   --format   yaml-split|yaml-classical|binary  (default: yaml-split)
- *   --geodata  metacubex|dustinwin        (default: metacubex)
- *   --target   mihomo|mihomo-smart        (overrides preset)
- *   --topology global|regional|advanced   (overrides preset)
- *   --help                                show this message
+ *   --preset   mini|lite|standard|full         (default: standard)
+ *   --sub      https://airport.com/sub?tok=xxx  (repeatable; overrides user.yaml subs)
+ *   --user     path/to/user.yaml               (default: profiles/user.yaml)
+ *   --output   path/to/output/dir              (default: profiles/output)
+ *   --catalog  path/to/rulesets.json           (default: dist/rulesets.json)
+ *   --format   yaml-split|yaml-classical|binary (default: yaml-split)
+ *   --geodata  metacubex|dustinwin             (default: metacubex)
+ *   --target   mihomo|mihomo-smart             (overrides preset)
+ *   --topology global|regional|advanced        (overrides preset)
+ *   --help                                     show this message
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
 import { resolve, join, dirname } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { createInterface } from 'node:readline/promises'
 import yaml from 'js-yaml'
 import { buildFullProfile } from './src/ProfileBuilder.js'
 import { buildHostsBlock } from './hosts.js'
@@ -28,8 +29,13 @@ const DEFAULT_CATALOG = 'dist/rulesets.json'
 
 // ── arg parsing ──────────────────────────────────────────────────────────────
 
-function parseArgs(argv: string[]): Record<string, string> {
-  const args: Record<string, string> = {
+interface ParsedArgs {
+  flags: Record<string, string>
+  subs: string[]   // --sub (repeatable)
+}
+
+function parseArgs(argv: string[]): ParsedArgs {
+  const flags: Record<string, string> = {
     preset: 'standard',
     user: DEFAULT_USER,
     output: DEFAULT_OUTPUT,
@@ -37,15 +43,17 @@ function parseArgs(argv: string[]): Record<string, string> {
     format: 'yaml-split',
     geodata: 'metacubex',
   }
+  const subs: string[] = []
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i]
     if (a === '--help' || a === '-h') { printHelp(); process.exit(0) }
+    if (a === '--sub' && argv[i + 1]) { subs.push(argv[++i]); continue }
     const key = a.replace(/^--/, '')
     if (a.startsWith('--') && argv[i + 1] && !argv[i + 1].startsWith('--')) {
-      args[key] = argv[++i]
+      flags[key] = argv[++i]
     }
   }
-  return args
+  return { flags, subs }
 }
 
 function printHelp() {
@@ -55,15 +63,19 @@ hajimihomo — mihomo profile builder
 Usage: hajimihomo [options]
 
 Options:
-  --preset    mini|lite|standard|full      (default: standard)
-  --user      path/to/user.yaml            (default: profiles/user.yaml)
-  --output    output directory             (default: profiles/output)
-  --catalog   path/to/rulesets.json        (default: dist/mihomo/rulesets.json)
-  --format    yaml-split|yaml-classical|binary  (default: yaml-split)
-  --geodata   metacubex|dustinwin          (default: metacubex)
-  --target    mihomo|mihomo-smart          (overrides preset)
-  --topology  global|regional|advanced     (overrides preset)
-  --help      show this message`)
+  --preset    mini|lite|standard|full            (default: standard)
+  --sub       subscription URL                   (repeatable; overrides user.yaml subs)
+  --user      path/to/user.yaml                  (default: profiles/user.yaml)
+  --output    output directory                   (default: profiles/output)
+  --catalog   path/to/rulesets.json              (default: dist/rulesets.json)
+  --format    yaml-split|yaml-classical|binary   (default: yaml-split)
+  --geodata   metacubex|dustinwin                (default: metacubex)
+  --target    mihomo|mihomo-smart                (overrides preset)
+  --topology  global|regional|advanced           (overrides preset)
+  --help      show this message
+
+When no --sub flags and no user.yaml exist, an interactive wizard runs to
+collect subscription URLs and optionally saves them to user.yaml.`)
 }
 
 // ── preset loading ───────────────────────────────────────────────────────────
@@ -71,19 +83,15 @@ Options:
 function loadPreset(name: string): Record<string, any> {
   const files = [
     join(PRESET_DIR, `${name}.yaml`),
-    // handle numbered prefix filenames like 3-standard.yaml
     ...['1', '2', '3', '4'].map(n => join(PRESET_DIR, `${n}-${name}.yaml`)),
   ]
   for (const f of files) {
-    if (existsSync(f)) {
-      const raw = readFileSync(f, 'utf8')
-      return yaml.load(raw) as Record<string, any>
-    }
+    if (existsSync(f)) return (yaml.load(readFileSync(f, 'utf8')) || {}) as Record<string, any>
   }
   throw new Error(`Preset '${name}' not found in ${PRESET_DIR}/`)
 }
 
-// ── user config loading ───────────────────────────────────────────────────────
+// ── user config ───────────────────────────────────────────────────────────────
 
 interface UserConfig {
   proxy_providers?: Array<{ name: string; url: string; prefix?: string }>
@@ -99,30 +107,77 @@ interface UserConfig {
   hosts_exclude?: string[]
 }
 
-function loadUser(path: string): UserConfig {
-  if (!existsSync(path)) {
-    console.warn(`[warn] user config not found at ${path}, using defaults`)
-    return {}
-  }
+function loadUser(path: string): UserConfig | null {
+  if (!existsSync(path)) return null
   return (yaml.load(readFileSync(path, 'utf8')) || {}) as UserConfig
+}
+
+// ── interactive wizard ────────────────────────────────────────────────────────
+
+async function runWizard(userPath: string): Promise<string[]> {
+  const rl = createInterface({ input: process.stdin, output: process.stdout })
+  const subUrls: string[] = []
+
+  const ask = (q: string) => rl.question(q).catch(() => '')
+
+  console.log('\n✨ No subscription URLs found. Enter your proxy airport subscription(s).\n')
+
+  while (true) {
+    const url = (await ask('  Subscription URL (empty to finish): ')).trim()
+    if (!url) break
+    subUrls.push(url)
+    console.log(`  ✓ Added (${subUrls.length})`)
+  }
+
+  if (subUrls.length > 0) {
+    const ans = (await ask(`\n  Save to ${userPath}? [Y/n] `)).trim().toLowerCase()
+    if (!ans || ans === 'y') {
+      const config = {
+        proxy_providers: subUrls.map((url, i) => ({ name: `Airport ${i + 1}`, url })),
+      }
+      mkdirSync(dirname(resolve(userPath)), { recursive: true })
+      writeFileSync(userPath, yaml.dump(config, { lineWidth: -1 }))
+      console.log(`  ✓ Saved to ${userPath}\n`)
+    }
+  } else {
+    console.log('  (no URLs entered — generating profile without proxy providers)\n')
+  }
+
+  rl.close()
+  return subUrls
 }
 
 // ── main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
-  const args = parseArgs(process.argv.slice(2))
+  const { flags, subs: flagSubs } = parseArgs(process.argv.slice(2))
 
-  // load preset + user config
-  const preset = loadPreset(args.preset)
-  const user   = loadUser(args.user)
+  const preset = loadPreset(flags.preset)
 
-  // merge: user overrides preset where specified
-  const target   = args.target   || user.target   || preset.target   || 'mihomo'
-  const topology = args.topology || user.topology  || preset.topology || 'regional'
-  const geodata  = args.geodata  || user.geodata   || 'metacubex'
-  const format   = args.format   || user.format    || 'yaml-split'
+  // Priority: --sub flags → user.yaml → interactive wizard
+  let user: UserConfig = {}
+  let subUrls: string[]
 
-  // group IDs: start from preset, apply user add/remove
+  if (flagSubs.length > 0) {
+    // flags win; still load file for non-sub settings if it exists
+    user = loadUser(flags.user) || {}
+    subUrls = flagSubs
+  } else {
+    const loaded = loadUser(flags.user)
+    if (loaded !== null) {
+      user = loaded
+      subUrls = (user.proxy_providers || []).map((p: any) => p.url).filter(Boolean)
+    } else {
+      // first-run wizard
+      subUrls = await runWizard(flags.user)
+    }
+  }
+
+  const target   = flags.target   || user.target   || preset.target   || 'mihomo'
+  const topology = flags.topology || user.topology  || preset.topology || 'regional'
+  const geodata  = flags.geodata  || user.geodata   || 'metacubex'
+  const format   = flags.format   || user.format    || 'yaml-split'
+
   let groupIds: string[] = preset.groups || []
   if (user.extra_groups?.length) groupIds = [...groupIds, ...user.extra_groups]
   if (user.skip_groups?.length) {
@@ -130,30 +185,21 @@ async function main() {
     groupIds = groupIds.filter((g: string) => !skip.has(g))
   }
 
-  // subscription URLs from user config
-  const subUrls: string[] = (user.proxy_providers || []).map((p: any) => p.url).filter(Boolean)
-
-  // load rulesets catalog
-  if (!existsSync(args.catalog)) {
-    console.error(`[error] catalog not found at ${args.catalog}`)
+  if (!existsSync(flags.catalog)) {
+    console.error(`[error] catalog not found at ${flags.catalog}`)
     console.error(`  Run 'make build-groups' first to generate dist/rulesets.json`)
     process.exit(1)
   }
-  const catalog = JSON.parse(readFileSync(args.catalog, 'utf8'))
+  const catalog = JSON.parse(readFileSync(flags.catalog, 'utf8'))
 
-  // build profile
   const opts: Record<string, any> = {
-    topology,
-    target,
+    topology, target, format, geodata,
     features: preset.features || {},
     regionExcludes: user.region_excludes || '',
-    geodata,
-    format,
   }
 
   let profile = buildFullProfile(subUrls, groupIds, catalog, opts)
 
-  // optionally append hosts block
   if (user.hosts_enabled) {
     try {
       const hostsBlock = await buildHostsBlock({
@@ -166,11 +212,11 @@ async function main() {
     }
   }
 
-  // write output
-  mkdirSync(args.output, { recursive: true })
-  const outFile = join(args.output, `${args.preset}.yaml`)
+  mkdirSync(flags.output, { recursive: true })
+  const outFile = join(flags.output, `${flags.preset}.yaml`)
   writeFileSync(outFile, profile + '\n')
   console.log(`[ok] wrote ${outFile}  (${(profile.length / 1024).toFixed(1)} KB)`)
 }
 
 main().catch(e => { console.error(e.message); process.exit(1) })
+
