@@ -89,9 +89,9 @@ async function init() {
   }
 
   // Default to 'full' if available
-  if (presets.full) {
-    presetEl.value = 'full'
-    applyPreset('full')
+  if (presets.standard) {
+    presetEl.value = 'standard'
+    applyPreset('standard')
   }
 
   populateCatalogGrid(catalog)

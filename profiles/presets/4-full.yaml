@@ -1,6 +1,6 @@
 # full preset — comprehensive rule set
-name: pro
-description: 'Pro: all 19 catalog groups, full LB topology.'
+name: full
+description: 'Full: all 19 catalog groups, full LB topology.'
 target: mihomo        # mihomo | mihomo-smart (vernesong fork, enables smart groups)
 topology: advanced
 features:

@@ -1,6 +1,6 @@
 # standard preset — everyday: full services with regional url-test
-name: full
-description: 'Full: 13 services including streaming + social, regional url-test.'
+name: standard
+description: 'Standard: 13 services including streaming + social, regional auto-test.'
 target: mihomo
 topology: regional
 features:

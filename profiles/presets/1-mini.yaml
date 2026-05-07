@@ -1,6 +1,6 @@
 # minimal preset — light: CN/ads split only, no per-service routing
-name: nano
-description: 'Nano: ads blocked + CN direct only. No per-service routing.'
+name: mini
+description: 'Mini: ads blocked + CN direct only. No per-service routing.'
 target: mihomo
 topology: global
 features:
